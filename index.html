@@ -32,6 +32,43 @@
 .hero-left p.lede { font-size: 19px; line-height: 1.55; max-width: 600px; margin-bottom: 14px; }
 .hero-left p.now-line { font-family: var(--mono); font-size: 13px; letter-spacing: 0.5px; padding: 10px 14px; background: var(--ink); color: var(--lime); border: 2px solid var(--ink); display: inline-block; max-width: 640px; margin-bottom: 26px; line-height: 1.5; }
 .hero-left p.now-line strong { color: var(--paper); }
+.hero-left p.shipping-line { font-family: var(--mono); font-size: 12px; letter-spacing: 0.3px; margin-bottom: 26px; opacity: 0.85; line-height: 1.5; max-width: 640px; }
+.hero-left p.shipping-line strong { background: var(--lime); padding: 1px 6px; }
+.hero-left p.shipping-line a { text-decoration: underline; text-decoration-color: var(--lime-deep); text-underline-offset: 3px; }
+
+/* LOGOS STRIP */
+.logos-strip { background: white; border-bottom: 2px solid var(--ink); padding: 50px 28px; }
+.logos-strip .wrap { max-width: 1280px; margin: 0 auto; }
+.logos-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 28px; flex-wrap: wrap; }
+.logos-head h3 { font-family: var(--display); font-size: clamp(28px, 4vw, 44px); line-height: 1; letter-spacing: -0.02em; }
+.logos-head p { font-family: var(--hand); font-size: 22px; opacity: 0.7; }
+.logos-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; align-items: stretch; }
+.logo-cell { background: var(--paper); border: 2px solid var(--ink); padding: 16px 12px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: all 0.2s; }
+.logo-cell:hover { transform: translate(-3px,-3px); box-shadow: 5px 5px 0 var(--lime); background: white; }
+.logo-cell img { width: 36px; height: 36px; object-fit: contain; filter: grayscale(1) contrast(1.1); opacity: 0.85; transition: filter 0.2s, opacity 0.2s; }
+.logo-cell:hover img { filter: none; opacity: 1; }
+.logo-cell span { font-family: var(--display); font-size: 13px; letter-spacing: -0.02em; line-height: 1.1; }
+.logo-cell em { font-family: var(--mono); font-style: normal; font-size: 9px; letter-spacing: 0.5px; text-transform: uppercase; opacity: 0.55; line-height: 1.2; }
+@media (max-width: 980px) { .logos-row { grid-template-columns: repeat(3, 1fr); } .logos-head { flex-direction: column; align-items: flex-start; } }
+@media (max-width: 520px) { .logos-row { grid-template-columns: repeat(2, 1fr); } }
+
+/* HOW I SELL — playbook */
+.playbook { background: var(--ink); color: var(--paper); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 90px 28px; }
+.playbook .wrap { max-width: 1280px; margin: 0 auto; }
+.playbook .section-num { color: var(--lime); opacity: 1; }
+.playbook h2 { font-family: var(--display); font-size: clamp(48px, 7vw, 92px); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 14px; }
+.playbook h2 .hl { background: var(--lime); color: var(--ink); padding: 0 10px; display: inline-block; transform: rotate(-1deg); }
+.playbook > .wrap > p.kicker { font-family: var(--hand); font-size: 26px; opacity: 0.85; margin-bottom: 50px; max-width: 700px; }
+.playbook-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.play-step { background: rgba(255,255,255,0.04); border: 2px solid var(--lime); padding: 24px 22px; position: relative; transition: all 0.25s; }
+.play-step:hover { transform: translate(-4px,-4px); box-shadow: 6px 6px 0 var(--lime); background: rgba(198,255,61,0.06); }
+.play-step .num { font-family: var(--display); font-size: 36px; color: var(--lime); line-height: 1; margin-bottom: 12px; }
+.play-step h4 { font-family: var(--display); font-size: 22px; line-height: 1; letter-spacing: -0.02em; margin-bottom: 8px; }
+.play-step .sub { font-family: var(--hand); font-size: 19px; color: var(--lime); margin-bottom: 14px; line-height: 1.1; }
+.play-step p { font-size: 13px; line-height: 1.55; opacity: 0.88; }
+.play-step .tag-line { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--lime); margin-top: 14px; padding-top: 12px; border-top: 1px dashed rgba(198,255,61,0.3); }
+@media (max-width: 980px) { .playbook-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .playbook-grid { grid-template-columns: 1fr; } }
 .three-pillars { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; max-width: 640px; margin-bottom: 30px; }
 .pillar { background: white; border: 2px solid var(--ink); padding: 16px 14px; box-shadow: 5px 5px 0 var(--ink); transition: all 0.2s; }
 .pillar:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--lime); }
@@ -128,7 +165,25 @@
     <li><a href="social.html">Social</a></li>
   </ul>
   <a href="#contact" class="hire-btn">Let's talk ↗</a>
+  <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+  </button>
 </nav>
+<div class="mobile-menu" aria-hidden="true">
+  <ul>
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="gio.html">GIO Sports</a></li>
+    <li><a href="cadena.html">Cadena A</a></li>
+    <li><a href="consulting.html">Consulting</a></li>
+    <li><a href="social.html">Social</a></li>
+  </ul>
+  <div class="menu-cta">
+    <a href="mailto:alevargasmeyer@gmail.com" class="email">Email me →</a>
+    <a href="cv.pdf" download class="cv">Download CV ↓</a>
+  </div>
+</div>
+
+<button class="cursor-toggle" type="button" aria-label="Toggle custom cursor">✦ Cursor: on</button>
 
 <!-- HERO -->
 <section class="hero" id="top">
@@ -140,6 +195,7 @@
       Bentley University grad turned <strong style="background:var(--lime); padding: 1px 6px;">co-founder of GIO Sports</strong> — a custom-paddle brand I built from cold-start to <strong>$250K in revenue</strong>, with our own paddles in <strong>12 retail stores across 6 states</strong> and partnerships with Four Seasons, Marriott, and Cytiva. Before that, I ran social + production at <strong>Cadena A</strong> in Bolivia — taking the network from <strong>0 to 500K+ followers</strong> and from last place to #1 in three years. I sell hard, ship fast, learn faster.
     </p>
     <p class="now-line">↳ <strong>Open to:</strong> GTM · BDR/AE · partnerships · CS/AM · growth · brand &amp; social marketing.</p>
+    <p class="shipping-line">↳ <strong>Now shipping:</strong> <a href="https://360-paddles.vercel.app" target="_blank" rel="noopener">360 Paddles</a> (Stripe-checkout custom paddles) · <a href="https://msvinteriors.netlify.app" target="_blank" rel="noopener">MSV Interiors</a> (client portfolio site).</p>
     <div class="three-pillars">
       <a href="#bentley" class="pillar"><span class="tag-num">// 01</span><strong>Bentley University</strong><span>Media Studies · BM + Entrepreneurship</span></a>
       <a href="cadena.html" class="pillar"><span class="tag-num">// 02</span><strong>Cadena A · Bolivia</strong><span>0→500K followers · last to #1 in 3 yrs</span></a>
@@ -152,15 +208,33 @@
     </div>
   </div>
   <div class="hero-right">
-    <div class="polaroid">
+    <div class="polaroid" id="polaroid">
       <div class="tape"></div>
       <img src="assets/me/me.jpg" alt="Alejandro Vargas Meyer" />
       <div class="caption">that's me — let's build.</div>
       <div class="sticker s1">FOUNDER</div>
       <div class="sticker s2">CLOSER</div>
       <div class="sticker s3">EST. AVM</div>
+      <!--
+        INTRO VIDEO HOOK
+        Record a 30–60s phone video of yourself (720p+, MP4) and save it as:
+          assets/me/intro.mp4
+        Then UNCOMMENT the two blocks below. The play button + modal are ready.
+      -->
+      <!--
+      <button class="polaroid-play" onclick="document.getElementById('intro-modal').showModal()" aria-label="Play 60-second pitch">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><polygon points="6,4 20,12 6,20"/></svg>
+        <span>60s · my pitch</span>
+      </button>
+      -->
     </div>
   </div>
+  <!--
+  <dialog id="intro-modal" class="intro-modal">
+    <video src="assets/me/intro.mp4" controls autoplay playsinline></video>
+    <button onclick="document.getElementById('intro-modal').close()" class="intro-close">✕</button>
+  </dialog>
+  -->
 </section>
 
 <!-- MARQUEE — tightened to 6 sharp roles + clients -->
@@ -182,6 +256,25 @@
     <span>★ TRUSTED BY · FOUR SEASONS · MARRIOTT · CYTIVA · FERG'S · TODAY SHOW</span><span class="dot">●</span>
   </div>
 </div>
+
+<!-- LOGOS — actual clients & coverage -->
+<section class="logos-strip" aria-label="Clients and coverage">
+  <div class="wrap">
+    <div class="logos-head">
+      <span class="section-num">// — RECEIPTS</span>
+      <h3>Closed. Sold. Covered.</h3>
+      <p>The brands that bought, partnered, or featured the work.</p>
+    </div>
+    <div class="logos-row">
+      <div class="logo-cell"><img src="https://www.google.com/s2/favicons?domain=fourseasons.com&sz=128" alt="Four Seasons" loading="lazy"/><span>Four Seasons</span><em>GIO · B2B paddles</em></div>
+      <div class="logo-cell"><img src="https://www.google.com/s2/favicons?domain=marriott.com&sz=128" alt="Marriott" loading="lazy"/><span>Marriott</span><em>GIO · B2B paddles</em></div>
+      <div class="logo-cell"><img src="https://www.google.com/s2/favicons?domain=cytiva.com&sz=128" alt="Cytiva" loading="lazy"/><span>Cytiva</span><em>GIO · corporate gifting</em></div>
+      <div class="logo-cell"><img src="https://www.google.com/s2/favicons?domain=fergssportsbar.com&sz=128" alt="Ferg's Sports Bar" loading="lazy"/><span>Ferg's</span><em>GIO · venue partner</em></div>
+      <div class="logo-cell"><img src="https://www.google.com/s2/favicons?domain=today.com&sz=128" alt="Today Show" loading="lazy"/><span>Today Show</span><em>@popculture · feature</em></div>
+      <div class="logo-cell"><img src="https://www.google.com/s2/favicons?domain=bentley.edu&sz=128" alt="Bentley University" loading="lazy"/><span>Bentley</span><em>BA · Media Studies</em></div>
+    </div>
+  </div>
+</section>
 
 <!-- THREE BIG PROJECT CARDS — each is a clickable subpage link -->
 <section class="about" id="projects">
@@ -216,7 +309,7 @@
 
       <a href="cadena.html" class="project-card">
         <div class="thumb">
-          <video src="assets/cadena/tv-show.mp4" autoplay muted loop playsinline poster="assets/posters/tv-show.jpg"></video>
+          <video src="assets/cadena/tv-show.mp4" muted loop playsinline preload="none" poster="assets/posters/tv-show.jpg" data-autoplay-on-hover></video>
           <div class="thumb-overlay">0 → 500K · BOLIVIA · 2019–2022</div>
         </div>
         <div class="body">
@@ -250,7 +343,50 @@
         </div>
       </a>
     </div>
+  </div>
+</section>
 
+<!-- HOW I SELL — playbook -->
+<section class="playbook" id="playbook">
+  <div class="wrap">
+    <span class="section-num">// 02 — HOW I SELL</span>
+    <h2>The <span class="hl">playbook</span>.</h2>
+    <p class="kicker">Same motion every time. Built at GIO. Works for any deal that has a buyer with a budget and an instagram account.</p>
+    <div class="playbook-grid">
+      <div class="play-step">
+        <div class="num">01</div>
+        <h4>Prospect</h4>
+        <div class="sub">↳ find the right room.</div>
+        <p>Built lists of hotels, clubs, and resorts running paddle programs. Hit the F&amp;B buyer or GM directly — never the front desk. LinkedIn + Instagram DM, not a generic form.</p>
+        <div class="tag-line">Receipt · Four Seasons, Marriott, Cytiva</div>
+      </div>
+      <div class="play-step">
+        <div class="num">02</div>
+        <h4>Pitch</h4>
+        <div class="sub">↳ sell their brand back to them.</div>
+        <p>"Buy paddles" never landed. "We'll print your logo on the most-Instagrammed object on your property" did. Decks fit on one screen. Visuals before copy.</p>
+        <div class="tag-line">Receipt · 12 retail stores · 6 states</div>
+      </div>
+      <div class="play-step">
+        <div class="num">03</div>
+        <h4>Close</h4>
+        <div class="sub">↳ take all the friction.</div>
+        <p>Free samples, no MOQ for trials, same-week shipping. One-tier pricing. Most B2B asks for a 30-day pilot — GIO did it in 7. Margin held at 165% top.</p>
+        <div class="tag-line">Receipt · $250K in revenue</div>
+      </div>
+      <div class="play-step">
+        <div class="num">04</div>
+        <h4>Retain</h4>
+        <div class="sub">↳ stay in the DMs.</div>
+        <p>Reorders came from Instagram check-ins and a personal text, not outbound emails. Same buyers, same season after season. The first sale is just the audition.</p>
+        <div class="tag-line">Receipt · multiple reorders per account</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="education">
+  <div class="wrap">
     <!-- BENTLEY -->
     <div class="bentley-strip" id="bentley">
       <div>
@@ -269,7 +405,7 @@
         </div>
       </div>
       <div class="quote">
-        Bentley taught me business runs on three things: clear communication, real numbers, and people you can trust.
+        Bentley made me an operator before I knew what an operator was — pitching real CPG brands by junior year, reading a P&amp;L before I could read a contract.
       </div>
     </div>
   </div>

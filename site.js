@@ -1,5 +1,46 @@
 /* ============== SHARED SITE JS ============== */
 (function() {
+  // ===== CURSOR TOGGLE (persists in localStorage) =====
+  const cursorKey = 'avm-no-custom-cursor';
+  const cursorBtn = document.querySelector('.cursor-toggle');
+  function applyCursorState() {
+    const off = localStorage.getItem(cursorKey) === '1';
+    document.body.classList.toggle('no-custom-cursor', off);
+    if (cursorBtn) cursorBtn.textContent = off ? '✦ Cursor: off' : '✦ Cursor: on';
+  }
+  applyCursorState();
+  if (cursorBtn) {
+    cursorBtn.addEventListener('click', () => {
+      const isOff = localStorage.getItem(cursorKey) === '1';
+      localStorage.setItem(cursorKey, isOff ? '0' : '1');
+      applyCursorState();
+    });
+  }
+
+  // ===== HAMBURGER (mobile nav) =====
+  const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }));
+  }
+
+  // ===== LAZY AUTOPLAY-ON-HOVER for project cards marked data-autoplay-on-hover =====
+  document.querySelectorAll('video[data-autoplay-on-hover]').forEach(v => {
+    const card = v.closest('.project-card') || v.parentElement;
+    if (!card) return;
+    card.addEventListener('mouseenter', () => { v.play().catch(() => {}); });
+    card.addEventListener('mouseleave', () => { v.pause(); });
+  });
+
   // ===== CURSOR =====
   const dot = document.querySelector('.cursor-dot');
   const ring = document.querySelector('.cursor-ring');

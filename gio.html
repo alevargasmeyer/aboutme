@@ -9,10 +9,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link href="styles.css" rel="stylesheet">
 <style>
-.gio-bg { background: var(--ink); color: var(--paper); }
-.gio-bg .section-head h2 { color: var(--paper); }
-.gio-bg .section-head h2 .hl { color: var(--ink); }
-.gio-bg .section-head .kicker { color: var(--paper); }
+/* SECTION TONE HELPERS — paper / paper-2 / ink */
+.bg-paper { background: var(--paper); color: var(--ink); border-top: 2px solid var(--ink); }
+.bg-paper-2 { background: var(--paper-2); color: var(--ink); border-top: 2px solid var(--ink); }
+.bg-ink { background: var(--ink); color: var(--paper); border-top: 2px solid var(--lime); }
+.bg-ink-grad { background: linear-gradient(180deg, var(--ink) 0%, #161616 100%); color: var(--paper); border-top: 2px solid var(--lime); }
+
+/* PAPER SECTIONS — flip dark-default cards to brutalist paper cards */
+.bg-paper .chapter-title, .bg-paper-2 .chapter-title { color: var(--ink); }
+.bg-paper .chapter-lede, .bg-paper-2 .chapter-lede { color: var(--ink); opacity: 1; }
+.bg-paper .chapter-lede strong, .bg-paper-2 .chapter-lede strong { color: var(--lime-deep); background: rgba(157,214,38,0.12); padding: 1px 6px; }
+.bg-paper .chapter-num, .bg-paper-2 .chapter-num { color: var(--lime-deep); opacity: 0.85; }
+.bg-paper .subhead, .bg-paper-2 .subhead { color: var(--ink); }
+.bg-paper .context-line, .bg-paper-2 .context-line { color: var(--ink); opacity: 0.85; }
+.bg-paper .product-tier, .bg-paper-2 .product-tier,
+.bg-paper .motion-card, .bg-paper-2 .motion-card,
+.bg-paper .process-step, .bg-paper-2 .process-step,
+.bg-paper .region-block, .bg-paper-2 .region-block,
+.bg-paper .brand-card, .bg-paper-2 .brand-card,
+.bg-paper .roles-block, .bg-paper-2 .roles-block,
+.bg-paper .amb-hero, .bg-paper-2 .amb-hero,
+.bg-paper .mix-card, .bg-paper-2 .mix-card,
+.bg-paper .featured-banner, .bg-paper-2 .featured-banner {
+  background: white; color: var(--ink); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+}
+.bg-paper .product-tier .tier-spec, .bg-paper-2 .product-tier .tier-spec { border-top-color: rgba(0,0,0,0.18); }
+.bg-paper .region-head, .bg-paper-2 .region-head { border-bottom-color: rgba(0,0,0,0.15); }
+.bg-paper .brand-card .brand-name, .bg-paper-2 .brand-card .brand-name { color: var(--ink); }
+.bg-paper .brand-card .brand-tag, .bg-paper-2 .brand-card .brand-tag { color: var(--ink); opacity: 0.7; }
+.bg-paper .product-tier .tier-name, .bg-paper-2 .product-tier .tier-name,
+.bg-paper .motion-card h4, .bg-paper-2 .motion-card h4 { color: var(--ink); }
+.bg-paper .price-table-wrap, .bg-paper-2 .price-table-wrap { background: white; border: 2px solid var(--ink); }
+.bg-paper .price-table th, .bg-paper-2 .price-table th { background: var(--ink); color: var(--lime); }
+.bg-paper .price-table td, .bg-paper-2 .price-table td { color: var(--ink); }
+.bg-paper .margin-card, .bg-paper-2 .margin-card { background: white; color: var(--ink); border: 2px solid var(--ink); }
+.bg-paper .margin-card .pm, .bg-paper-2 .margin-card .pm { color: var(--lime-deep); }
+.bg-paper .media-card .label, .bg-paper-2 .media-card .label { color: var(--ink); }
+.bg-paper .deck-card, .bg-paper-2 .deck-card { background: white; }
 
 /* HEADER */
 .gio-header { background: var(--ink); color: var(--paper); padding: 130px 28px 60px; border-bottom: 2px solid var(--lime); }
@@ -205,7 +238,7 @@
 }
 </style>
 </head>
-<body class="gio-bg">
+<body>
 
 <div class="cursor-dot"></div>
 <div class="cursor-ring"></div>
@@ -282,7 +315,7 @@
 </div>
 
 <!-- ============== 01 · THE BET ============== -->
-<section id="bet" style="padding-top: 80px;">
+<section id="bet" class="bg-paper" style="padding-top: 80px;">
   <div class="wrap">
     <span class="chapter-num">// CHAPTER 01</span>
     <h2 class="chapter-title">The <span class="hl">bet</span> we made.</h2>
@@ -304,7 +337,7 @@
 </section>
 
 <!-- ============== 02 · THE PRODUCT ============== -->
-<section id="product" style="background: linear-gradient(180deg, var(--ink) 0%, #161616 100%);">
+<section id="product" class="bg-paper-2">
   <div class="wrap">
     <span class="chapter-num">// CHAPTER 02</span>
     <h2 class="chapter-title">The <span class="hl">product</span>.</h2>
@@ -366,7 +399,7 @@
 </section>
 
 <!-- ============== 03 · THE BUILD ============== -->
-<section id="build">
+<section id="build" class="bg-paper">
   <div class="wrap">
     <span class="chapter-num">// CHAPTER 03</span>
     <h2 class="chapter-title">How we <span class="hl">made</span> it.</h2>
@@ -403,7 +436,7 @@
 </section>
 
 <!-- ============== 04 · THE SALE ENGINE ============== -->
-<section id="sale" style="background: linear-gradient(180deg, var(--ink) 0%, #161616 100%);">
+<section id="sale" class="bg-ink-grad">
   <div class="wrap">
     <span class="chapter-num">// CHAPTER 04</span>
     <h2 class="chapter-title">How we <span class="hl">sold</span> it.</h2>
@@ -523,7 +556,7 @@
 </section>
 
 <!-- ============== 05 · RETAIL ============== -->
-<section id="retail">
+<section id="retail" class="bg-paper-2">
   <div class="wrap">
     <span class="chapter-num">// CHAPTER 05</span>
     <h2 class="chapter-title">12 stores. <span class="hl">6 states</span>.</h2>
@@ -572,7 +605,7 @@
 </section>
 
 <!-- ============== 06 · MARKETING ============== -->
-<section id="marketing" style="background: linear-gradient(180deg, var(--ink) 0%, #161616 100%);">
+<section id="marketing" class="bg-paper">
   <div class="wrap">
     <span class="chapter-num">// CHAPTER 06</span>
     <h2 class="chapter-title">How we drove <span class="hl">demand</span>.</h2>
@@ -617,7 +650,7 @@
 </section>
 
 <!-- ============== 07 · BRAND AMBASSADOR PROGRAM ============== -->
-<section id="ambassadors">
+<section id="ambassadors" class="bg-paper-2">
   <div class="wrap">
     <span class="chapter-num">// CHAPTER 07</span>
     <h2 class="chapter-title">30+ <span class="hl">ambassadors</span>.</h2>

@@ -15,11 +15,11 @@
 /* SECTION TONE HELPERS — paper / paper-2 / ink */
 .bg-paper { background: var(--paper); color: var(--ink); border-top: 2px solid var(--ink); }
 .bg-paper-2 { background: var(--paper-2); color: var(--ink); border-top: 2px solid var(--ink); }
-.bg-ink { background: var(--ink); color: var(--paper); border-top: 2px solid var(--lime); }
-.bg-ink-grad { background: linear-gradient(180deg, var(--ink) 0%, #161616 100%); color: var(--paper); border-top: 2px solid var(--lime); }
+.bg-ink { background: var(--gio-blue); color: white; border-top: 2px solid var(--lime); }
+.bg-ink-grad { background: linear-gradient(180deg, var(--gio-blue) 0%, #163E84 100%); color: white; border-top: 2px solid var(--lime); }
 
 /* HEADER */
-.gio-header { background: var(--ink); color: var(--paper); padding: 130px 28px 60px; border-bottom: 2px solid var(--lime); }
+.gio-header { background: var(--gio-blue); color: white; padding: 130px 28px 60px; border-bottom: 2px solid var(--lime); }
 .gio-header .wrap { display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: center; }
 .gio-header h1 { font-family: var(--display); font-size: clamp(72px, 10vw, 160px); line-height: 0.85; letter-spacing: -0.04em; margin-bottom: 14px; }
 .gio-header h1 .lime { color: var(--lime); }
@@ -38,7 +38,7 @@
 .gio-stat .l { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.85; margin-top: 6px; }
 
 /* JUMP NAV */
-.jump-nav { position: sticky; top: 60px; background: var(--ink); border-bottom: 2px solid var(--lime); z-index: 50; padding: 12px 0; overflow-x: auto; white-space: nowrap; }
+.jump-nav { position: sticky; top: 60px; background: var(--gio-blue); border-bottom: 2px solid var(--lime); z-index: 50; padding: 12px 0; overflow-x: auto; white-space: nowrap; }
 .jump-nav-inner { display: flex; gap: 6px; padding: 0 28px; max-width: 1280px; margin: 0 auto; }
 .jump-nav a { background: transparent; color: var(--paper); border: 1px solid rgba(255,255,255,0.3); padding: 6px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; }
 .jump-nav a:hover, .jump-nav a.active { background: var(--lime); color: var(--ink); border-color: var(--lime); }
@@ -68,7 +68,7 @@
 .product-tier .tier-price span { font-size: 11px; letter-spacing: 1px; }
 
 /* SUPPLIER BLOCK */
-.supplier-block { background: linear-gradient(135deg, var(--ink) 0%, #1a1a1a 100%); border: 2px solid var(--lime); padding: 36px; box-shadow: 12px 12px 0 var(--hot); position: relative; overflow: hidden; }
+.supplier-block { background: linear-gradient(135deg, var(--gio-blue) 0%, #163E84 100%); color: white; border: 2px solid var(--lime); padding: 36px; box-shadow: 12px 12px 0 var(--lime); position: relative; overflow: hidden; }
 .supplier-block::before { content: '6'; position: absolute; bottom: -120px; right: -30px; font-family: var(--display); font-size: 480px; color: rgba(198,255,61,0.06); line-height: 0.85; pointer-events: none; }
 .supplier-block h3 { font-family: var(--display); font-size: clamp(36px, 5vw, 56px); line-height: 0.95; margin-bottom: 14px; position: relative; }
 .supplier-block h3 .hl { background: var(--lime); color: var(--ink); padding: 0 10px; display: inline-block; transform: rotate(-1deg); }
@@ -115,9 +115,9 @@
 .price-table-wrap .pre { font-size: 13px; opacity: 0.75; margin-bottom: 14px; line-height: 1.5; }
 .price-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .price-table th, .price-table td { padding: 10px 8px; text-align: center; border-bottom: 1px dashed rgba(0,0,0,0.15); }
-.price-table th { background: var(--ink); color: var(--lime); font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+.price-table th { background: var(--gio-blue); color: white; font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
 .price-table tr:hover td { background: rgba(198,255,61,0.18); }
-.price-table .qty-cell { background: var(--ink); color: var(--lime); font-weight: 700; font-family: var(--mono); }
+.price-table .qty-cell { background: var(--gio-blue); color: white; font-weight: 700; font-family: var(--mono); }
 
 /* MARGIN CARDS */
 .margin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
@@ -160,7 +160,7 @@
 .brand-card.more .brand-name { color: var(--lime); }
 
 /* AMBASSADOR PROGRAM HERO */
-.amb-hero { background: linear-gradient(135deg, var(--ink) 0%, #1a1a1a 100%); border: 3px solid var(--lime); padding: 36px; box-shadow: 14px 14px 0 var(--hot); position: relative; overflow: hidden; }
+.amb-hero { background: linear-gradient(135deg, var(--gio-blue) 0%, #163E84 100%); color: white; border: 3px solid var(--lime); padding: 36px; box-shadow: 14px 14px 0 var(--lime); position: relative; overflow: hidden; }
 .amb-hero::before { content: '30+'; position: absolute; bottom: -90px; right: -20px; font-family: var(--display); font-size: 320px; color: rgba(198,255,61,0.07); line-height: 0.85; pointer-events: none; }
 .amb-hero h3 { font-family: var(--display); font-size: clamp(36px, 5vw, 60px); line-height: 0.95; margin-bottom: 14px; position: relative; z-index: 2; }
 .amb-hero h3 .hl { background: var(--lime); color: var(--ink); padding: 0 10px; display: inline-block; transform: rotate(-1deg); }
@@ -318,8 +318,13 @@
 .jump-nav a.active { background: var(--lime); color: var(--ink); border-color: var(--lime); }
 .jump-nav a:hover { background: var(--gio-blue); color: white; border-color: var(--gio-blue); }
 
-/* Hero stat numbers — keep lime on dark for brand consistency */
+/* Hero stat numbers — keep lime on blue for brand consistency */
 /* (gio-stat already styled, no change needed) */
+
+/* GIO-specific footer override — page is blue-dominant, footer should match */
+body footer { background: var(--gio-blue); color: white; border-top: 2px solid var(--lime); }
+body footer a { color: var(--lime); }
+body footer .heart { color: var(--lime); }
 </style>
 </head>
 <body>

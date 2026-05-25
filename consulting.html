@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Web Consulting — Alejandro V.M.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+<style>
+.browser-frame { background: white; border: 2px solid var(--ink); border-radius: 12px; overflow: hidden; box-shadow: 8px 8px 0 var(--ink); margin-bottom: 30px; }
+.browser-bar { background: var(--paper-2); padding: 10px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid var(--ink); }
+.browser-bar .dots { display: flex; gap: 6px; }
+.browser-bar .dots span { width: 12px; height: 12px; border-radius: 50%; background: #ff5f56; }
+.browser-bar .dots span:nth-child(2) { background: #ffbd2e; }
+.browser-bar .dots span:nth-child(3) { background: #27c93f; }
+.browser-bar .url { background: white; padding: 4px 12px; border-radius: 999px; font-family: var(--mono); font-size: 12px; flex: 1; margin-left: 10px; border: 1px solid var(--ink); }
+.browser-bar .open-btn { background: var(--ink); color: var(--paper); padding: 4px 10px; font-size: 11px; font-weight: 700; letter-spacing: 1px; border-radius: 4px; text-transform: uppercase; }
+.browser-frame iframe { width: 100%; height: 540px; border: none; display: block; }
+.consult-card h3 { font-family: var(--display); font-size: 28px; margin-bottom: 8px; }
+.consult-card p { font-size: 15px; line-height: 1.6; margin-bottom: 14px; }
+.process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 30px 0; }
+.process-step-2 { background: white; border: 2px solid var(--ink); padding: 18px; box-shadow: 4px 4px 0 var(--ink); }
+.process-step-2 .num { font-family: var(--display); font-size: 28px; color: var(--lime-deep); line-height: 1; }
+.process-step-2 strong { display: block; font-family: var(--display); font-size: 14px; margin: 6px 0; }
+.process-step-2 p { font-size: 12px; opacity: 0.8; }
+@media (max-width: 980px) {
+  nav.top ul { display: none; }
+  .process { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<nav class="top">
+  <a href="index.html" class="logo"><span class="blink"></span> ALEJANDRO V.M.</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gio.html">GIO Sports</a></li>
+    <li><a href="cadena.html">Cadena A</a></li>
+    <li><a href="consulting.html" class="active">Consulting</a></li>
+    <li><a href="social.html">Social</a></li>
+  </ul>
+  <a href="index.html#contact" class="hire-btn">Hire Me ↗</a>
+</nav>
+
+<header class="page-head">
+  <div class="wrap">
+    <div>
+      <div class="breadcrumbs">// 04 — WEB CONSULTING</div>
+      <h1>Sites that <span class="hl">convert</span>.</h1>
+      <p class="lede">I consult on digital presence — strategy, narrative, copy, and build. Two clients below. Live previews. Real sites.</p>
+    </div>
+    <div class="right-meta">
+      <div class="meta-row"><span>Clients</span><strong>2 active</strong></div>
+      <div class="meta-row"><span>Service</span><strong>Strategy → Build</strong></div>
+      <div class="meta-row"><span>Stack</span><strong>WordPress · custom</strong></div>
+    </div>
+  </div>
+</header>
+
+<!-- PROCESS -->
+<section style="background: var(--paper-2); border-bottom: 2px solid var(--ink);">
+  <div class="wrap">
+    <span class="section-num">// 01 — HOW I WORK</span>
+    <div class="section-head">
+      <div><h2>The <span class="hl">process</span>.</h2></div>
+      <p class="kicker">Same playbook every time. Diagnose → narrative → design → ship.</p>
+    </div>
+    <div class="process">
+      <div class="process-step-2"><div class="num">01</div><strong>Audit + Diagnose</strong><p>What works, what doesn't, who the user is, what they need to do.</p></div>
+      <div class="process-step-2"><div class="num">02</div><strong>Narrative + Copy</strong><p>The story the brand tells. Headline, voice, value prop.</p></div>
+      <div class="process-step-2"><div class="num">03</div><strong>Design + Build</strong><p>Layout, type, motion, lead capture. Built to load fast on mobile.</p></div>
+      <div class="process-step-2"><div class="num">04</div><strong>Ship + Iterate</strong><p>Launch, measure, tweak. The site is never "done."</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MSV -->
+<section>
+  <div class="wrap">
+    <span class="section-num">// 02 — CLIENT</span>
+    <div class="section-head">
+      <div><h2>MSV <span class="hl">Interiors</span>.</h2></div>
+      <p class="kicker">Interior-design studio · re-architected for clarity</p>
+    </div>
+    <div class="consult-card">
+      <p>Interior-design studio. The original site buried the work behind generic copy. I rebuilt the narrative around the portfolio — clarity for prospects, lead capture that doesn't feel like a form, and a portfolio that earns the room.</p>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="url">https://msvinteriors.netlify.app</div>
+          <a href="https://msvinteriors.netlify.app" target="_blank" rel="noopener" class="open-btn">Open ↗</a>
+        </div>
+        <iframe src="https://msvinteriors.netlify.app" loading="lazy" referrerpolicy="no-referrer"></iframe>
+      </div>
+      <p style="font-size: 12px; opacity: 0.6;">If the preview won't load, the site uses an X-Frame-Options header — click Open ↗ to view it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOYO 19 -->
+<section style="background: var(--paper-2); border-top: 2px solid var(--ink);">
+  <div class="wrap">
+    <span class="section-num">// 03 — CLIENT</span>
+    <div class="section-head">
+      <div><h2>Hoyo <span class="hl">19</span>.</h2></div>
+      <p class="kicker">Mining + trading · technical credibility, fast turnaround</p>
+    </div>
+    <div class="consult-card">
+      <p>Mining company that trades commodities. Built the corporate site from the ground up — narrative, structure, copy, and build. Every section calibrated for buyers, partners, and counterparties: clear about what they extract, what they trade, and how to reach the desk.</p>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="url">https://www.hoyo19mining.com</div>
+          <a href="https://www.hoyo19mining.com" target="_blank" rel="noopener" class="open-btn">Open ↗</a>
+        </div>
+        <iframe src="https://www.hoyo19mining.com" loading="lazy" referrerpolicy="no-referrer"></iframe>
+      </div>
+      <p style="font-size: 12px; opacity: 0.6;">If the preview won't load, the site uses an X-Frame-Options header — click Open ↗ to view it.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background: var(--lime); color: var(--ink); padding: 60px 28px; text-align: center; border-top: 2px solid var(--ink);">
+  <h3 style="font-family: var(--display); font-size: clamp(36px, 5vw, 64px); line-height: 1; margin-bottom: 14px;">Need a site that converts?</h3>
+  <p style="max-width: 640px; margin: 0 auto 24px;">If your current one doesn't do the work for you, let's talk.</p>
+  <a href="index.html#contact" class="btn primary" style="background: var(--ink); color: var(--lime); border-color: var(--ink);">Contact me →</a>
+  <a href="index.html" class="btn" style="background: transparent; color: var(--ink); border-color: var(--ink); margin-left: 8px;">← Back home</a>
+</section>
+
+<footer>Built by Alejandro · Web Consulting · <span class="heart">●</span> sites that ship · <a href="index.html">home</a></footer>
+<script src="site.js"></script>
+</body>
+</html>

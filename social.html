@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Social Pages — @popculture + Pickleball — Alejandro V.M.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* HERO STATS */
+.popcult-hero { background: linear-gradient(135deg, #FF4D6D 0%, #C6FF3D 100%); padding: 130px 28px 80px; border-bottom: 4px solid var(--ink); position: relative; overflow: hidden; }
+.popcult-hero::before { content: '@'; position: absolute; bottom: -120px; right: -20px; font-family: var(--display); font-size: 480px; color: rgba(0,0,0,0.06); line-height: 1; pointer-events: none; }
+.popcult-hero .wrap { max-width: 1280px; margin: 0 auto; position: relative; z-index: 2; }
+.popcult-hero .crumb { font-family: var(--mono); font-size: 12px; opacity: 0.7; letter-spacing: 2px; margin-bottom: 12px; }
+.popcult-hero h1 { font-family: var(--display); font-size: clamp(72px, 11vw, 180px); line-height: 0.85; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 14px; }
+.popcult-hero h1 .highlight { background: var(--ink); color: var(--lime); padding: 0 14px; transform: rotate(-1deg); display: inline-block; }
+.popcult-hero .lede { font-size: 18px; line-height: 1.55; max-width: 580px; margin-bottom: 24px; color: var(--ink); }
+
+.giant-stat { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+.giant-stat-card { background: var(--ink); color: var(--paper); padding: 22px; border: 3px solid var(--ink); transition: transform 0.2s; }
+.giant-stat-card:hover { transform: translateY(-4px); }
+.giant-stat-card.lime { background: var(--lime); color: var(--ink); }
+.giant-stat-card .num { font-family: var(--display); font-size: clamp(36px, 5vw, 64px); line-height: 1; letter-spacing: -1px; }
+.giant-stat-card .lbl { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.85; margin-top: 8px; }
+
+/* TREND ORIGIN STORY */
+.origin-story { background: var(--paper); border-bottom: 2px solid var(--ink); }
+.origin-block { background: white; border: 3px solid var(--ink); padding: 0; box-shadow: 12px 12px 0 var(--lime); display: grid; grid-template-columns: 1fr 1.3fr; gap: 0; overflow: hidden; }
+.origin-img { background: #f5f0e2; display: flex; align-items: center; justify-content: center; padding: 30px; border-right: 3px solid var(--ink); }
+.origin-img img { max-width: 100%; max-height: 600px; object-fit: contain; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+.origin-text { padding: 40px; }
+.origin-text .label { background: var(--hot); color: white; padding: 4px 12px; font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px; display: inline-block; margin-bottom: 16px; }
+.origin-text h3 { font-family: var(--display); font-size: clamp(28px, 4vw, 44px); line-height: 1; margin-bottom: 14px; }
+.origin-text h3 .hl { background: var(--lime); padding: 0 8px; transform: rotate(-1deg); display: inline-block; }
+.origin-text .quote { font-family: var(--hand); font-size: 26px; color: var(--ink-soft); line-height: 1.3; padding: 16px 20px; background: var(--paper-2); border-left: 4px solid var(--lime); margin: 20px 0; }
+.origin-text p { font-size: 15px; line-height: 1.6; margin-bottom: 14px; }
+
+/* HOW THE TREND SPREAD - timeline */
+.trend-flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 30px; position: relative; }
+.flow-step { background: white; border: 2px solid var(--ink); padding: 18px; position: relative; }
+.flow-step:not(:last-child)::after { content: '→'; position: absolute; right: -12px; top: 50%; transform: translateY(-50%); background: var(--lime); color: var(--ink); width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 14px; z-index: 2; border: 2px solid var(--ink); }
+.flow-step .num { font-family: var(--mono); font-size: 11px; opacity: 0.5; letter-spacing: 1.5px; }
+.flow-step strong { display: block; font-family: var(--display); font-size: 14px; margin: 6px 0; line-height: 1.1; }
+.flow-step p { font-size: 12px; opacity: 0.78; line-height: 1.4; }
+
+/* CELEBS GRID — story format */
+.celebs-section { background: var(--paper-2); border-bottom: 2px solid var(--ink); }
+.celebs-grid { display: grid; gap: 26px; grid-template-columns: 1fr 1fr; }
+.celeb-card { background: white; border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); transition: all 0.25s; overflow: hidden; display: grid; grid-template-columns: 0.8fr 1fr; gap: 0; }
+.celeb-card:hover { transform: translate(-4px,-4px); box-shadow: 12px 12px 0 var(--lime); }
+.celeb-card .pic { background: #f5f0e2; padding: 12px; border-right: 2px solid var(--ink); display: flex; align-items: center; justify-content: center; }
+.celeb-card .pic img { width: 100%; max-height: 380px; object-fit: contain; }
+.celeb-card .meta { padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+.celeb-card .handle-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.celeb-card .handle { font-family: var(--mono); font-size: 13px; font-weight: 700; }
+.celeb-card .verified { background: var(--lime); color: var(--ink); width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; border: 1px solid var(--ink); }
+.celeb-card .role-mini { background: var(--ink); color: var(--lime); padding: 3px 10px; font-family: var(--mono); font-size: 10px; letter-spacing: 1px; display: inline-block; align-self: flex-start; margin-bottom: 6px; }
+.celeb-card.originator .role-mini { background: var(--hot); color: white; }
+.celeb-card .caption { font-size: 14px; line-height: 1.45; padding: 10px 12px; background: var(--paper-2); border-left: 3px solid var(--ink); margin: 6px 0; font-style: italic; }
+.celeb-card .hashtag { font-family: var(--mono); font-size: 12px; color: var(--lime-deep); font-weight: 700; }
+.celeb-card .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; }
+.celeb-card .stat-mini { background: var(--ink); color: var(--paper); padding: 8px 10px; text-align: center; }
+.celeb-card .stat-mini strong { display: block; font-family: var(--display); font-size: 18px; line-height: 1; color: var(--lime); }
+.celeb-card .stat-mini span { font-size: 10px; letter-spacing: 1px; opacity: 0.7; text-transform: uppercase; }
+.celeb-card.featured { background: var(--ink); color: var(--paper); }
+.celeb-card.featured .pic { background: #1a1a1a; border-right-color: var(--lime); }
+.celeb-card.featured .caption { background: rgba(255,255,255,0.06); border-left-color: var(--lime); }
+.celeb-card.featured .stat-mini { background: var(--lime); color: var(--ink); }
+.celeb-card.featured .stat-mini strong { color: var(--ink); }
+
+/* TODAY SHOW */
+.today-card { background: var(--ink); color: var(--paper); border: 3px solid var(--lime); padding: 0; margin-top: 36px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 0; box-shadow: 14px 14px 0 var(--hot); overflow: hidden; }
+.today-card .ts-img { padding: 0; background: #000; }
+.today-card .ts-img img { width: 100%; height: 100%; object-fit: cover; min-height: 380px; }
+.today-card .ts-meta { padding: 36px; }
+.today-card .ts-label { background: var(--hot); color: white; padding: 6px 14px; font-family: var(--display); font-size: 12px; letter-spacing: 2px; display: inline-block; margin-bottom: 16px; }
+.today-card h3 { font-family: var(--display); font-size: clamp(32px, 4vw, 56px); line-height: 0.95; margin-bottom: 12px; }
+.today-card h3 .hl { color: var(--lime); }
+.today-card p { font-size: 16px; line-height: 1.5; opacity: 0.9; margin-bottom: 12px; }
+
+/* TOP POSTS — VISUAL STAT CARDS */
+.top-posts-section { background: var(--ink); color: var(--paper); border-bottom: 2px solid var(--ink); }
+.top-posts-section .section-head h2 { color: var(--paper); }
+.top-posts-section .section-head .kicker { color: var(--paper); }
+.top-posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.post-stat-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.18); padding: 24px; transition: all 0.25s; position: relative; overflow: hidden; }
+.post-stat-card:hover { border-color: var(--lime); transform: translateY(-4px); }
+.post-stat-card .post-num { font-family: var(--mono); font-size: 11px; color: var(--lime); letter-spacing: 2px; opacity: 0.85; }
+.post-stat-card .post-views { font-family: var(--display); font-size: clamp(40px, 5vw, 56px); line-height: 1; color: var(--lime); margin: 8px 0 4px; }
+.post-stat-card .post-views-label { font-size: 11px; letter-spacing: 1.5px; opacity: 0.7; text-transform: uppercase; margin-bottom: 16px; }
+.post-stat-card .post-divider { height: 1px; background: rgba(255,255,255,0.15); margin: 14px 0; }
+.post-stat-card .stat-row-h { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 13px; }
+.post-stat-card .stat-row-h span { opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; font-size: 10px; }
+.post-stat-card .stat-row-h strong { font-family: var(--display); font-size: 16px; }
+
+/* STAT PROGRESS BARS */
+.bar-row { margin: 18px 0; }
+.bar-row .bar-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.bar-row .bar-head span { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.8; }
+.bar-row .bar-head strong { font-family: var(--display); font-size: 18px; color: var(--lime); }
+.bar-track { background: rgba(255,255,255,0.08); height: 10px; border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; background: linear-gradient(90deg, var(--lime) 0%, var(--lime-deep) 100%); border-radius: 999px; transition: width 1.2s cubic-bezier(.2,.8,.2,1); width: 0; }
+.bar-fill.hot { background: linear-gradient(90deg, var(--hot) 0%, #cc3d54 100%); }
+.bar-fill.dark { background: linear-gradient(90deg, var(--ink) 0%, #2b2a28 100%); }
+
+/* PICKLEBALL SECTION (kept but trimmed) */
+.social-page-card { background: white; border: 2px solid var(--ink); padding: 32px; box-shadow: 8px 8px 0 var(--ink); margin-bottom: 30px; }
+.social-page-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; }
+.social-page-head h3 { font-family: var(--display); font-size: 30px; line-height: 1; }
+.badge { background: var(--lime); color: var(--ink); padding: 6px 14px; border-radius: 999px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 1px; border: 2px solid var(--ink); }
+.badge.hot { background: var(--hot); color: white; }
+.badge.dark { background: var(--ink); color: var(--paper); }
+.video-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 18px; }
+.video-stat { background: var(--paper-2); border: 2px solid var(--ink); padding: 14px; }
+.video-stat img { aspect-ratio: 9/16; object-fit: cover; border: 2px solid var(--ink); width: 100%; }
+.video-stat .stats-block { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
+.video-stat .stats-block .s { text-align: center; background: white; padding: 8px 4px; border: 1px solid var(--ink); }
+.video-stat .stats-block .s strong { display: block; font-family: var(--display); font-size: 14px; }
+.video-stat .stats-block .s span { font-size: 9px; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; }
+.video-stat .net-follows { background: var(--lime); color: var(--ink); padding: 8px 12px; margin-top: 10px; font-family: var(--mono); font-size: 12px; font-weight: 700; text-align: center; border: 2px solid var(--ink); }
+
+@media (max-width: 980px) {
+  nav.top ul { display: none; }
+  .giant-stat { grid-template-columns: 1fr 1fr; }
+  .origin-block, .today-card, .celeb-card { grid-template-columns: 1fr; }
+  .origin-img, .today-card .ts-img, .celeb-card .pic { border-right: none; border-bottom: 2px solid var(--ink); }
+  .trend-flow { grid-template-columns: 1fr 1fr; }
+  .flow-step:nth-child(2)::after, .flow-step:nth-child(4)::after { display: none; }
+  .celebs-grid, .top-posts-grid { grid-template-columns: 1fr; }
+  .video-stat-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<nav class="top">
+  <a href="index.html" class="logo"><span class="blink"></span> ALEJANDRO V.M.</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gio.html">GIO Sports</a></li>
+    <li><a href="cadena.html">Cadena A</a></li>
+    <li><a href="consulting.html">Consulting</a></li>
+    <li><a href="social.html" class="active">Social</a></li>
+  </ul>
+  <a href="index.html#contact" class="hire-btn">Hire Me ↗</a>
+</nav>
+
+<!-- HERO -->
+<header class="popcult-hero">
+  <div class="wrap">
+    <div class="crumb">// 05.A — POP-CULTURE PAGE I RUN</div>
+    <h1>I run<br/><span class="highlight">@popculture</span>.</h1>
+    <p class="lede">Owner + creator of @popculture, a pop-culture meme page on Instagram. <strong>28K combined followers</strong> across this and my pickleball page. <strong>20M+ lifetime views</strong>. Featured on the <strong>Today Show</strong>. I created the celebrity "Elf on a Shelf" trend — kicked off when I posted Garcelle Beauvais and she reposted it to her own timeline. From there, 6 A-list celebrities tagged the page. Below: the receipts.</p>
+
+    <div class="giant-stat">
+      <div class="giant-stat-card lime"><div class="num" id="totalViews">20M+</div><div class="lbl">Total page views</div></div>
+      <div class="giant-stat-card"><div class="num" id="totalFollowers">28K</div><div class="lbl">Combined followers · both pages</div></div>
+      <div class="giant-stat-card"><div class="num" id="totalCelebs">6</div><div class="lbl">A-list celebs tagged us</div></div>
+      <div class="giant-stat-card lime"><div class="num" id="totalCelebLikes">1.6M</div><div class="lbl">Likes from celeb tags</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ORIGIN STORY -->
+<section class="origin-story">
+  <div class="wrap">
+    <span class="section-num">// 01 — TREND I CREATED</span>
+    <div class="section-head">
+      <div><h2>The "Elf on a <span class="hl">Shelf</span>" trend.</h2></div>
+      <p class="kicker">Designed the format. Tagged the right person. Watched it go.</p>
+    </div>
+
+    <div class="origin-block">
+      <div class="origin-img">
+        <img src="assets/popculture/today-show.jpg" alt="The Garcelle Beauvais Pharrell-on-a-Shelf post I made that kicked off the trend"/>
+      </div>
+      <div class="origin-text">
+        <span class="label">★ THE POST I MADE · WHERE IT STARTED</span>
+        <h3>I posted <span class="hl">Garcelle</span>. She reposted. Trend goes.</h3>
+        <p>The format I built: a celebrity portrait with a tiny famous figure perched on their shoulder — a play on "Elf on a Shelf." I made the kickoff post on @popculture: <strong>Garcelle Beauvais with Pharrell Williams</strong> on her shoulder, captioned "You've heard of Elf on a Shelf, now get ready for this..."</p>
+        <div class="quote">Garcelle reposted it to her own timeline. That's when it took off.<br/><em style="font-size: 18px; opacity: 0.7;">— how a trend actually starts</em></div>
+        <p>From there, six A-list celebrities self-tagged the page with their own variations — <strong>Anne Hathaway, Reese Witherspoon, Zoe Saldana, Elizabeth Banks, Jenny McCarthy, Barbara Corcoran</strong>. Combined likes from those celeb posts alone: <strong>over 1.6 million</strong>.</p>
+        <p>Then the <strong>Today Show with Hoda &amp; Jenna</strong> picked the trend up on national TV — featuring the original Garcelle/Pharrell post on-air.</p>
+      </div>
+    </div>
+
+    <h4 style="font-family: var(--display); font-size: 22px; margin-top: 50px; margin-bottom: 14px;">How the trend traveled</h4>
+    <div class="trend-flow">
+      <div class="flow-step"><div class="num">// 01</div><strong>Concept</strong><p>I built the visual format and meme template.</p></div>
+      <div class="flow-step"><div class="num">// 02</div><strong>Kickoff</strong><p>I posted Garcelle Beauvais + Pharrell on @popculture.</p></div>
+      <div class="flow-step"><div class="num">// 03</div><strong>Repost</strong><p>Garcelle shared it to her own timeline. It flew.</p></div>
+      <div class="flow-step"><div class="num">// 04</div><strong>Viral</strong><p>Anne, Reese, Zoe, Liz, Jenny, Barbara joined in.</p></div>
+      <div class="flow-step"><div class="num">// 05</div><strong>National TV</strong><p>Today Show ran the segment featuring my post.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TODAY SHOW -->
+<section style="background: var(--paper); border-bottom: 2px solid var(--ink);">
+  <div class="wrap">
+    <span class="section-num">// 02 — NATIONAL TV</span>
+    <div class="section-head">
+      <div><h2>Featured on the <span class="hl">Today Show</span>.</h2></div>
+      <p class="kicker">Hoda &amp; Jenna picked up the trend on-air. Garcelle Beauvais joined in.</p>
+    </div>
+
+    <div class="today-card">
+      <div class="ts-img"><img src="assets/popculture/today-show.jpg" alt="Today Show featuring the Elf on a Shelf celebrity trend with Garcelle Beauvais and Pharrell"/></div>
+      <div class="ts-meta">
+        <span class="ts-label">★ TODAY · NBC</span>
+        <h3>The trend made it<br/>to <span class="hl">national TV</span>.</h3>
+        <p>Hoda &amp; Jenna featured the trend on the Today Show. The segment played the original meme template ("You've heard of Elf on a Shelf, now get ready for this...") and the <strong>Pharrell-on-Garcelle</strong> entry that Garcelle Beauvais made for the show.</p>
+        <p>The format I built — used as live entertainment on NBC, in front of millions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE SIX CELEBS -->
+<section class="celebs-section">
+  <div class="wrap">
+    <span class="section-num">// 03 — THE RECEIPTS</span>
+    <div class="section-head">
+      <div><h2>6 celebs <span class="hl">self-tagged</span>.</h2></div>
+      <p class="kicker">Real posts. Real handles. Real numbers from each.</p>
+    </div>
+
+    <div class="celebs-grid">
+
+      <div class="celeb-card">
+        <div class="pic"><img src="assets/popculture/trend-4.jpg" alt="Elizabeth Banks Elf on a Shelf post"/></div>
+        <div class="meta">
+          <div class="handle-row"><span class="handle">@elizabethbanks</span><span class="verified">✓</span></div>
+          <span class="role-mini">A-LIST · ACTRESS / DIRECTOR</span>
+          <div class="caption">"I know you've all heard of Elf on a Shelf, but have you heard of..." <em>(Forrest Gump on her shoulder)</em></div>
+          <div class="hashtag">joined the chain after Garcelle</div>
+          <div class="stats-row">
+            <div class="stat-mini"><strong>2,026</strong><span>Likes</span></div>
+            <div class="stat-mini"><strong>27</strong><span>Comments</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="celeb-card featured">
+        <div class="pic"><img src="assets/popculture/trend-3.jpg" alt="Anne Hathaway tagged post"/></div>
+        <div class="meta">
+          <div class="handle-row"><span class="handle">@annehathaway</span><span class="verified">✓</span></div>
+          <span class="role-mini">★ BIGGEST POST</span>
+          <div class="caption">"Okay, @elizabethbanks..." <em>(Lily Tomlin perched on her shoulder)</em></div>
+          <div class="hashtag">replied to the originator</div>
+          <div class="stats-row">
+            <div class="stat-mini"><strong>842K</strong><span>Likes</span></div>
+            <div class="stat-mini"><strong>2,243</strong><span>Comments</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="celeb-card">
+        <div class="pic"><img src="assets/popculture/trend-2.jpg" alt="Reese Witherspoon Grease tagged post"/></div>
+        <div class="meta">
+          <div class="handle-row"><span class="handle">@reesewitherspoon</span><span class="verified">✓</span></div>
+          <span class="role-mini">A-LIST · 30M+ FOLLOWERS</span>
+          <div class="caption">"Oh hey @elizabethbanks!..." <em>(Grease dancing duo on her shoulder)</em></div>
+          <div class="hashtag">tagged the page · joined chain</div>
+          <div class="stats-row">
+            <div class="stat-mini"><strong>580K</strong><span>Likes</span></div>
+            <div class="stat-mini"><strong>2,740</strong><span>Comments</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="celeb-card">
+        <div class="pic"><img src="assets/popculture/trend-1.jpg" alt="Zoe Saldana Bowie tagged post"/></div>
+        <div class="meta">
+          <div class="handle-row"><span class="handle">@zoesaldana</span><span class="verified">✓</span></div>
+          <span class="role-mini">A-LIST · GUARDIANS / AVATAR</span>
+          <div class="caption">"Oh hey @jennifer.garner I see your #pennonjen and I raise you a Bowie on Zoe!"</div>
+          <div class="hashtag">#BowieOnZoe</div>
+          <div class="stats-row">
+            <div class="stat-mini"><strong>132K</strong><span>Likes</span></div>
+            <div class="stat-mini"><strong>495</strong><span>Comments</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="celeb-card">
+        <div class="pic"><img src="assets/popculture/trend-5.jpg" alt="Jenny McCarthy KenOnJen post"/></div>
+        <div class="meta">
+          <div class="handle-row"><span class="handle">@jennymccarthy</span><span class="verified">✓</span></div>
+          <span class="role-mini">TV HOST · MASKED SINGER</span>
+          <div class="caption">"#KenOnJen coming to Fox next summer. Hosted by @kenjeong."</div>
+          <div class="hashtag">#KenOnJen · made her own hashtag</div>
+          <div class="stats-row">
+            <div class="stat-mini"><strong>38.8K</strong><span>Likes</span></div>
+            <div class="stat-mini"><strong>584</strong><span>Comments</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="celeb-card">
+        <div class="pic"><img src="assets/popculture/trend-6.jpg" alt="Barbara Corcoran Wonder Bread post"/></div>
+        <div class="meta">
+          <div class="handle-row"><span class="handle">@barbaracorcoran</span><span class="verified">✓</span></div>
+          <span class="role-mini">SHARK TANK · INVESTOR</span>
+          <div class="caption">"Let's do this..." <em>(loaf of Wonder Bread on her shoulder)</em></div>
+          <div class="hashtag">on-brand for a Shark</div>
+          <div class="stats-row">
+            <div class="stat-mini"><strong>3,944</strong><span>Likes</span></div>
+            <div class="stat-mini"><strong>146</strong><span>Comments</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TOP POSTS — visual stat cards -->
+<section class="top-posts-section">
+  <div class="wrap">
+    <span class="section-num">// 04 — POSTS THAT WORKED</span>
+    <div class="section-head">
+      <div><h2>The <span class="hl">posts</span>. The <span class="hl">numbers</span>.</h2></div>
+      <p class="kicker">6 stand-out posts. 4M+ combined views from this batch alone. Real Meta analytics, visualized.</p>
+    </div>
+
+    <div class="top-posts-grid">
+      <div class="post-stat-card" data-views="1134086">
+        <div class="post-num">// POST 01 · TOP</div>
+        <div class="post-views" data-target="1134086">0</div>
+        <div class="post-views-label">Views</div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Likes</span><strong>9.2K</strong></div>
+          <div class="bar-track"><div class="bar-fill" data-pct="100"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Comments</span><strong>5.0K</strong></div>
+          <div class="bar-track"><div class="bar-fill hot" data-pct="100"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Saves</span><strong>1.1K</strong></div>
+          <div class="bar-track"><div class="bar-fill dark" data-pct="100"></div></div>
+        </div>
+        <div class="post-divider"></div>
+        <div class="stat-row-h"><span>Profile activity</span><strong>3,001</strong></div>
+        <div class="stat-row-h"><span>Shares</span><strong>117</strong></div>
+      </div>
+
+      <div class="post-stat-card" data-views="860369">
+        <div class="post-num">// POST 02</div>
+        <div class="post-views" data-target="860369">0</div>
+        <div class="post-views-label">Views</div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Likes</span><strong>15.1K</strong></div>
+          <div class="bar-track"><div class="bar-fill" data-pct="100"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Comments</span><strong>687</strong></div>
+          <div class="bar-track"><div class="bar-fill hot" data-pct="14"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Saves</span><strong>819</strong></div>
+          <div class="bar-track"><div class="bar-fill dark" data-pct="74"></div></div>
+        </div>
+        <div class="post-divider"></div>
+        <div class="stat-row-h"><span>Profile activity</span><strong>1,716</strong></div>
+        <div class="stat-row-h"><span>Best engagement rate</span><strong>2.1%</strong></div>
+      </div>
+
+      <div class="post-stat-card" data-views="827812">
+        <div class="post-num">// POST 03</div>
+        <div class="post-views" data-target="827812">0</div>
+        <div class="post-views-label">Views</div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Likes</span><strong>10.8K</strong></div>
+          <div class="bar-track"><div class="bar-fill" data-pct="71"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Comments</span><strong>522</strong></div>
+          <div class="bar-track"><div class="bar-fill hot" data-pct="10"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Saves</span><strong>406</strong></div>
+          <div class="bar-track"><div class="bar-fill dark" data-pct="37"></div></div>
+        </div>
+        <div class="post-divider"></div>
+        <div class="stat-row-h"><span>Profile activity</span><strong>1,256</strong></div>
+        <div class="stat-row-h"><span>Engagement rate</span><strong>1.4%</strong></div>
+      </div>
+
+      <div class="post-stat-card" data-views="669028">
+        <div class="post-num">// POST 04</div>
+        <div class="post-views" data-target="669028">0</div>
+        <div class="post-views-label">Views</div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Likes</span><strong>3.6K</strong></div>
+          <div class="bar-track"><div class="bar-fill" data-pct="24"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Comments</span><strong>182</strong></div>
+          <div class="bar-track"><div class="bar-fill hot" data-pct="4"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Saves</span><strong>353</strong></div>
+          <div class="bar-track"><div class="bar-fill dark" data-pct="32"></div></div>
+        </div>
+        <div class="post-divider"></div>
+        <div class="stat-row-h"><span>Profile activity</span><strong>2,030</strong></div>
+        <div class="stat-row-h"><span>Engagement rate</span><strong>0.6%</strong></div>
+      </div>
+
+      <div class="post-stat-card" data-views="488363">
+        <div class="post-num">// POST 05</div>
+        <div class="post-views" data-target="488363">0</div>
+        <div class="post-views-label">Views</div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Likes</span><strong>5.5K</strong></div>
+          <div class="bar-track"><div class="bar-fill" data-pct="36"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Comments</span><strong>118</strong></div>
+          <div class="bar-track"><div class="bar-fill hot" data-pct="3"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Saves</span><strong>190</strong></div>
+          <div class="bar-track"><div class="bar-fill dark" data-pct="17"></div></div>
+        </div>
+        <div class="post-divider"></div>
+        <div class="stat-row-h"><span>Profile activity</span><strong>361</strong></div>
+        <div class="stat-row-h"><span>Engagement rate</span><strong>1.2%</strong></div>
+      </div>
+
+      <div class="post-stat-card" data-views="200000">
+        <div class="post-num">// POST 06 · BOOKMARK QUEEN</div>
+        <div class="post-views" data-target="11800">0</div>
+        <div class="post-views-label">Likes (saves over views, this one was a saver)</div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Likes</span><strong>11.8K</strong></div>
+          <div class="bar-track"><div class="bar-fill" data-pct="78"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Comments</span><strong>125</strong></div>
+          <div class="bar-track"><div class="bar-fill hot" data-pct="2"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-head"><span>Saves</span><strong>1.1K</strong></div>
+          <div class="bar-track"><div class="bar-fill dark" data-pct="100"></div></div>
+        </div>
+        <div class="post-divider"></div>
+        <div class="stat-row-h"><span>Posted</span><strong>Jan 3, 2024</strong></div>
+        <div class="stat-row-h"><span>Saves-to-likes</span><strong>9.3%</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT CHART -->
+<section style="background: var(--paper); border-bottom: 2px solid var(--ink);">
+  <div class="wrap">
+    <span class="section-num">// 05 — VIEWS BY POST</span>
+    <div class="section-head">
+      <div><h2>Per-post <span class="hl">views</span>.</h2></div>
+      <p class="kicker">Top 6 posts. Real Meta numbers. Hover any bar.</p>
+    </div>
+    <div class="chart-wrap" style="border-color: var(--ink);">
+      <h4>Views per post · interactive</h4>
+      <canvas id="postsViewsChart"></canvas>
+      <p style="font-size: 12px; opacity: 0.7; margin-top: 8px;">Combined: 4,179,668 views from these 6 posts alone. Page lifetime: 20M+.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PICKLEBALL -->
+<section style="background: var(--paper-2); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);">
+  <div class="wrap">
+    <span class="section-num">// 06 — SECOND ORGANIC PAGE</span>
+    <div class="section-head">
+      <div><h2>Pickleball <span class="hl">Memes</span>.</h2></div>
+      <p class="kicker">+4,809.5% growth in 608 days. Different niche, same playbook.</p>
+    </div>
+    <div class="social-page-card">
+      <div class="social-page-head">
+        <h3>Pickleball Memes</h3>
+        <span class="badge hot">+4,809.5% IN 608 DAYS</span>
+        <span class="badge dark">14,057 TOTAL FOLLOWERS</span>
+        <span class="badge">3.36M+ COMBINED VIEWS</span>
+      </div>
+      <p style="font-size: 16px; line-height: 1.6; margin-bottom: 18px;">Vertical-first pickleball page. Started at ~285 followers, grew to 14,057 in 608 days. Three breakout videos delivered <strong>3.36M combined views</strong> and <strong>4,172 net new follows</strong>. Real Meta analytics below.</p>
+      <div class="chart-wrap" style="margin-bottom: 22px;">
+        <h4>Overall growth · Feb 1 → Jul 7</h4>
+        <canvas id="pickleGrowthChart"></canvas>
+      </div>
+      <h4 style="font-family: var(--display); font-size: 18px; margin-bottom: 10px;">Top 3 videos · real numbers</h4>
+      <div class="video-stat-row">
+        <div class="video-stat">
+          <img src="assets/pickleball/v1.png" alt="Video 1"/>
+          <div class="stats-block">
+            <div class="s" id="v1-views"><strong>—</strong><span>Views</span></div>
+            <div class="s" id="v1-likes"><strong>—</strong><span>Likes</span></div>
+            <div class="s" id="v1-react"><strong>—</strong><span>Interactions</span></div>
+          </div>
+          <div class="net-follows" id="v1-net">+— net follows</div>
+        </div>
+        <div class="video-stat">
+          <img src="assets/pickleball/v2.png" alt="Video 2"/>
+          <div class="stats-block">
+            <div class="s" id="v2-views"><strong>—</strong><span>Views</span></div>
+            <div class="s" id="v2-likes"><strong>—</strong><span>Likes</span></div>
+            <div class="s" id="v2-react"><strong>—</strong><span>Interactions</span></div>
+          </div>
+          <div class="net-follows" id="v2-net">+— net follows</div>
+        </div>
+        <div class="video-stat">
+          <img src="assets/pickleball/v3.png" alt="Video 3"/>
+          <div class="stats-block">
+            <div class="s" id="v3-views"><strong>—</strong><span>Views</span></div>
+            <div class="s" id="v3-likes"><strong>—</strong><span>Likes</span></div>
+            <div class="s" id="v3-react"><strong>—</strong><span>Interactions</span></div>
+          </div>
+          <div class="net-follows" id="v3-net">+— net follows</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background: var(--lime); color: var(--ink); padding: 60px 28px; text-align: center;">
+  <h3 style="font-family: var(--display); font-size: clamp(36px, 5vw, 64px); line-height: 1; margin-bottom: 14px;">Want a viral page?</h3>
+  <p style="max-width: 640px; margin: 0 auto 24px;">I built one trend that landed on national TV. Imagine what I do for your brand.</p>
+  <a href="index.html#contact" class="btn primary" style="background: var(--ink); color: var(--lime); border-color: var(--ink);">Contact me →</a>
+  <a href="index.html" class="btn" style="background: transparent; color: var(--ink); border-color: var(--ink); margin-left: 8px;">← Back home</a>
+</section>
+
+<footer>Built by Alejandro · Social Pages · <span class="heart">●</span> 20M+ views, 6 celebs, 1 trend · <a href="index.html">home</a></footer>
+
+<script src="site.js"></script>
+<script>
+const lime = '#C6FF3D', ink = '#0E0E0E', hot = '#FF4D6D';
+
+/* ===== ANIMATED COUNTERS for top stats ===== */
+function animateNum(el, target, dur=1500, suffix='') {
+  let cur = 0;
+  const start = performance.now();
+  function step(now) {
+    const t = Math.min(1, (now - start) / dur);
+    const eased = 1 - Math.pow(1 - t, 3);
+    cur = target * eased;
+    if (target >= 1000000) el.textContent = (cur/1000000).toFixed(1) + 'M' + suffix;
+    else if (target >= 1000) el.textContent = (cur/1000).toFixed(0) + 'K' + suffix;
+    else el.textContent = Math.round(cur).toLocaleString() + suffix;
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* Top hero counters */
+const heroObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    animateNum(document.getElementById('totalViews'), 20000000, 1800, '+');
+    animateNum(document.getElementById('totalFollowers'), 28000);
+    animateNum(document.getElementById('totalCelebs'), 6);
+    animateNum(document.getElementById('totalCelebLikes'), 1600000);
+    heroObs.disconnect();
+  });
+}, { threshold: 0.4 });
+heroObs.observe(document.getElementById('totalViews'));
+
+/* Per-post views counters + bar fills */
+const postObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const card = e.target;
+    const viewsEl = card.querySelector('.post-views');
+    const target = parseInt(viewsEl.dataset.target, 10);
+    let cur = 0;
+    const dur = 1500, start = performance.now();
+    function step(now) {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      cur = target * eased;
+      if (target >= 1000000) viewsEl.textContent = (cur/1000000).toFixed(2) + 'M';
+      else if (target >= 1000) viewsEl.textContent = (cur/1000).toFixed(1) + 'K';
+      else viewsEl.textContent = Math.round(cur).toLocaleString();
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+    /* fill bars */
+    card.querySelectorAll('.bar-fill').forEach(bar => {
+      setTimeout(() => { bar.style.width = bar.dataset.pct + '%'; }, 200);
+    });
+    postObs.unobserve(card);
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.post-stat-card').forEach(c => postObs.observe(c));
+
+/* ===== POSTS VIEWS BAR CHART ===== */
+new Chart(document.getElementById('postsViewsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Post 01', 'Post 02', 'Post 03', 'Post 04', 'Post 05', 'Post 06'],
+    datasets: [{
+      label: 'Views',
+      data: [1134086, 860369, 827812, 669028, 488363, 200000],
+      backgroundColor: [lime, lime, lime, ink, ink, ink],
+      borderRadius: 6, borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { backgroundColor: ink, callbacks: { label: ctx => ctx.parsed.y.toLocaleString() + ' views' } } },
+    scales: {
+      y: { beginAtZero: true, ticks: { color: ink, font: { family: 'JetBrains Mono' }, callback: v => v >= 1000000 ? (v/1000000)+'M' : (v/1000)+'K' }, grid: { color: 'rgba(0,0,0,0.08)' } },
+      x: { ticks: { color: ink, font: { family: 'JetBrains Mono' } }, grid: { display: false } }
+    }
+  }
+});
+
+/* ===== PICKLEBALL CHART ===== */
+new Chart(document.getElementById('pickleGrowthChart'), {
+  type: 'line',
+  data: { labels: ['Feb 1', 'Apr 28', 'Jul 24', 'Oct 19', 'Jan 14', 'Apr 11', 'Jul 7'],
+    datasets: [{ data: [285, 320, 4900, 5800, 6300, 13200, 14057],
+      borderColor: hot, backgroundColor: 'rgba(255,77,109,0.18)', fill: true, tension: 0.4, borderWidth: 3,
+      pointRadius: 6, pointBackgroundColor: lime, pointBorderColor: ink, pointBorderWidth: 2 }] },
+  options: { responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { backgroundColor: ink, callbacks: { label: ctx => `${ctx.parsed.y.toLocaleString()} followers` } } },
+    scales: { y: { beginAtZero: true, ticks: { color: ink, font: { family: 'JetBrains Mono' }, callback: v => v.toLocaleString() }, grid: { color: 'rgba(0,0,0,0.08)' } },
+              x: { ticks: { color: ink, font: { family: 'JetBrains Mono' } }, grid: { display: false } } } }
+});
+
+/* PICKLEBALL VIDEO STATS */
+const videoStats = {
+  'v1-views':  { v: 1427801, fmt: 'M' }, 'v1-likes':  { v: 9622, fmt: 'K' }, 'v1-react':  { v: 12900, fmt: 'K' }, 'v1-net':    { v: 2549, fmt: 'net' },
+  'v2-views':  { v: 1221396, fmt: 'M' }, 'v2-likes':  { v: 7914, fmt: 'K' }, 'v2-react':  { v: 8912, fmt: 'K' },  'v2-net':    { v: 1099, fmt: 'net' },
+  'v3-views':  { v: 709466,  fmt: 'K' }, 'v3-likes':  { v: 2886, fmt: 'K' }, 'v3-react':  { v: 3956, fmt: 'K' },  'v3-net':    { v: 524, fmt: 'net' }
+};
+function display(val, mode) {
+  if (mode === 'M') return val >= 1000000 ? (val/1000000).toFixed(2) + 'M' : Math.round(val/1000) + 'K';
+  if (mode === 'K') return val >= 1000 ? (val/1000).toFixed(1) + 'K' : Math.round(val).toLocaleString();
+  if (mode === 'net') return '+' + Math.round(val).toLocaleString() + ' net follows';
+  return Math.round(val).toLocaleString();
+}
+const vsObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const id = e.target.id, cfg = videoStats[id];
+    if (!cfg) return;
+    const target = cfg.fmt === 'net' ? e.target : e.target.querySelector('strong');
+    const dur = 1400, start = performance.now();
+    function step(now) {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      target.textContent = display(cfg.v * eased, cfg.fmt);
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+    vsObs.unobserve(e.target);
+  });
+}, { threshold: 0.4 });
+Object.keys(videoStats).forEach(id => { const el = document.getElementById(id); if (el) vsObs.observe(el); });
+</script>
+</body>
+</html>

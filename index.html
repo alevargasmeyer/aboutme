@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alejandro Vargas Meyer — Founder. Operator.</title>
+<meta name="description" content="Co-founder of GIO Sports — built a custom-paddle brand from $0 to $250K, in 12 retail stores across 6 states, with Four Seasons, Marriott and Cytiva as clients. Looking for GTM, partnerships and growth roles." />
+
+<!-- Open Graph / social unfurls -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Alejandro Vargas Meyer — Founder. Operator." />
+<meta property="og:description" content="Built GIO Sports from $0 → $250K. Took Cadena A from 0 → 500K followers. Pop-culture page with 20M+ views. I sell hard, ship fast, learn faster." />
+<meta property="og:image" content="https://aboutme.alevargasmeyer.com/assets/og/og.jpg" />
+<meta property="og:url" content="https://aboutme.alevargasmeyer.com/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Alejandro Vargas Meyer — Founder. Operator." />
+<meta name="twitter:description" content="Built GIO Sports from $0 → $250K. Took Cadena A from 0 → 500K followers. I sell hard, ship fast, learn faster." />
+<meta name="twitter:image" content="https://aboutme.alevargasmeyer.com/assets/og/og.jpg" />
+
+<!-- Favicon: pickleball, matches the cursor -->
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='11.2' fill='%23C6FF3D' stroke='%230E0E0E' stroke-width='0.8'/><circle cx='8' cy='6' r='1.2' fill='%230E0E0E' opacity='0.55'/><circle cx='15.5' cy='5.5' r='1.2' fill='%230E0E0E' opacity='0.55'/><circle cx='5.5' cy='11' r='1.2' fill='%230E0E0E' opacity='0.55'/><circle cx='12' cy='9' r='1.2' fill='%230E0E0E' opacity='0.55'/><circle cx='18.5' cy='11' r='1.2' fill='%230E0E0E' opacity='0.55'/><circle cx='9' cy='14.5' r='1.2' fill='%230E0E0E' opacity='0.55'/><circle cx='15' cy='14.5' r='1.2' fill='%230E0E0E' opacity='0.55'/><circle cx='12' cy='18' r='1.2' fill='%230E0E0E' opacity='0.55'/></svg>" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+<style>
+.hero { min-height: 100vh; padding: 110px 28px 40px; display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 40px; align-items: center; position: relative; max-width: 1280px; margin: 0 auto; }
+.hero-left h1 { font-family: var(--display); font-size: clamp(56px, 9vw, 132px); line-height: 0.9; letter-spacing: -0.04em; margin-bottom: 18px; }
+.hero-left h1 .accent { color: var(--ink); background: var(--lime); padding: 0 12px; transform: rotate(-2deg); display: inline-block; }
+.hero-left .tag { font-family: var(--hand); font-size: 32px; color: var(--ink-soft); margin-bottom: 22px; }
+.hero-left p.lede { font-size: 19px; line-height: 1.55; max-width: 600px; margin-bottom: 14px; }
+.hero-left p.now-line { font-family: var(--mono); font-size: 13px; letter-spacing: 0.5px; padding: 10px 14px; background: var(--ink); color: var(--lime); border: 2px solid var(--ink); display: inline-block; max-width: 640px; margin-bottom: 26px; line-height: 1.5; }
+.hero-left p.now-line strong { color: var(--paper); }
+.three-pillars { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; max-width: 640px; margin-bottom: 30px; }
+.pillar { background: white; border: 2px solid var(--ink); padding: 16px 14px; box-shadow: 5px 5px 0 var(--ink); transition: all 0.2s; }
+.pillar:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--lime); }
+.pillar .tag-num { font-family: var(--mono); font-size: 11px; opacity: 0.55; letter-spacing: 1px; }
+.pillar strong { display: block; font-family: var(--display); font-size: 16px; margin: 4px 0; line-height: 1.1; }
+.pillar span { font-size: 12px; opacity: 0.75; }
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-right { position: relative; }
+.polaroid { background: white; padding: 14px 14px 56px; box-shadow: var(--shadow); transform: rotate(3deg); position: relative; max-width: 380px; margin: 0 auto; transition: transform 0.4s cubic-bezier(.2,.8,.2,1.2); }
+.polaroid:hover { transform: rotate(-1deg) scale(1.03); }
+.polaroid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+.polaroid .caption { position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; font-family: var(--hand); font-size: 22px; }
+.tape { position: absolute; width: 110px; height: 28px; background: var(--tape); top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+.sticker { position: absolute; background: var(--lime); border: 2px solid var(--ink); border-radius: 999px; padding: 8px 14px; font-family: var(--display); font-size: 13px; letter-spacing: 0.5px; box-shadow: 4px 4px 0 var(--ink); }
+.sticker.s1 { top: -10px; right: -20px; transform: rotate(8deg); }
+.sticker.s2 { bottom: -16px; left: -22px; transform: rotate(-6deg); background: var(--hot); color: white; }
+.sticker.s3 { top: 40%; right: -30px; transform: rotate(12deg); background: white; }
+
+/* PROJECT CARDS — clickable links to full subpages */
+.about { background: var(--paper-2); border-bottom: 2px solid var(--ink); }
+.project-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.project-card { background: white; border: 2px solid var(--ink); padding: 0; box-shadow: 8px 8px 0 var(--ink); transition: all 0.25s; overflow: hidden; display: flex; flex-direction: column; }
+.project-card:hover { transform: translate(-5px,-5px); box-shadow: 12px 12px 0 var(--lime); }
+.project-card .thumb { aspect-ratio: 16/10; overflow: hidden; border-bottom: 2px solid var(--ink); position: relative; }
+.project-card .thumb img, .project-card .thumb video { width: 100%; height: 100%; object-fit: cover; }
+.project-card .thumb-overlay { position: absolute; top: 12px; left: 12px; background: var(--lime); color: var(--ink); border: 2px solid var(--ink); padding: 4px 10px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+.project-card .body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+.project-card .body h3 { font-family: var(--display); font-size: 24px; line-height: 1; margin-bottom: 6px; }
+.project-card .body .role { font-family: var(--hand); font-size: 22px; color: var(--lime-deep); margin-bottom: 12px; }
+.project-card .body p { font-size: 14px; line-height: 1.5; margin-bottom: 16px; opacity: 0.85; flex: 1; }
+.project-card .stats { display: flex; gap: 14px; margin-bottom: 14px; flex-wrap: wrap; }
+.project-card .stat { background: var(--paper-2); border: 1px solid var(--ink); padding: 6px 10px; }
+.project-card .stat strong { display: block; font-family: var(--display); font-size: 14px; line-height: 1; }
+.project-card .stat span { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.7; }
+.project-card .arr { background: var(--ink); color: var(--paper); padding: 10px 16px; font-family: var(--display); font-size: 13px; letter-spacing: 1px; align-self: flex-start; transition: all 0.2s; }
+.project-card:hover .arr { background: var(--lime); color: var(--ink); }
+.project-card.featured { background: var(--ink); color: var(--paper); }
+.project-card.featured .body p { opacity: 0.9; }
+.project-card.featured .stat { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.2); color: var(--paper); }
+.project-card.featured .arr { background: var(--lime); color: var(--ink); }
+
+/* BENTLEY CARD */
+.bentley-strip { background: white; border: 2px solid var(--ink); padding: 28px; box-shadow: 8px 8px 0 var(--ink); position: relative; margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
+.bentley-strip h4 { font-family: var(--display); font-size: 26px; margin-bottom: 14px; }
+.bentley-strip .deg { display: flex; gap: 14px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px dashed var(--ink); }
+.bentley-strip .deg:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+.bentley-strip .deg .icon { font-family: var(--display); font-size: 30px; color: var(--lime-deep); flex-shrink: 0; min-width: 36px; }
+.bentley-strip .deg strong { display: block; font-size: 16px; }
+.bentley-strip .deg span { font-size: 13px; opacity: 0.7; }
+.bentley-strip .quote { font-family: var(--hand); font-size: 32px; color: var(--ink-soft); line-height: 1.2; }
+.bentley-strip .quote::before { content: '"'; font-family: var(--display); color: var(--lime); font-size: 80px; line-height: 0.8; display: block; margin-bottom: -20px; }
+
+/* MORE CTA */
+.more-cta { background: var(--lime); border-top: 2px solid var(--ink); padding: 60px 28px; text-align: center; }
+.more-cta h3 { font-family: var(--display); font-size: clamp(36px, 5vw, 64px); line-height: 1; margin-bottom: 14px; }
+.more-cta p { font-size: 16px; max-width: 600px; margin: 0 auto 24px; }
+.more-pages { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; max-width: 720px; margin: 0 auto; }
+.more-pages a { background: var(--ink); color: var(--lime); padding: 18px; font-family: var(--display); font-size: 16px; border: 2px solid var(--ink); transition: all 0.2s; text-align: center; }
+.more-pages a:hover { background: var(--paper); color: var(--ink); transform: translate(-3px,-3px); box-shadow: 5px 5px 0 var(--ink); }
+
+/* CONTACT */
+.contact { background: var(--ink); color: var(--paper); border-top: 2px solid var(--ink); padding: 80px 28px; }
+.contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 0.8fr; gap: 50px; align-items: center; }
+.contact h2 { font-family: var(--display); font-size: clamp(56px, 9vw, 120px); line-height: 0.92; letter-spacing: -0.03em; }
+.contact h2 .strike { font-style: italic; opacity: 0.45; text-decoration: line-through; text-decoration-color: var(--hot); text-decoration-thickness: 5px; }
+.contact h2 .lime-text { color: var(--lime); }
+.contact .lede { font-size: 18px; line-height: 1.55; max-width: 540px; margin: 20px 0 30px; opacity: 0.9; }
+.contact-card { background: var(--lime); color: var(--ink); padding: 30px; border-radius: 16px; box-shadow: 10px 10px 0 var(--paper); }
+.contact-card .row { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px dashed rgba(0,0,0,0.2); }
+.contact-card .row:last-child { border-bottom: none; }
+.contact-card .row .ico { width: 36px; height: 36px; background: var(--ink); color: var(--lime); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.contact-card .row a { font-size: 15px; word-break: break-all; }
+
+@media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; padding-top: 100px; }
+  .three-pillars { grid-template-columns: 1fr 1fr; }
+  .project-grid, .bentley-strip, .contact-inner, .more-pages { grid-template-columns: 1fr; }
+  nav.top ul { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<nav class="top">
+  <a href="index.html" class="logo"><span class="blink"></span> ALEJANDRO V.M.</a>
+  <ul>
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="gio.html">GIO Sports</a></li>
+    <li><a href="cadena.html">Cadena A</a></li>
+    <li><a href="consulting.html">Consulting</a></li>
+    <li><a href="social.html">Social</a></li>
+  </ul>
+  <a href="#contact" class="hire-btn">Let's talk ↗</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-left">
+    <span class="section-num">// 00 — INDEX</span>
+    <h1>I build things,<br/>run rooms,<br/><span class="accent">close deals.</span></h1>
+    <p class="tag">↳ Founder. Operator. Bilingual closer.</p>
+    <p class="lede">
+      Bentley University grad turned <strong style="background:var(--lime); padding: 1px 6px;">co-founder of GIO Sports</strong> — a custom-paddle brand I built from cold-start to <strong>$250K in revenue</strong>, with our own paddles in <strong>12 retail stores across 6 states</strong> and partnerships with Four Seasons, Marriott, and Cytiva. Before that, I ran social + production at <strong>Cadena A</strong> in Bolivia — taking the network from <strong>0 to 500K+ followers</strong> and from last place to #1 in three years. I sell hard, ship fast, learn faster.
+    </p>
+    <p class="now-line">↳ <strong>Open to:</strong> GTM · BDR/AE · partnerships · CS/AM · growth · brand &amp; social marketing.</p>
+    <div class="three-pillars">
+      <a href="#bentley" class="pillar"><span class="tag-num">// 01</span><strong>Bentley University</strong><span>Media Studies · BM + Entrepreneurship</span></a>
+      <a href="cadena.html" class="pillar"><span class="tag-num">// 02</span><strong>Cadena A · Bolivia</strong><span>0→500K followers · last to #1 in 3 yrs</span></a>
+      <a href="gio.html" class="pillar"><span class="tag-num">// 03</span><strong>GIO Sports</strong><span>Founder · $250K revenue · 12 stores</span></a>
+    </div>
+    <div class="hero-cta">
+      <a href="gio.html" class="btn primary">See GIO Sports →</a>
+      <a href="cv.pdf" class="btn" download>Download CV ↓</a>
+      <a href="#contact" class="btn">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="polaroid">
+      <div class="tape"></div>
+      <img src="assets/me/me.jpg" alt="Alejandro Vargas Meyer" />
+      <div class="caption">that's me — let's build.</div>
+      <div class="sticker s1">FOUNDER</div>
+      <div class="sticker s2">CLOSER</div>
+      <div class="sticker s3">EST. AVM</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE — tightened to 6 sharp roles + clients -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>FOUNDER</span><span class="dot">●</span>
+    <span>SALES &amp; BIZDEV</span><span class="dot">●</span>
+    <span>GROWTH + BRAND</span><span class="dot">●</span>
+    <span>PARTNERSHIPS</span><span class="dot">●</span>
+    <span>SOCIAL &amp; CONTENT</span><span class="dot">●</span>
+    <span>BILINGUAL · ES · EN</span><span class="dot">●</span>
+    <span>★ TRUSTED BY · FOUR SEASONS · MARRIOTT · CYTIVA · FERG'S · TODAY SHOW</span><span class="dot">●</span>
+    <span>FOUNDER</span><span class="dot">●</span>
+    <span>SALES &amp; BIZDEV</span><span class="dot">●</span>
+    <span>GROWTH + BRAND</span><span class="dot">●</span>
+    <span>PARTNERSHIPS</span><span class="dot">●</span>
+    <span>SOCIAL &amp; CONTENT</span><span class="dot">●</span>
+    <span>BILINGUAL · ES · EN</span><span class="dot">●</span>
+    <span>★ TRUSTED BY · FOUR SEASONS · MARRIOTT · CYTIVA · FERG'S · TODAY SHOW</span><span class="dot">●</span>
+  </div>
+</div>
+
+<!-- THREE BIG PROJECT CARDS — each is a clickable subpage link -->
+<section class="about" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">// 01 — THE THREE THAT MATTER</span>
+        <h2>Click <span class="hl">in</span>.</h2>
+      </div>
+      <p class="kicker">Three pages, one operator. Each one has every piece of work — videos, decks, real numbers — laid out in detail.</p>
+    </div>
+
+    <div class="project-grid">
+      <a href="gio.html" class="project-card featured">
+        <div class="thumb">
+          <video src="assets/gio/gio-website.mp4" autoplay muted loop playsinline poster="assets/posters/gio-website.jpg"></video>
+          <div class="thumb-overlay">FOUNDER · 2023 → TODAY</div>
+        </div>
+        <div class="body">
+          <h3>GIO Sports</h3>
+          <div class="role" style="color: var(--lime);">↳ Co-founded. Built from zero.</div>
+          <p>Custom pickleball-paddle brand. B2B + B2C. Sold to Four Seasons, Marriott, Cytiva, Synergy, Ferg's, Atlantic Pickleball Club, Sherry CC, plus our own line in 12 retail stores across 6 states.</p>
+          <div class="stats">
+            <div class="stat"><strong>$250K</strong><span>Revenue</span></div>
+            <div class="stat"><strong>12</strong><span>Product lines</span></div>
+            <div class="stat"><strong>12</strong><span>Retail stores</span></div>
+            <div class="stat"><strong>165%</strong><span>Top margin</span></div>
+          </div>
+          <span class="arr">OPEN GIO PAGE →</span>
+        </div>
+      </a>
+
+      <a href="cadena.html" class="project-card">
+        <div class="thumb">
+          <video src="assets/cadena/tv-show.mp4" autoplay muted loop playsinline poster="assets/posters/tv-show.jpg"></video>
+          <div class="thumb-overlay">0 → 500K · BOLIVIA · 2019–2022</div>
+        </div>
+        <div class="body">
+          <h3>Cadena A · Bolivia</h3>
+          <div class="role">↳ Last place to #1 in 3 years.</div>
+          <p>Took Bolivia's TV news network from 0 to 500K+ followers in three years — passing every competitor. 50+ videos a day, all organic, edited and copywritten myself. Created "60 Segundos de Política."</p>
+          <div class="stats">
+            <div class="stat"><strong>500K+</strong><span>Followers</span></div>
+            <div class="stat"><strong>#1</strong><span>vs 5 outlets</span></div>
+            <div class="stat"><strong>50+</strong><span>Videos / day</span></div>
+          </div>
+          <span class="arr">OPEN CADENA PAGE →</span>
+        </div>
+      </a>
+
+      <a href="social.html" class="project-card">
+        <div class="thumb">
+          <img src="assets/popculture/today-show.jpg" alt="Pop-culture page on Today Show"/>
+          <div class="thumb-overlay">ORGANIC GROWTH · 2022 → TODAY</div>
+        </div>
+        <div class="body">
+          <h3>Side Pages</h3>
+          <div class="role">↳ I created a viral celeb trend.</div>
+          <p>@popculture — 20M+ page views, 412K followers, on the Today Show. I created the "Elf on a Shelf" celeb trend — Anne Hathaway, Reese Witherspoon, Zoe Saldana &amp; 3 more A-listers tagged the page. Plus a pickleball page at +4,809.5%.</p>
+          <div class="stats">
+            <div class="stat"><strong>20M+</strong><span>Page views</span></div>
+            <div class="stat"><strong>6</strong><span>A-list tags</span></div>
+            <div class="stat"><strong>+4,809%</strong><span>Pickleball</span></div>
+          </div>
+          <span class="arr">OPEN SOCIAL PAGE →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- BENTLEY -->
+    <div class="bentley-strip" id="bentley">
+      <div>
+        <h4>📚 Bentley University · the foundation</h4>
+        <div class="deg">
+          <div class="icon">B</div>
+          <div><strong>Bachelor's — Media Studies</strong><span>Bentley University · Minors: Business Management + Entrepreneurship</span></div>
+        </div>
+        <div class="deg">
+          <div class="icon">M</div>
+          <div><strong>Master's — IED Barcelona</strong><span>Design · Innovation · Branding</span></div>
+        </div>
+        <div class="deg">
+          <div class="icon">★</div>
+          <div><strong>IBM — Generative AI Certifications</strong><span>Foundation models · prompting · applied use cases</span></div>
+        </div>
+      </div>
+      <div class="quote">
+        Bentley taught me business runs on three things: clear communication, real numbers, and people you can trust.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MORE -->
+<section class="more-cta">
+  <h3>Want the whole thing?</h3>
+  <p>Each page is a deep-dive — every video, every deck, every brand, every store. Pick one.</p>
+  <div class="more-pages">
+    <a href="gio.html">→ GIO Sports · the full story</a>
+    <a href="cadena.html">→ Cadena A · the broadcast work</a>
+    <a href="consulting.html">→ Web Consulting · MSV + Hoyo 19</a>
+    <a href="social.html">→ Social Pages · pop-culture + pickleball</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <h2>Let's <span class="strike">talk</span> <span class="lime-text">build.</span></h2>
+      <p class="lede">If you've made it this far, you already know how I work: show up, ship, sell. Email, LinkedIn, or text — I respond fast.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="mailto:alevargasmeyer@gmail.com" class="btn primary" style="background:var(--lime); color:var(--ink); border-color:var(--lime);">Send an email →</a>
+        <a href="cv.pdf" download class="btn" style="background:transparent; color:var(--paper); border-color:var(--paper);">Download CV ↓</a>
+      </div>
+    </div>
+    <div class="contact-card">
+      <div class="row"><div class="ico">@</div><a href="mailto:alevargasmeyer@gmail.com">alevargasmeyer@gmail.com</a></div>
+      <div class="row"><div class="ico">in</div><a href="https://www.linkedin.com/in/alevargasmeyer" target="_blank" rel="noopener">LinkedIn / alevargasmeyer</a></div>
+      <div class="row"><div class="ico">📍</div><span>Miami · open to remote / hybrid</span></div>
+      <div class="row"><div class="ico">★</div><span>Available immediately</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>Built by Alejandro · designed to be loud · <span class="heart">●</span> ready when you are</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

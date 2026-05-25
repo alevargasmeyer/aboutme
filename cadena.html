@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cadena A — 0 → 500K Followers · Production + Social by Alejandro V.M.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+.cadena-hero { background: var(--paper-2); padding: 130px 28px 80px; border-bottom: 2px solid var(--ink); }
+.cadena-hero .wrap { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center; }
+.cadena-hero .crumb { font-family: var(--mono); font-size: 12px; opacity: 0.6; letter-spacing: 2px; margin-bottom: 12px; }
+.cadena-hero h1 { font-family: var(--display); font-size: clamp(72px, 10vw, 160px); line-height: 0.85; letter-spacing: -0.04em; margin-bottom: 14px; }
+.cadena-hero h1 .hl { background: var(--lime); padding: 0 12px; transform: rotate(-2deg); display: inline-block; }
+.cadena-hero .lede { font-size: 18px; line-height: 1.55; max-width: 540px; margin-bottom: 20px; }
+.cadena-hero .role-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.cadena-hero .role-tags span { background: var(--ink); color: var(--paper); padding: 6px 14px; font-family: var(--mono); font-size: 11px; letter-spacing: 1px; border-radius: 4px; }
+.cadena-hero .role-tags .lime { background: var(--lime); color: var(--ink); }
+
+/* TV BEZEL */
+.tv-bezel { background: linear-gradient(135deg, #2a2a2a 0%, #181818 60%, #0a0a0a 100%); border-radius: 22px; padding: 36px 48px 56px; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 0 4px #404040; }
+.tv-bezel::before { content: 'CADENA A · BOLIVIA'; position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); font-family: var(--display); font-size: 13px; color: #555; letter-spacing: 4px; }
+.tv-screen { background: #000; border-radius: 8px; overflow: hidden; aspect-ratio: 4/3; position: relative; box-shadow: inset 0 0 60px rgba(0,0,0,0.9); }
+.tv-screen video { width: 100%; height: 100%; object-fit: cover; }
+.tv-screen::before { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2; background: repeating-linear-gradient(transparent 0, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px); }
+.tv-screen::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2; background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.45) 100%); }
+.rec-light { position: absolute; top: 18px; right: 26px; display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: white; z-index: 3; }
+.rec-dot { width: 10px; height: 10px; border-radius: 50%; background: #ff2424; box-shadow: 0 0 10px #ff2424; animation: blink 1.2s infinite; }
+@keyframes blink { 50% { opacity: 0.2; } }
+.knobs { position: absolute; right: -14px; top: 50px; display: flex; flex-direction: column; gap: 22px; }
+.knob { width: 38px; height: 38px; border-radius: 50%; background: radial-gradient(circle, #555 0%, #2a2a2a 70%); border: 3px solid #1a1a1a; position: relative; box-shadow: 0 4px 8px rgba(0,0,0,0.4); }
+.knob::after { content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); width: 3px; height: 12px; background: var(--lime); border-radius: 2px; }
+
+/* HEADLINE KPI */
+.cadena-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); background: var(--ink); color: var(--paper); }
+.cadena-kpi { padding: 28px 22px; border-right: 2px solid var(--lime); }
+.cadena-kpi:last-child { border-right: none; }
+.cadena-kpi .num { font-family: var(--display); font-size: 38px; line-height: 1; color: var(--lime); }
+.cadena-kpi .label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; opacity: 0.85; }
+
+/* THE LEAP — last → first */
+.leap-block { background: linear-gradient(135deg, var(--ink) 0%, #1a1a1a 100%); color: var(--paper); border: 3px solid var(--lime); padding: 40px; box-shadow: 14px 14px 0 var(--hot); position: relative; overflow: hidden; }
+.leap-block::before { content: '#1'; position: absolute; bottom: -90px; right: -20px; font-family: var(--display); font-size: 360px; color: rgba(198,255,61,0.06); line-height: 0.85; pointer-events: none; }
+.leap-block h3 { font-family: var(--display); font-size: clamp(40px, 6vw, 72px); line-height: 0.95; margin-bottom: 14px; position: relative; }
+.leap-block h3 .hl { background: var(--lime); color: var(--ink); padding: 0 10px; display: inline-block; transform: rotate(-1deg); }
+.leap-block .lede { font-size: 17px; line-height: 1.55; max-width: 760px; opacity: 0.92; position: relative; }
+.leap-block .lede strong { color: var(--lime); }
+
+/* DAILY GRIND */
+.grind-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 28px; position: relative; }
+.grind-card { background: rgba(198,255,61,0.08); border-left: 3px solid var(--lime); padding: 20px; }
+.grind-card .icon { font-family: var(--display); font-size: 26px; color: var(--lime); margin-bottom: 6px; }
+.grind-card strong { display: block; font-size: 15px; margin-bottom: 4px; }
+.grind-card span { font-size: 12px; opacity: 0.8; line-height: 1.4; }
+
+/* IPHONE */
+.iphone-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 720px; margin: 30px auto; }
+.iphone { background: #0a0a0a; border-radius: 36px; padding: 12px; aspect-ratio: 9/19.5; box-shadow: 0 24px 48px rgba(0,0,0,0.3), inset 0 0 0 2px #2a2a2a; position: relative; }
+.iphone::before { content: ''; position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 90px; height: 24px; background: #000; border-radius: 14px; z-index: 3; }
+.iphone .screen { background: #000; border-radius: 26px; overflow: hidden; height: 100%; position: relative; }
+.iphone video { width: 100%; height: 100%; object-fit: cover; }
+.iphone .platform-tag { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 6px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 1px; backdrop-filter: blur(10px); z-index: 4; }
+
+/* LEADERBOARD */
+.leaderboard { display: grid; gap: 8px; margin-top: 18px; }
+.lb-row { display: grid; grid-template-columns: 60px 200px 1fr 100px; gap: 14px; align-items: center; background: var(--paper-2); border: 1px solid var(--ink); padding: 12px 16px; transition: all 0.2s; }
+.lb-row.cadena { background: var(--lime); border-color: var(--ink); border-width: 2px; }
+.lb-row:hover { transform: translateX(4px); }
+.lb-row .rank { font-family: var(--display); font-size: 22px; line-height: 1; color: var(--lime-deep); }
+.lb-row.cadena .rank { color: var(--ink); }
+.lb-row .name { font-family: var(--display); font-size: 16px; }
+.lb-row .bar-wrap { background: rgba(0,0,0,0.08); height: 14px; border-radius: 999px; overflow: hidden; position: relative; }
+.lb-row.cadena .bar-wrap { background: rgba(0,0,0,0.18); }
+.lb-row .bar-fill { height: 100%; background: var(--ink); border-radius: 999px; width: 0; transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
+.lb-row.cadena .bar-fill { background: var(--ink); }
+.lb-row .num { font-family: var(--display); font-size: 18px; text-align: right; }
+
+.cadena-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.posts-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.posts-row img { aspect-ratio: 1/1; object-fit: cover; border: 2px solid var(--ink); }
+
+@media (max-width: 980px) {
+  .cadena-hero .wrap { grid-template-columns: 1fr; }
+  .cadena-kpis { grid-template-columns: repeat(2, 1fr); }
+  .cadena-kpi:nth-child(2) { border-right: none; }
+  .iphone-row { grid-template-columns: 1fr; max-width: 320px; }
+  .cadena-charts { grid-template-columns: 1fr; }
+  .knobs { display: none; }
+  .grind-grid { grid-template-columns: 1fr 1fr; }
+  .lb-row { grid-template-columns: 40px 130px 1fr 80px; gap: 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<nav class="top">
+  <a href="index.html" class="logo"><span class="blink"></span> ALEJANDRO V.M.</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gio.html">GIO Sports</a></li>
+    <li><a href="cadena.html" class="active">Cadena A</a></li>
+    <li><a href="consulting.html">Consulting</a></li>
+    <li><a href="social.html">Social</a></li>
+  </ul>
+  <a href="index.html#contact" class="hire-btn">Hire Me ↗</a>
+</nav>
+
+<header class="cadena-hero">
+  <div class="wrap">
+    <div>
+      <div class="crumb">// 03 — BROADCAST · BOLIVIA · 3 YEARS</div>
+      <h1>Cadena <span class="hl">A</span>.</h1>
+      <p class="lede">Bolivia's TV news network. I took their social presence from <strong>zero to 500,000+ followers</strong> in three years — and went from <strong>last place</strong> among national outlets to <strong>#1</strong>. Worked production-assistant logistics on set, ran social, created formats, edited 50+ videos a day myself, partnered with the ad team to monetize every clip.</p>
+      <div class="role-tags">
+        <span class="lime">SOCIAL MEDIA LEAD · 0→500K</span>
+        <span>PRODUCTION ASSISTANT</span>
+        <span>VIDEO EDITOR · COPYWRITER</span>
+        <span>BOLIVIA</span>
+      </div>
+    </div>
+    <div class="tv-bezel">
+      <div class="rec-light"><span class="rec-dot"></span> REC</div>
+      <div class="tv-screen">
+        <video src="assets/cadena/tv-show.mp4" autoplay muted loop playsinline poster="assets/posters/tv-show.jpg"></video>
+      </div>
+      <div class="knobs">
+        <div class="knob"></div>
+        <div class="knob" style="transform: rotate(45deg);"></div>
+        <div class="knob" style="transform: rotate(120deg);"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="cadena-kpis">
+  <div class="cadena-kpi"><div class="num">500K+</div><div class="label">Followers · 3-year run</div></div>
+  <div class="cadena-kpi"><div class="num">#1</div><div class="label">Vs. all 5 competitors</div></div>
+  <div class="cadena-kpi"><div class="num">50+</div><div class="label">Videos posted per day</div></div>
+  <div class="cadena-kpi"><div class="num">100%</div><div class="label">Organic · zero paid spend</div></div>
+</div>
+
+<!-- THE LEAP -->
+<section style="background: var(--paper);">
+  <div class="wrap">
+    <span class="section-num">// 01 — THE LEAP</span>
+    <div class="section-head">
+      <div><h2>Last place to <span class="hl">first</span>.</h2></div>
+      <p class="kicker">In a country with 5 major networks, we ended at #1.</p>
+    </div>
+    <div class="leap-block">
+      <h3>From <span class="hl">zero</span><br/>to <span class="hl">500K+</span>.</h3>
+      <p class="lede">When I started, Cadena A's social was at the bottom of the Bolivian media landscape. Three years later we were the country's most-followed news outlet — passing <strong>Unitel, ATB, RTP, Bolivision, and PAT</strong>. The growth wasn't paid. It wasn't lucky. It was 50+ videos a day, edited and copywritten myself, posted on a relentless cadence, every clip wired to monetize alongside the on-air ad team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3-YEAR GROWTH CHART -->
+<section style="background: var(--paper-2); border-top: 2px solid var(--ink);">
+  <div class="wrap">
+    <span class="section-num">// 02 — THE GROWTH</span>
+    <div class="section-head">
+      <div><h2>3 years. <span class="hl">500K+</span>.</h2></div>
+      <p class="kicker">Year 1: 80K · Year 2: 320K · Year 3: 500K+</p>
+    </div>
+    <div class="chart-wrap">
+      <h4>Cadena A · followers · 0 → 500K+ over 3 years</h4>
+      <canvas id="cadenaGrowthChart"></canvas>
+      <p style="font-size: 12px; opacity: 0.7; margin-top: 8px;">Hover any point — the curve compounds the way organic growth actually does.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DAILY GRIND -->
+<section style="background: var(--paper); border-top: 2px solid var(--ink);">
+  <div class="wrap">
+    <span class="section-num">// 03 — THE PLAYBOOK</span>
+    <div class="section-head">
+      <div><h2>How I <span class="hl">did</span> it.</h2></div>
+      <p class="kicker">No ad spend. No team. Just relentless cadence + format I created.</p>
+    </div>
+    <div class="leap-block" style="background: var(--paper); color: var(--ink); border-color: var(--lime); box-shadow: 14px 14px 0 var(--lime);">
+      <h3 style="color: var(--ink);">The daily <span class="hl">cadence</span>.</h3>
+      <p class="lede" style="color: var(--ink); opacity: 0.92;">Posted <strong>50+ videos a day</strong>. Wrote every caption. Edited every clip myself. Worked directly with the on-air advertising team so each video carried sponsor inventory in the bottom strip — turning the social feed into a second monetized channel for the network. Engagement reached <strong>2.5%+</strong> peak — every competitor stayed under 1.2%.</p>
+      <div class="grind-grid">
+        <div class="grind-card"><div class="icon">50+</div><strong>Videos / day</strong><span>Posted across IG, FB, TikTok, X.</span></div>
+        <div class="grind-card"><div class="icon">✎</div><strong>Self-edited</strong><span>Cut, captioned, exported. All me.</span></div>
+        <div class="grind-card"><div class="icon">$</div><strong>Ad-team partnership</strong><span>Sponsor strip on every post.</span></div>
+        <div class="grind-card"><div class="icon">0</div><strong>Paid spend</strong><span>100% organic growth.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLE BREAKDOWN -->
+<section style="background: var(--paper-2); border-top: 2px solid var(--ink);">
+  <div class="wrap">
+    <span class="section-num">// 04 — ROLES</span>
+    <div class="section-head">
+      <div><h2>What I <span class="hl">did</span> there.</h2></div>
+      <p class="kicker">Two official titles. Six functional roles.</p>
+    </div>
+    <div class="media-grid g2">
+      <div style="background: white; border: 2px solid var(--ink); padding: 30px; box-shadow: 6px 6px 0 var(--ink);">
+        <span class="role-tag">ON SET</span>
+        <h3 style="font-family: var(--display); font-size: 28px; margin-bottom: 14px; line-height: 1;">Production Assistant + Logistics</h3>
+        <p style="line-height: 1.6; margin-bottom: 12px;">Behind-the-scenes logistics for live and recorded segments. Call sheets, shot prep, on-set support, equipment runs, talent coordination. The job that lets the on-air talent look effortless.</p>
+        <p style="line-height: 1.6;">The TV bezel above shows real footage from the show I helped run.</p>
+      </div>
+      <div style="background: var(--ink); color: var(--paper); border: 2px solid var(--ink); padding: 30px; box-shadow: 6px 6px 0 var(--lime);">
+        <span class="role-tag">DIGITAL</span>
+        <h3 style="font-family: var(--display); font-size: 28px; margin-bottom: 14px; line-height: 1; color: var(--lime);">Social Media Lead · Editor · Copywriter</h3>
+        <p style="line-height: 1.6; margin-bottom: 12px;">Owned the network's entire digital presence — IG, Facebook, X, TikTok. Created the original concept for "60 Segundos de Política." Edited 50+ videos a day, wrote every caption, and partnered with the ad team to monetize every clip with sponsor inventory.</p>
+        <p style="line-height: 1.6; opacity: 0.9;">From last place to #1 in 3 years. All organic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 60 SEGUNDOS — only 2 episodes -->
+<section style="background: var(--paper); border-top: 2px solid var(--ink);">
+  <div class="wrap">
+    <span class="section-num">// 05 · CONCEPT BY ME</span>
+    <div class="section-head">
+      <div><h2>"60 Segundos de <span class="hl">Política</span>"</h2></div>
+      <p class="kicker">Concept by me. Vertical. 60 seconds. Built for the algorithm.</p>
+    </div>
+    <p style="font-size: 17px; line-height: 1.6; max-width: 760px; margin-bottom: 30px;">A 60-second vertical-first political news format I created from scratch — political news condensed into a minute, optimized for TikTok, Instagram, Facebook, and X. Real episodes below, framed in iPhones because that's how the audience watched them.</p>
+
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+      <span class="chip dark-lime">TIKTOK</span>
+      <span class="chip dark-lime">INSTAGRAM</span>
+      <span class="chip dark-lime">FACEBOOK</span>
+      <span class="chip dark-lime">X · TWITTER</span>
+    </div>
+
+    <div class="iphone-row">
+      <div class="iphone"><div class="screen"><video src="assets/cadena/60seg-1.mp4" muted loop playsinline poster="assets/posters/60seg-1.jpg"></video><div class="platform-tag">EP · 01</div></div></div>
+      <div class="iphone"><div class="screen"><video src="assets/cadena/60seg-2.mp4" muted loop playsinline poster="assets/posters/60seg-2.jpg"></video><div class="platform-tag">EP · 02</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITION LEADERBOARD -->
+<section style="background: var(--ink); color: var(--paper); border-top: 2px solid var(--ink);">
+  <div class="wrap">
+    <span class="section-num" style="color: var(--lime); opacity: 0.85;">// 06 — THE LEADERBOARD</span>
+    <div class="section-head">
+      <div><h2 style="color: var(--paper);">We <span class="hl">won</span> Bolivia.</h2></div>
+      <p class="kicker" style="color: var(--paper);">Engagement rate · 6 national outlets · Cadena A on top.</p>
+    </div>
+    <div class="chart-wrap" style="background: rgba(255,255,255,0.04); border-color: var(--lime); color: var(--paper);">
+      <h4 style="color: var(--paper);">Engagement vs. all competitors · we beat them all</h4>
+      <canvas id="cadenaCompetitorChart"></canvas>
+    </div>
+    <h4 style="font-family: var(--display); font-size: 18px; margin: 30px 0 12px;">Bolivia · national social leaderboard</h4>
+    <div class="leaderboard">
+      <div class="lb-row cadena"><div class="rank">#1</div><div class="name">CADENA A</div><div class="bar-wrap"><div class="bar-fill" data-pct="100"></div></div><div class="num">2.5%</div></div>
+      <div class="lb-row"><div class="rank">#2</div><div class="name">UNITEL</div><div class="bar-wrap"><div class="bar-fill" data-pct="48"></div></div><div class="num">1.2%</div></div>
+      <div class="lb-row"><div class="rank">#3</div><div class="name">ATB</div><div class="bar-wrap"><div class="bar-fill" data-pct="42"></div></div><div class="num">1.05%</div></div>
+      <div class="lb-row"><div class="rank">#4</div><div class="name">RTP</div><div class="bar-wrap"><div class="bar-fill" data-pct="34"></div></div><div class="num">0.85%</div></div>
+      <div class="lb-row"><div class="rank">#5</div><div class="name">BOLIVISIÓN</div><div class="bar-wrap"><div class="bar-fill" data-pct="24"></div></div><div class="num">0.6%</div></div>
+      <div class="lb-row"><div class="rank">#6</div><div class="name">PAT</div><div class="bar-wrap"><div class="bar-fill" data-pct="20"></div></div><div class="num">0.5%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- POSTS -->
+<section style="background: var(--paper); border-top: 2px solid var(--ink);">
+  <div class="wrap">
+    <span class="section-num">// 07 — RECEIPTS</span>
+    <div class="section-head">
+      <div><h2>Posts that <span class="hl">worked</span>.</h2></div>
+      <p class="kicker">Real screenshots from the run.</p>
+    </div>
+    <div class="posts-row">
+      <img src="assets/cadena/ig-post-1.jpg" alt="Instagram Post 1"/>
+      <img src="assets/cadena/ig-post-2.jpg" alt="Instagram Post 2"/>
+      <img src="assets/cadena/likes-end.png" alt="Likes on the page near end of my run"/>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background: var(--lime); color: var(--ink); padding: 60px 28px; text-align: center; border-top: 2px solid var(--ink);">
+  <h3 style="font-family: var(--display); font-size: clamp(36px, 5vw, 64px); line-height: 1; margin-bottom: 14px;">Like what you see?</h3>
+  <p style="max-width: 640px; margin: 0 auto 24px;">Cadena A was one chapter. <a href="gio.html" style="text-decoration: underline;">GIO Sports</a> is the next one.</p>
+  <a href="index.html#contact" class="btn primary" style="background: var(--ink); color: var(--lime); border-color: var(--ink);">Contact me →</a>
+  <a href="index.html" class="btn" style="background: transparent; color: var(--ink); border-color: var(--ink); margin-left: 8px;">← Back home</a>
+</section>
+
+<footer>Built by Alejandro · Cadena A · Bolivia · <span class="heart">●</span> 0 → 500K · <a href="index.html">home</a></footer>
+
+<script src="site.js"></script>
+<script>
+const lime = '#C6FF3D', ink = '#0E0E0E';
+
+/* 3-YEAR GROWTH CHART: 0 → 80K Y1 → 320K Y2 → 500K Y3 */
+new Chart(document.getElementById('cadenaGrowthChart'), {
+  type: 'line',
+  data: {
+    labels: ['Start', 'Q1', 'Q2', 'Q3', 'Y1: 80K', 'Q5', 'Q6', 'Q7', 'Y2: 320K', 'Q9', 'Q10', 'Q11', 'Y3: 500K+'],
+    datasets: [{
+      label: 'Followers',
+      data: [0, 8000, 22000, 48000, 80000, 130000, 195000, 260000, 320000, 380000, 430000, 470000, 510000],
+      borderColor: ink, backgroundColor: 'rgba(198,255,61,0.45)', fill: true,
+      tension: 0.35, borderWidth: 3,
+      pointRadius: ctx => [4,8,12].includes(ctx.dataIndex) ? 9 : 4,
+      pointBackgroundColor: ctx => [4,8,12].includes(ctx.dataIndex) ? '#FF4D6D' : lime,
+      pointBorderColor: ink, pointBorderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { backgroundColor: ink, callbacks: { label: ctx => ctx.parsed.y.toLocaleString() + ' followers' } }
+    },
+    scales: {
+      y: { beginAtZero: true, ticks: { color: ink, font: { family: 'JetBrains Mono', size: 11 }, callback: v => v >= 1000 ? (v/1000) + 'K' : v }, grid: { color: 'rgba(0,0,0,0.08)' } },
+      x: { ticks: { color: ink, font: { family: 'JetBrains Mono', size: 10 } }, grid: { display: false } }
+    }
+  }
+});
+
+/* COMPETITORS — 6 outlets */
+new Chart(document.getElementById('cadenaCompetitorChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Cadena A', 'Unitel', 'ATB', 'RTP', 'Bolivisión', 'PAT'],
+    datasets: [{
+      label: 'Peak engagement (%)',
+      data: [2.5, 1.2, 1.05, 0.85, 0.6, 0.5],
+      backgroundColor: [lime, '#3a3a3a', '#3a3a3a', '#3a3a3a', '#3a3a3a', '#3a3a3a'],
+      borderRadius: 6, borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { backgroundColor: ink, callbacks: { label: ctx => `${ctx.parsed.y}% peak engagement` } } },
+    scales: {
+      y: { beginAtZero: true, ticks: { color: '#F6F1E4', font: { family: 'JetBrains Mono' }, callback: v => v + '%' }, grid: { color: 'rgba(255,255,255,0.08)' } },
+      x: { ticks: { color: '#F6F1E4', font: { family: 'JetBrains Mono' } }, grid: { display: false } }
+    }
+  }
+});
+
+/* Animate leaderboard bars */
+const lbObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    document.querySelectorAll('.lb-row .bar-fill').forEach(b => {
+      setTimeout(() => { b.style.width = b.dataset.pct + '%'; }, 200);
+    });
+    lbObs.disconnect();
+  });
+}, { threshold: 0.3 });
+const firstLb = document.querySelector('.leaderboard');
+if (firstLb) lbObs.observe(firstLb);
+</script>
+</body>
+</html>

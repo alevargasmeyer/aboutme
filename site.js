@@ -33,6 +33,34 @@
     }));
   }
 
+  // ===== JUMP-NAV SCROLL-SPY (highlights current chapter chip) =====
+  const jumpNav = document.querySelector('.jump-nav');
+  if (jumpNav) {
+    const chipLinks = [...jumpNav.querySelectorAll('a[href^="#"]')];
+    const targets = chipLinks
+      .map(a => ({ a, el: document.getElementById(a.getAttribute('href').slice(1)) }))
+      .filter(o => o.el);
+    if (targets.length) {
+      const spyObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          const match = targets.find(t => t.el === e.target);
+          if (!match) return;
+          if (e.isIntersecting) {
+            chipLinks.forEach(l => l.classList.remove('active'));
+            match.a.classList.add('active');
+            // keep the active chip visible in the horizontally-scrolling nav
+            const navRect = jumpNav.getBoundingClientRect();
+            const chipRect = match.a.getBoundingClientRect();
+            if (chipRect.right > navRect.right || chipRect.left < navRect.left) {
+              match.a.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+            }
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+      targets.forEach(t => spyObs.observe(t.el));
+    }
+  }
+
   // ===== LAZY AUTOPLAY-ON-HOVER for project cards marked data-autoplay-on-hover =====
   document.querySelectorAll('video[data-autoplay-on-hover]').forEach(v => {
     const card = v.closest('.project-card') || v.parentElement;

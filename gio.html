@@ -325,6 +325,40 @@
 body footer { background: var(--gio-blue); color: white; border-top: 2px solid var(--lime); }
 body footer a { color: var(--lime); }
 body footer .heart { color: var(--lime); }
+
+/* READABILITY: text on blue sections needs full opacity + slight weight */
+.bg-ink .chapter-lede, .bg-ink-grad .chapter-lede {
+  color: white !important;
+  opacity: 1 !important;
+  font-weight: 500;
+}
+.bg-ink .chapter-lede strong, .bg-ink-grad .chapter-lede strong {
+  color: var(--lime);
+  font-weight: 700;
+}
+.bg-ink .chapter-num, .bg-ink-grad .chapter-num {
+  color: var(--lime);
+  opacity: 1;
+  font-weight: 700;
+}
+.bg-ink .subhead, .bg-ink-grad .subhead { color: white; }
+.bg-ink .context-line, .bg-ink-grad .context-line {
+  color: white !important;
+  opacity: 1 !important;
+}
+
+/* Supplier-block (blue card on paper) — text needs full opacity */
+.supplier-block { color: white !important; }
+.supplier-block h3 { color: white !important; }
+.supplier-block .lede { color: white !important; opacity: 1 !important; font-weight: 500; }
+.supplier-grid .sg-card { color: white; }
+.supplier-grid .sg-card strong { color: white; opacity: 1; }
+.supplier-grid .sg-card span { color: white; opacity: 1; }
+
+/* Amb-hero card (when it's on dark — currently overridden to white on paper,
+   but keeping these in case it's used in dark sections later) */
+.bg-ink .amb-hero, .bg-ink-grad .amb-hero { color: white; }
+.bg-ink .amb-hero .lede, .bg-ink-grad .amb-hero .lede { color: white; opacity: 1; }
 </style>
 </head>
 <body>
@@ -773,7 +807,7 @@ body footer .heart { color: var(--lime); }
 </section>
 
 <!-- ============== 08 · THE OUTCOME ============== -->
-<section id="outcome" style="background: var(--ink); padding-bottom: 60px;">
+<section id="outcome" class="bg-ink" style="padding-bottom: 60px;">
   <div class="wrap">
     <span class="chapter-num">// CHAPTER 08</span>
     <h2 class="chapter-title">The <span class="hl">outcome</span>.</h2>

@@ -9,43 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link href="styles.css" rel="stylesheet">
 <style>
+/* GIO PALETTE EXTENSION — blue from the logo, used sparingly as a secondary accent */
+:root { --gio-blue: #1B4FA8; --gio-blue-soft: #5B7FD6; --gio-blue-pale: #E8EEFB; }
+
 /* SECTION TONE HELPERS — paper / paper-2 / ink */
 .bg-paper { background: var(--paper); color: var(--ink); border-top: 2px solid var(--ink); }
 .bg-paper-2 { background: var(--paper-2); color: var(--ink); border-top: 2px solid var(--ink); }
 .bg-ink { background: var(--ink); color: var(--paper); border-top: 2px solid var(--lime); }
 .bg-ink-grad { background: linear-gradient(180deg, var(--ink) 0%, #161616 100%); color: var(--paper); border-top: 2px solid var(--lime); }
-
-/* PAPER SECTIONS — flip dark-default cards to brutalist paper cards */
-.bg-paper .chapter-title, .bg-paper-2 .chapter-title { color: var(--ink); }
-.bg-paper .chapter-lede, .bg-paper-2 .chapter-lede { color: var(--ink); opacity: 1; }
-.bg-paper .chapter-lede strong, .bg-paper-2 .chapter-lede strong { color: var(--lime-deep); background: rgba(157,214,38,0.12); padding: 1px 6px; }
-.bg-paper .chapter-num, .bg-paper-2 .chapter-num { color: var(--lime-deep); opacity: 0.85; }
-.bg-paper .subhead, .bg-paper-2 .subhead { color: var(--ink); }
-.bg-paper .context-line, .bg-paper-2 .context-line { color: var(--ink); opacity: 0.85; }
-.bg-paper .product-tier, .bg-paper-2 .product-tier,
-.bg-paper .motion-card, .bg-paper-2 .motion-card,
-.bg-paper .process-step, .bg-paper-2 .process-step,
-.bg-paper .region-block, .bg-paper-2 .region-block,
-.bg-paper .brand-card, .bg-paper-2 .brand-card,
-.bg-paper .roles-block, .bg-paper-2 .roles-block,
-.bg-paper .amb-hero, .bg-paper-2 .amb-hero,
-.bg-paper .mix-card, .bg-paper-2 .mix-card,
-.bg-paper .featured-banner, .bg-paper-2 .featured-banner {
-  background: white; color: var(--ink); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
-}
-.bg-paper .product-tier .tier-spec, .bg-paper-2 .product-tier .tier-spec { border-top-color: rgba(0,0,0,0.18); }
-.bg-paper .region-head, .bg-paper-2 .region-head { border-bottom-color: rgba(0,0,0,0.15); }
-.bg-paper .brand-card .brand-name, .bg-paper-2 .brand-card .brand-name { color: var(--ink); }
-.bg-paper .brand-card .brand-tag, .bg-paper-2 .brand-card .brand-tag { color: var(--ink); opacity: 0.7; }
-.bg-paper .product-tier .tier-name, .bg-paper-2 .product-tier .tier-name,
-.bg-paper .motion-card h4, .bg-paper-2 .motion-card h4 { color: var(--ink); }
-.bg-paper .price-table-wrap, .bg-paper-2 .price-table-wrap { background: white; border: 2px solid var(--ink); }
-.bg-paper .price-table th, .bg-paper-2 .price-table th { background: var(--ink); color: var(--lime); }
-.bg-paper .price-table td, .bg-paper-2 .price-table td { color: var(--ink); }
-.bg-paper .margin-card, .bg-paper-2 .margin-card { background: white; color: var(--ink); border: 2px solid var(--ink); }
-.bg-paper .margin-card .pm, .bg-paper-2 .margin-card .pm { color: var(--lime-deep); }
-.bg-paper .media-card .label, .bg-paper-2 .media-card .label { color: var(--ink); }
-.bg-paper .deck-card, .bg-paper-2 .deck-card { background: white; }
 
 /* HEADER */
 .gio-header { background: var(--ink); color: var(--paper); padding: 130px 28px 60px; border-bottom: 2px solid var(--lime); }
@@ -236,6 +207,119 @@
   .retail-region-grid { grid-template-columns: 1fr; }
   .region-block:first-child .store-list { grid-template-columns: 1fr; }
 }
+
+/* =============================================================
+   PAPER-SECTION OVERRIDES — must be LAST so they win specificity
+   against the dark-mode card rules above. Cards flip to brutalist
+   white-on-paper. GIO blue (--gio-blue) is the secondary accent.
+   ============================================================= */
+
+/* Chapter text on paper */
+.bg-paper .chapter-title, .bg-paper-2 .chapter-title { color: var(--ink); }
+.bg-paper .chapter-num,   .bg-paper-2 .chapter-num   { color: var(--gio-blue); opacity: 1; font-weight: 700; }
+.bg-paper .chapter-lede,  .bg-paper-2 .chapter-lede  { color: var(--ink); opacity: 1; }
+.bg-paper .chapter-lede strong,
+.bg-paper-2 .chapter-lede strong {
+  color: var(--gio-blue);
+  background: var(--gio-blue-pale);
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+.bg-paper .subhead, .bg-paper-2 .subhead { color: var(--ink); }
+.bg-paper .subhead .hl, .bg-paper-2 .subhead .hl { background: var(--lime); color: var(--ink); padding: 0 8px; }
+.bg-paper .context-line, .bg-paper-2 .context-line { color: var(--ink); opacity: 1; }
+.bg-paper p, .bg-paper-2 p { color: var(--ink); }
+
+/* Generic card flip — white card, ink border, offset shadow */
+.bg-paper .product-tier, .bg-paper-2 .product-tier,
+.bg-paper .motion-card, .bg-paper-2 .motion-card,
+.bg-paper .process-step, .bg-paper-2 .process-step,
+.bg-paper .region-block, .bg-paper-2 .region-block,
+.bg-paper .brand-card, .bg-paper-2 .brand-card,
+.bg-paper .amb-hero, .bg-paper-2 .amb-hero,
+.bg-paper .mix-card, .bg-paper-2 .mix-card,
+.bg-paper .amb-mix .mix-card, .bg-paper-2 .amb-mix .mix-card,
+.bg-paper .featured-banner, .bg-paper-2 .featured-banner,
+.bg-paper .margin-card, .bg-paper-2 .margin-card,
+.bg-paper .price-table-wrap, .bg-paper-2 .price-table-wrap {
+  background: white !important;
+  color: var(--ink) !important;
+  border: 2px solid var(--ink) !important;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+}
+
+/* The retail page has a "featured" first card with lime-tinted bg — keep it
+   subtle and readable on paper. */
+.bg-paper .region-block:first-child, .bg-paper-2 .region-block:first-child {
+  background: var(--gio-blue-pale) !important;
+  border-color: var(--gio-blue) !important;
+  box-shadow: 4px 4px 0 var(--gio-blue) !important;
+}
+
+/* Inner text fixes for cards */
+.bg-paper .product-tier .tier-tag, .bg-paper-2 .product-tier .tier-tag { color: var(--ink); opacity: 0.55; }
+.bg-paper .product-tier .tier-name, .bg-paper-2 .product-tier .tier-name { color: var(--ink); }
+.bg-paper .product-tier .tier-desc, .bg-paper-2 .product-tier .tier-desc { color: var(--ink); opacity: 1; }
+.bg-paper .product-tier .tier-spec, .bg-paper-2 .product-tier .tier-spec { border-top-color: rgba(0,0,0,0.2); }
+.bg-paper .product-tier .tier-spec strong, .bg-paper-2 .product-tier .tier-spec strong { color: var(--gio-blue); }
+
+.bg-paper .motion-card .num, .bg-paper-2 .motion-card .num { color: var(--gio-blue); }
+.bg-paper .motion-card h4, .bg-paper-2 .motion-card h4 { color: var(--ink); }
+.bg-paper .motion-card p, .bg-paper-2 .motion-card p { color: var(--ink); opacity: 1; }
+
+.bg-paper .process-step .step-num, .bg-paper-2 .process-step .step-num { color: var(--gio-blue); }
+.bg-paper .process-step h5, .bg-paper-2 .process-step h5 { color: var(--ink); }
+.bg-paper .process-step p, .bg-paper-2 .process-step p { color: var(--ink); opacity: 0.92; }
+
+.bg-paper .region-head, .bg-paper-2 .region-head { border-bottom-color: rgba(0,0,0,0.15) !important; }
+.bg-paper .region-block h4, .bg-paper-2 .region-block h4 { color: var(--ink); }
+.bg-paper .region-block .store-list li, .bg-paper-2 .region-block .store-list li { color: var(--ink); }
+
+.bg-paper .brand-card .brand-name, .bg-paper-2 .brand-card .brand-name { color: var(--ink); }
+.bg-paper .brand-card .brand-tag, .bg-paper-2 .brand-card .brand-tag { color: var(--ink); opacity: 0.7; }
+/* Hero brands (Four Seasons, Marriott, Cytiva) get the blue treatment on paper */
+.bg-paper .brand-card.hero-brand, .bg-paper-2 .brand-card.hero-brand {
+  background: var(--gio-blue) !important; color: white !important; border-color: var(--gio-blue) !important; box-shadow: 4px 4px 0 var(--ink) !important;
+}
+.bg-paper .brand-card.hero-brand .brand-name, .bg-paper-2 .brand-card.hero-brand .brand-name { color: white; }
+.bg-paper .brand-card.hero-brand .brand-tag, .bg-paper-2 .brand-card.hero-brand .brand-tag { color: white; opacity: 0.9; }
+
+.bg-paper .price-table th, .bg-paper-2 .price-table th { background: var(--gio-blue); color: white; }
+.bg-paper .price-table td, .bg-paper-2 .price-table td { color: var(--ink); }
+.bg-paper .price-table-wrap h4, .bg-paper-2 .price-table-wrap h4 { color: var(--ink); }
+.bg-paper .price-table-wrap .pre, .bg-paper-2 .price-table-wrap .pre { color: var(--ink); opacity: 0.7; }
+
+.bg-paper .margin-card .name, .bg-paper-2 .margin-card .name { color: var(--ink); }
+.bg-paper .margin-card .retail, .bg-paper-2 .margin-card .retail { color: var(--gio-blue); }
+.bg-paper .margin-card .retail-label, .bg-paper-2 .margin-card .retail-label { color: var(--ink); opacity: 0.85; }
+.bg-paper .margin-card .pm, .bg-paper-2 .margin-card .pm { color: var(--lime-deep); }
+
+.bg-paper .amb-hero, .bg-paper-2 .amb-hero { box-shadow: 8px 8px 0 var(--gio-blue) !important; }
+.bg-paper .amb-hero::before, .bg-paper-2 .amb-hero::before { color: var(--gio-blue-pale) !important; }
+.bg-paper .amb-hero h3, .bg-paper-2 .amb-hero h3 { color: var(--ink); }
+.bg-paper .amb-hero .lede, .bg-paper-2 .amb-hero .lede { color: var(--ink); opacity: 1; }
+.bg-paper .amb-mix .mix-card, .bg-paper-2 .amb-mix .mix-card { border-left: 4px solid var(--gio-blue) !important; }
+.bg-paper .amb-mix .mix-card .icon, .bg-paper-2 .amb-mix .mix-card .icon { color: var(--gio-blue); }
+.bg-paper .amb-mix .mix-card strong, .bg-paper-2 .amb-mix .mix-card strong { color: var(--ink); }
+.bg-paper .amb-mix .mix-card span, .bg-paper-2 .amb-mix .mix-card span { color: var(--ink); opacity: 0.85; }
+
+.bg-paper .featured-banner, .bg-paper-2 .featured-banner { border-left: 6px solid var(--gio-blue) !important; }
+.bg-paper .featured-banner h4, .bg-paper-2 .featured-banner h4 { color: var(--ink); }
+.bg-paper .featured-banner p, .bg-paper-2 .featured-banner p { color: var(--ink); opacity: 0.9; }
+.bg-paper .featured-banner .banner-img, .bg-paper-2 .featured-banner .banner-img { background: white; border-color: var(--gio-blue) !important; }
+
+.bg-paper .media-card, .bg-paper-2 .media-card { background: white; border-color: var(--ink); }
+.bg-paper .media-card .label, .bg-paper-2 .media-card .label { color: var(--ink); }
+
+.bg-paper .deck-card, .bg-paper-2 .deck-card { background: white !important; border-color: var(--gio-blue) !important; box-shadow: 4px 4px 0 var(--gio-blue) !important; }
+.bg-paper .deck-card:hover, .bg-paper-2 .deck-card:hover { box-shadow: 7px 7px 0 var(--gio-blue) !important; }
+
+/* JUMP-NAV active state uses the GIO blue too — matches the cohesive accent */
+.jump-nav a.active { background: var(--lime); color: var(--ink); border-color: var(--lime); }
+.jump-nav a:hover { background: var(--gio-blue); color: white; border-color: var(--gio-blue); }
+
+/* Hero stat numbers — keep lime on dark for brand consistency */
+/* (gio-stat already styled, no change needed) */
 </style>
 </head>
 <body>

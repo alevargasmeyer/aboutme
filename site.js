@@ -61,6 +61,52 @@
     }
   }
 
+  // ===== ANIMATED STAT COUNTERS — count up from 0 when scrolled into view =====
+  // Targets: GIO hero stats, project-card stats, margin-card retail, brand metrics.
+  // Reads the current textContent (e.g. "$250K", "165%", "+4,809%") and animates
+  // the numeric portion from 0 to that value while preserving the prefix/suffix.
+  function animateCount(el) {
+    if (el.dataset.counted) return;
+    el.dataset.counted = '1';
+    const final = (el.textContent || '').trim();
+    const m = final.match(/^([^\d-]*)(-?[\d,\.]+)(.*)$/);
+    if (!m) return;
+    const prefix = m[1];
+    const numStr = m[2].replace(/,/g, '');
+    const target = parseFloat(numStr);
+    const suffix = m[3];
+    if (!isFinite(target)) return;
+    const hasComma = m[2].includes(',');
+    const isFloat = numStr.includes('.');
+    const duration = 1400;
+    const start = performance.now();
+    function fmt(v) {
+      if (isFloat) return v.toFixed(1);
+      const r = Math.round(v);
+      return hasComma ? r.toLocaleString('en-US') : String(r);
+    }
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+      el.textContent = prefix + fmt(target * eased) + suffix;
+      if (t < 1) requestAnimationFrame(tick); else el.textContent = final;
+    }
+    requestAnimationFrame(tick);
+  }
+  const statSelectors = '.gio-stat .n, .project-card .stat strong, .margin-card .retail, .bentley-strip .deg strong, .outcome-block .margin-card .retail';
+  const statTargets = document.querySelectorAll(statSelectors);
+  if (statTargets.length) {
+    const countObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCount(e.target);
+          countObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    statTargets.forEach(el => countObs.observe(el));
+  }
+
   // ===== LAZY AUTOPLAY-ON-HOVER for project cards marked data-autoplay-on-hover =====
   document.querySelectorAll('video[data-autoplay-on-hover]').forEach(v => {
     const card = v.closest('.project-card') || v.parentElement;

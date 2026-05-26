@@ -241,17 +241,8 @@
       <div class="sticker s1">FOUNDER</div>
       <div class="sticker s2">CLOSER</div>
       <div class="sticker s3">EST. AVM</div>
-      <!-- Intro video play button — hidden by JS if assets/me/intro.mp4 doesn't exist yet -->
-      <button class="polaroid-play" id="intro-play-btn" hidden onclick="document.getElementById('intro-modal').showModal()" aria-label="Play 60-second intro">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>
-        <span>60s · my pitch</span>
-      </button>
     </div>
   </div>
-  <dialog id="intro-modal" class="intro-modal" aria-label="60 second intro">
-    <video id="intro-video" src="assets/me/intro.mp4" controls playsinline></video>
-    <button onclick="document.getElementById('intro-video').pause(); document.getElementById('intro-modal').close();" class="intro-close" aria-label="Close">✕</button>
-  </dialog>
 </section>
 
 <!-- MARQUEE — tightened to 6 sharp roles + clients -->

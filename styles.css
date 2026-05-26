@@ -236,8 +236,10 @@ footer a { color: var(--lime); }
    Uses max-height so it shrinks to fit content (no dead white space
    when there are only a couple messages). Grows up to a cap, then
    the log scrolls inside.
-   IMPORTANT: explicit padding: 0 to override the global `section`
-   rule (the panel is a <section> element). */
+   IMPORTANT:
+   - padding: 0 overrides the global `section` rule
+   - [hidden] override with !important so the JS .hidden toggle
+     actually hides the panel (otherwise display:flex wins). */
 #avm-chat-panel {
   position: fixed; bottom: 92px; right: 24px;
   width: min(360px, calc(100vw - 48px));
@@ -255,6 +257,7 @@ footer a { color: var(--lime); }
   animation: avm-panel-in 0.28s cubic-bezier(.2,.8,.2,1);
   transform-origin: bottom right;
 }
+#avm-chat-panel[hidden] { display: none !important; }
 @keyframes avm-panel-in {
   from { opacity: 0; transform: translateY(12px) scale(0.96); }
   to { opacity: 1; transform: translateY(0) scale(1); }

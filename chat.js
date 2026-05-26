@@ -12,14 +12,11 @@
   const root = document.createElement("div");
   root.id = "avm-chat-root";
   root.innerHTML = `
-    <div id="avm-chat-peek" hidden>
-      <span>↳ ask me anything</span>
-      <button class="close-peek" type="button" aria-label="Dismiss">✕</button>
-    </div>
     <button id="avm-chat-bubble" type="button" aria-label="Chat with Ale's AI" aria-expanded="false">
-      <span class="dot"></span>
-      <span class="label">Ask Ale</span>
-      <span class="arrow">↗</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+      </svg>
+      <span class="status-dot" aria-hidden="true"></span>
     </button>
     <section id="avm-chat-panel" hidden aria-label="Chat with Ale's AI">
       <header class="avm-chat-head">
@@ -27,22 +24,20 @@
           <span class="avatar">AVM</span>
           <div class="name">
             <strong>Ale Vargas Meyer</strong>
-            <span class="sub">AI · trained on my work</span>
+            <span class="sub">AI · usually replies instantly</span>
           </div>
         </div>
         <button class="avm-chat-close" type="button" aria-label="Close">✕</button>
       </header>
       <div class="avm-chat-log" id="avm-chat-log" role="log" aria-live="polite"></div>
       <form class="avm-chat-form" id="avm-chat-form" autocomplete="off">
-        <input type="text" id="avm-chat-input" placeholder="ask anything..." maxlength="500" aria-label="Type your question" />
-        <button type="submit" aria-label="Send">→</button>
+        <input type="text" id="avm-chat-input" placeholder="Ask anything..." maxlength="500" aria-label="Type your question" />
+        <button type="submit" aria-label="Send">↑</button>
       </form>
     </section>
   `;
   document.body.appendChild(root);
 
-  const peek = root.querySelector("#avm-chat-peek");
-  const peekClose = root.querySelector(".close-peek");
   const bubble = root.querySelector("#avm-chat-bubble");
   const panel = root.querySelector("#avm-chat-panel");
   const closeBtn = root.querySelector(".avm-chat-close");
@@ -139,29 +134,12 @@
     history.forEach((m) => appendMessage(m.role, m.content));
   }
 
-  // ---- Peek tooltip (auto-shows after 4s if user hasn't dismissed it before) ----
-  function maybeShowPeek() {
-    try { if (localStorage.getItem(PEEK_DISMISS_KEY) === "1") return; } catch {}
-    setTimeout(() => {
-      if (!panel.hidden) return;
-      peek.hidden = false;
-      setTimeout(() => { peek.hidden = true; }, 9000);
-    }, 4200);
-  }
-  function dismissPeek() {
-    peek.hidden = true;
-    try { localStorage.setItem(PEEK_DISMISS_KEY, "1"); } catch {}
-  }
-  peekClose.addEventListener("click", (e) => { e.stopPropagation(); dismissPeek(); });
-  peek.addEventListener("click", () => { dismissPeek(); openPanel(); });
-
   // ---- UI handlers ----
   function openPanel() {
     panel.hidden = false;
     bubble.setAttribute("aria-expanded", "true");
     bubble.classList.add("open");
     document.body.classList.add("avm-chat-open");
-    dismissPeek();
     setTimeout(() => input.focus(), 80);
     renderAll();
   }
@@ -230,6 +208,4 @@
     send(text);
   });
 
-  // Show peek after first render
-  maybeShowPeek();
 })();

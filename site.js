@@ -61,6 +61,22 @@
     }
   }
 
+  // ===== INTRO VIDEO PROBE =====
+  // Show the polaroid play button only if assets/me/intro.mp4 actually exists.
+  // This lets us ship the markup now; the button stays hidden until the file lands.
+  const introBtn = document.getElementById('intro-play-btn');
+  const introVideo = document.getElementById('intro-video');
+  if (introBtn && introVideo) {
+    fetch('assets/me/intro.mp4', { method: 'HEAD' })
+      .then(r => { if (r.ok) introBtn.hidden = false; })
+      .catch(() => { /* file not there yet; keep hidden */ });
+    // pause on dialog close (also closes via Esc)
+    const introModal = document.getElementById('intro-modal');
+    if (introModal) {
+      introModal.addEventListener('close', () => { try { introVideo.pause(); introVideo.currentTime = 0; } catch (e) {} });
+    }
+  }
+
   // ===== LAZY AUTOPLAY-ON-HOVER for project cards marked data-autoplay-on-hover =====
   document.querySelectorAll('video[data-autoplay-on-hover]').forEach(v => {
     const card = v.closest('.project-card') || v.parentElement;

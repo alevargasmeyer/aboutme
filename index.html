@@ -36,6 +36,33 @@
 .hero-left p.shipping-line strong { background: var(--lime); padding: 1px 6px; }
 .hero-left p.shipping-line a { text-decoration: underline; text-decoration-color: var(--lime-deep); text-underline-offset: 3px; }
 
+/* INTRO VIDEO — play button overlaid on polaroid + modal */
+.polaroid-play {
+  position: absolute; bottom: 62px; right: 14px; z-index: 5;
+  background: var(--ink); color: var(--lime);
+  border: 2px solid var(--ink); border-radius: 999px;
+  padding: 10px 16px; display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--display); font-size: 13px; letter-spacing: 0.5px;
+  box-shadow: 4px 4px 0 var(--lime); cursor: pointer; transition: all 0.18s;
+}
+.polaroid-play:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--lime); background: var(--lime); color: var(--ink); border-color: var(--lime); }
+.polaroid-play svg { width: 18px; height: 18px; }
+.intro-modal {
+  border: none; padding: 0; max-width: min(900px, 92vw); width: 900px;
+  background: var(--ink); border: 3px solid var(--lime); border-radius: 4px;
+  box-shadow: 12px 12px 0 var(--lime), 0 24px 80px rgba(0,0,0,0.5);
+  position: relative;
+}
+.intro-modal::backdrop { background: rgba(14,14,14,0.85); backdrop-filter: blur(8px); }
+.intro-modal video { width: 100%; height: auto; display: block; max-height: 80vh; background: black; }
+.intro-modal .intro-close {
+  position: absolute; top: -14px; right: -14px; width: 40px; height: 40px;
+  background: var(--lime); color: var(--ink); border: 2px solid var(--ink);
+  border-radius: 50%; font-family: var(--display); font-size: 16px; cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink); display: flex; align-items: center; justify-content: center;
+}
+.intro-modal .intro-close:hover { background: var(--hot); color: white; }
+
 /* LOGOS STRIP */
 .logos-strip { background: white; border-bottom: 2px solid var(--ink); padding: 50px 28px; }
 .logos-strip .wrap { max-width: 1280px; margin: 0 auto; }
@@ -195,7 +222,6 @@
       Bentley University grad turned <strong style="background:var(--lime); padding: 1px 6px;">co-founder of GIO Sports</strong> — a custom-paddle brand I built from cold-start to <strong>$250K in revenue</strong>, with our own paddles in <strong>12 retail stores across 6 states</strong> and partnerships with Four Seasons, Marriott, and Cytiva. Before that, I ran social + production at <strong>Cadena A</strong> in Bolivia — taking the network from <strong>0 to 500K+ followers</strong> and from last place to #1 in three years. I sell hard, ship fast, learn faster.
     </p>
     <p class="now-line">↳ <strong>Open to:</strong> GTM · BDR/AE · partnerships · CS/AM · growth · brand &amp; social marketing.</p>
-    <p class="shipping-line">↳ <strong>Now shipping:</strong> <a href="https://360-paddles.vercel.app" target="_blank" rel="noopener">360 Paddles</a> (Stripe-checkout custom paddles) · <a href="https://msvinteriors.netlify.app" target="_blank" rel="noopener">MSV Interiors</a> (client portfolio site).</p>
     <div class="three-pillars">
       <a href="#bentley" class="pillar"><span class="tag-num">// 01</span><strong>Bentley University</strong><span>Media Studies · BM + Entrepreneurship</span></a>
       <a href="cadena.html" class="pillar"><span class="tag-num">// 02</span><strong>Cadena A · Bolivia</strong><span>0→500K followers · last to #1 in 3 yrs</span></a>
@@ -215,26 +241,17 @@
       <div class="sticker s1">FOUNDER</div>
       <div class="sticker s2">CLOSER</div>
       <div class="sticker s3">EST. AVM</div>
-      <!--
-        INTRO VIDEO HOOK
-        Record a 30–60s phone video of yourself (720p+, MP4) and save it as:
-          assets/me/intro.mp4
-        Then UNCOMMENT the two blocks below. The play button + modal are ready.
-      -->
-      <!--
-      <button class="polaroid-play" onclick="document.getElementById('intro-modal').showModal()" aria-label="Play 60-second pitch">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><polygon points="6,4 20,12 6,20"/></svg>
+      <!-- Intro video play button — hidden by JS if assets/me/intro.mp4 doesn't exist yet -->
+      <button class="polaroid-play" id="intro-play-btn" hidden onclick="document.getElementById('intro-modal').showModal()" aria-label="Play 60-second intro">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>
         <span>60s · my pitch</span>
       </button>
-      -->
     </div>
   </div>
-  <!--
-  <dialog id="intro-modal" class="intro-modal">
-    <video src="assets/me/intro.mp4" controls autoplay playsinline></video>
-    <button onclick="document.getElementById('intro-modal').close()" class="intro-close">✕</button>
+  <dialog id="intro-modal" class="intro-modal" aria-label="60 second intro">
+    <video id="intro-video" src="assets/me/intro.mp4" controls playsinline></video>
+    <button onclick="document.getElementById('intro-video').pause(); document.getElementById('intro-modal').close();" class="intro-close" aria-label="Close">✕</button>
   </dialog>
-  -->
 </section>
 
 <!-- MARQUEE — tightened to 6 sharp roles + clients -->

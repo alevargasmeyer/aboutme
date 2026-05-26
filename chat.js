@@ -1,60 +1,64 @@
 // "Ask Ale anything" — floating chat widget powered by /api/chat (Claude Haiku).
 // No build step. Plain JS. Brutalist visual language matches the rest of the site.
 (function () {
-  const STORAGE_KEY = "avm-chat-history-v1";
-  const RATE_KEY = "avm-chat-count-v1";
-  const RATE_RESET_KEY = "avm-chat-reset-v1";
-  const MAX_PER_SESSION = 12;
+  const STORAGE_KEY = "avm-chat-history-v2";
+  const RATE_KEY = "avm-chat-count-v2";
+  const RATE_RESET_KEY = "avm-chat-reset-v2";
+  const PEEK_DISMISS_KEY = "avm-chat-peek-dismissed-v2";
+  const MAX_PER_SESSION = 14;
   const RATE_WINDOW_MS = 24 * 60 * 60 * 1000;
 
   // ---- DOM build ----
   const root = document.createElement("div");
   root.id = "avm-chat-root";
   root.innerHTML = `
+    <div id="avm-chat-peek" hidden>
+      <span>↳ ask me anything</span>
+      <button class="close-peek" type="button" aria-label="Dismiss">✕</button>
+    </div>
     <button id="avm-chat-bubble" type="button" aria-label="Chat with Ale's AI" aria-expanded="false">
       <span class="dot"></span>
-      <span class="label">Ask <strong>Ale</strong> anything</span>
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-        <path d="M4 4h16v12H7l-3 3V4z"/>
-      </svg>
+      <span class="label">Ask Ale</span>
+      <span class="arrow">↗</span>
     </button>
-    <section id="avm-chat-panel" hidden aria-label="Chat with Ale">
+    <section id="avm-chat-panel" hidden aria-label="Chat with Ale's AI">
       <header class="avm-chat-head">
         <div class="avm-chat-id">
-          <span class="avatar">AV</span>
-          <div>
+          <span class="avatar">AVM</span>
+          <div class="name">
             <strong>Ale Vargas Meyer</strong>
-            <span class="sub">↳ AI · trained on my work</span>
+            <span class="sub">AI · trained on my work</span>
           </div>
         </div>
-        <button class="avm-chat-close" type="button" aria-label="Close chat">✕</button>
+        <button class="avm-chat-close" type="button" aria-label="Close">✕</button>
       </header>
       <div class="avm-chat-log" id="avm-chat-log" role="log" aria-live="polite"></div>
-      <div class="avm-chat-suggestions" id="avm-chat-suggestions">
-        <button data-q="Why are you looking for a new role?">Why are you looking?</button>
-        <button data-q="Walk me through the GIO Sports sales motion.">GIO sales motion</button>
-        <button data-q="What's your strongest sales receipt?">Strongest receipt</button>
-        <button data-q="What roles are you targeting?">Roles I want</button>
-      </div>
       <form class="avm-chat-form" id="avm-chat-form" autocomplete="off">
-        <input type="text" id="avm-chat-input" placeholder="Ask anything..." maxlength="500" aria-label="Type your question" />
+        <input type="text" id="avm-chat-input" placeholder="ask anything..." maxlength="500" aria-label="Type your question" />
         <button type="submit" aria-label="Send">→</button>
       </form>
-      <p class="avm-chat-note">↳ Real Claude · responses are AI-generated · for live chat: <a href="mailto:alevargasmeyer@gmail.com">alevargasmeyer@gmail.com</a></p>
     </section>
   `;
   document.body.appendChild(root);
 
+  const peek = root.querySelector("#avm-chat-peek");
+  const peekClose = root.querySelector(".close-peek");
   const bubble = root.querySelector("#avm-chat-bubble");
   const panel = root.querySelector("#avm-chat-panel");
   const closeBtn = root.querySelector(".avm-chat-close");
   const logEl = root.querySelector("#avm-chat-log");
   const form = root.querySelector("#avm-chat-form");
   const input = root.querySelector("#avm-chat-input");
-  const suggestionBtns = root.querySelectorAll(".avm-chat-suggestions button");
+
+  const STARTERS = [
+    "Why are you looking?",
+    "GIO sales motion?",
+    "Strongest receipt?",
+    "Roles I want?",
+  ];
 
   // ---- State ----
-  let history = []; // [{ role: 'user' | 'assistant', content: string }]
+  let history = [];
   try {
     const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     if (Array.isArray(stored)) history = stored.slice(-20);
@@ -81,70 +85,115 @@
   }
 
   function escapeHTML(s) {
-    return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+  function lightMarkdown(s) {
+    // Convert **bold** to <strong>, preserve newlines, escape everything else.
+    return escapeHTML(s)
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+      .replace(/\n/g, "<br>");
   }
 
-  function renderMessage(role, text, opts = {}) {
+  function appendMessage(role, text, opts = {}) {
     const div = document.createElement("div");
     div.className = `avm-msg avm-msg-${role}`;
-    if (opts.thinking) div.classList.add("thinking");
-    div.innerHTML = opts.thinking
-      ? `<span class="dots"><span></span><span></span><span></span></span>`
-      : escapeHTML(text).replace(/\n/g, "<br>");
+    if (opts.thinking) {
+      div.classList.add("thinking");
+      div.innerHTML = `<span class="dots"><span></span><span></span><span></span></span>`;
+    } else {
+      div.innerHTML = role === "assistant" ? lightMarkdown(text) : escapeHTML(text);
+    }
     logEl.appendChild(div);
     logEl.scrollTop = logEl.scrollHeight;
     return div;
   }
 
+  function appendStarters() {
+    const wrap = document.createElement("div");
+    wrap.className = "avm-msg-starters";
+    wrap.id = "avm-starters";
+    STARTERS.forEach((q) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = q;
+      b.addEventListener("click", () => {
+        wrap.remove();
+        input.value = q;
+        form.dispatchEvent(new Event("submit", { cancelable: true }));
+      });
+      wrap.appendChild(b);
+    });
+    logEl.appendChild(wrap);
+  }
+
   function renderAll() {
     logEl.innerHTML = "";
     if (history.length === 0) {
-      renderMessage(
+      appendMessage(
         "assistant",
-        "Hey — I'm Ale's AI. I can answer questions about GIO Sports, Cadena A, the work, the receipts, and what I'm looking for next. Pick one below or type your own."
+        "Hey — Ale's AI here, trained on my work. **GIO Sports, Cadena A, @popculture, the receipts.** Ask me anything. If you stump me, I'll send you straight to my email."
       );
+      appendStarters();
       return;
     }
-    history.forEach((m) => renderMessage(m.role, m.content));
+    history.forEach((m) => appendMessage(m.role, m.content));
   }
+
+  // ---- Peek tooltip (auto-shows after 4s if user hasn't dismissed it before) ----
+  function maybeShowPeek() {
+    try { if (localStorage.getItem(PEEK_DISMISS_KEY) === "1") return; } catch {}
+    setTimeout(() => {
+      if (!panel.hidden) return;
+      peek.hidden = false;
+      setTimeout(() => { peek.hidden = true; }, 9000);
+    }, 4200);
+  }
+  function dismissPeek() {
+    peek.hidden = true;
+    try { localStorage.setItem(PEEK_DISMISS_KEY, "1"); } catch {}
+  }
+  peekClose.addEventListener("click", (e) => { e.stopPropagation(); dismissPeek(); });
+  peek.addEventListener("click", () => { dismissPeek(); openPanel(); });
 
   // ---- UI handlers ----
   function openPanel() {
     panel.hidden = false;
     bubble.setAttribute("aria-expanded", "true");
+    bubble.classList.add("open");
     document.body.classList.add("avm-chat-open");
-    setTimeout(() => input.focus(), 60);
+    dismissPeek();
+    setTimeout(() => input.focus(), 80);
     renderAll();
   }
   function closePanel() {
     panel.hidden = true;
     bubble.setAttribute("aria-expanded", "false");
+    bubble.classList.remove("open");
     document.body.classList.remove("avm-chat-open");
   }
   bubble.addEventListener("click", () => (panel.hidden ? openPanel() : closePanel()));
   closeBtn.addEventListener("click", closePanel);
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !panel.hidden) closePanel(); });
-
-  suggestionBtns.forEach((btn) =>
-    btn.addEventListener("click", () => {
-      input.value = btn.dataset.q || btn.textContent;
-      form.dispatchEvent(new Event("submit", { cancelable: true }));
-    })
-  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !panel.hidden) closePanel();
+  });
 
   // ---- Send ----
   async function send(content) {
+    // Remove starters once a real message is sent
+    const starters = document.getElementById("avm-starters");
+    if (starters) starters.remove();
+
     if (rateCount() >= MAX_PER_SESSION) {
-      renderMessage(
+      appendMessage(
         "assistant",
-        `That's ${MAX_PER_SESSION} messages — I'd rather we talk live. Drop me a note: alevargasmeyer@gmail.com.`
+        `That's ${MAX_PER_SESSION} messages — better to talk live. **alevargasmeyer@gmail.com**, I respond fast.`
       );
       return;
     }
     history.push({ role: "user", content });
     persist();
-    renderMessage("user", content);
-    const thinking = renderMessage("assistant", "", { thinking: true });
+    appendMessage("user", content);
+    const thinking = appendMessage("assistant", "", { thinking: true });
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
@@ -154,22 +203,22 @@
       const data = await res.json();
       thinking.remove();
       if (!res.ok) {
-        const msg = data?.error || "Chat is offline right now. Drop me an email: alevargasmeyer@gmail.com.";
-        renderMessage("assistant", msg);
+        const msg = data?.error || "Chat is offline right now. Email me direct: **alevargasmeyer@gmail.com**.";
+        appendMessage("assistant", msg);
         return;
       }
       const reply = (data.reply || "").trim();
       if (!reply) {
-        renderMessage("assistant", "Hmm, no answer came back. Try a more specific question, or email me: alevargasmeyer@gmail.com.");
+        appendMessage("assistant", "Hmm, no answer came back. Try again or email me: **alevargasmeyer@gmail.com**.");
         return;
       }
       history.push({ role: "assistant", content: reply });
       persist();
       bumpRate();
-      renderMessage("assistant", reply);
+      appendMessage("assistant", reply);
     } catch (err) {
       thinking.remove();
-      renderMessage("assistant", "Network glitch. Email me directly: alevargasmeyer@gmail.com.");
+      appendMessage("assistant", "Network glitch. Email me direct: **alevargasmeyer@gmail.com**.");
     }
   }
 
@@ -180,4 +229,7 @@
     input.value = "";
     send(text);
   });
+
+  // Show peek after first render
+  maybeShowPeek();
 })();

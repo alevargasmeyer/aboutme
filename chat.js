@@ -150,9 +150,22 @@
     document.body.classList.remove("avm-chat-open");
   }
   bubble.addEventListener("click", () => (panel.hidden ? openPanel() : closePanel()));
-  closeBtn.addEventListener("click", closePanel);
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closePanel();
+  });
+  // Also accept clicks ANYWHERE in the close button's row area (header)
+  // if user misses the 36px button — clicking the empty header space closes.
+  document.querySelector(".avm-chat-head").addEventListener("dblclick", closePanel);
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !panel.hidden) closePanel();
+  });
+  // Click anywhere outside the panel (and outside the bubble) closes it
+  document.addEventListener("click", (e) => {
+    if (panel.hidden) return;
+    if (root.contains(e.target)) return;
+    closePanel();
   });
 
   // ---- Send ----

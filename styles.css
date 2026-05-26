@@ -299,14 +299,36 @@ footer a { color: var(--lime); }
 .avm-chat-id .name .sub::before { content: none; }
 
 .avm-chat-close {
-  background: rgba(14,14,14,0.04); color: var(--ink);
+  background: rgba(14,14,14,0.06); color: var(--ink);
   border: none;
-  width: 28px; height: 28px; border-radius: 50%;
-  cursor: pointer; font-size: 13px; font-weight: 500;
+  width: 36px; height: 36px; border-radius: 50%;
+  cursor: pointer !important; font-size: 17px; font-weight: 500;
+  line-height: 1;
   transition: all 0.15s;
   display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
 }
-.avm-chat-close:hover { background: rgba(14,14,14,0.08); }
+.avm-chat-close:hover { background: rgba(14,14,14,0.12); }
+.avm-chat-close:active { transform: scale(0.92); }
+
+/* INSIDE the chat panel — restore the OS cursor so users can see
+   exactly what they're aiming at. The custom pickleball cursor is
+   great for the rest of the site but hostile to a UI tool like chat. */
+#avm-chat-panel,
+#avm-chat-panel * { cursor: auto !important; }
+#avm-chat-panel button,
+#avm-chat-panel a,
+#avm-chat-panel input,
+.avm-msg-starters button { cursor: pointer !important; }
+body:not(.no-custom-cursor) #avm-chat-panel .cursor-dot,
+body:not(.no-custom-cursor) #avm-chat-panel .cursor-ring { display: none; }
+
+/* Hide the pickleball cursor entirely while the chat is open — easier
+   than fighting it pixel by pixel. The OS cursor takes over. */
+body.avm-chat-open .cursor-dot,
+body.avm-chat-open .cursor-ring { display: none !important; }
+body.avm-chat-open { cursor: auto; }
+body.avm-chat-open a, body.avm-chat-open button { cursor: pointer; }
 
 /* Log: clean off-white, tight padding. flex: 0 1 auto so it doesn't
    force the panel to be tall when content is short. Scrolls when needed. */

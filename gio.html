@@ -69,7 +69,7 @@
 
 /* SUPPLIER BLOCK */
 .supplier-block { background: linear-gradient(135deg, var(--gio-blue) 0%, #163E84 100%); color: white; border: 2px solid var(--lime); padding: 36px; box-shadow: 12px 12px 0 var(--lime); position: relative; overflow: hidden; }
-.supplier-block::before { content: '6'; position: absolute; bottom: -120px; right: -30px; font-family: var(--display); font-size: 480px; color: rgba(198,255,61,0.06); line-height: 0.85; pointer-events: none; }
+.supplier-block::before { content: ''; display: none; }
 .supplier-block h3 { font-family: var(--display); font-size: clamp(36px, 5vw, 56px); line-height: 0.95; margin-bottom: 14px; position: relative; }
 .supplier-block h3 .hl { background: var(--lime); color: var(--ink); padding: 0 10px; display: inline-block; transform: rotate(-1deg); }
 .supplier-block .lede { font-size: 16px; line-height: 1.6; max-width: 720px; opacity: 0.92; position: relative; }
@@ -161,7 +161,7 @@
 
 /* AMBASSADOR PROGRAM HERO */
 .amb-hero { background: linear-gradient(135deg, var(--gio-blue) 0%, #163E84 100%); color: white; border: 3px solid var(--lime); padding: 36px; box-shadow: 14px 14px 0 var(--lime); position: relative; overflow: hidden; }
-.amb-hero::before { content: '30+'; position: absolute; bottom: -90px; right: -20px; font-family: var(--display); font-size: 320px; color: rgba(198,255,61,0.07); line-height: 0.85; pointer-events: none; }
+.amb-hero::before { content: ''; display: none; }
 .amb-hero h3 { font-family: var(--display); font-size: clamp(36px, 5vw, 60px); line-height: 0.95; margin-bottom: 14px; position: relative; z-index: 2; }
 .amb-hero h3 .hl { background: var(--lime); color: var(--ink); padding: 0 10px; display: inline-block; transform: rotate(-1deg); }
 .amb-hero .lede { font-size: 16px; line-height: 1.6; max-width: 720px; opacity: 0.92; position: relative; z-index: 2; }
@@ -326,6 +326,28 @@ body footer { background: var(--gio-blue); color: white; border-top: 2px solid v
 body footer a { color: var(--lime); }
 body footer .heart { color: var(--lime); }
 
+/* Bump section vertical padding — more whitespace, less crammed */
+section { padding-top: 130px; padding-bottom: 130px; }
+section.gio-header, header.gio-header { padding-top: 130px; padding-bottom: 60px; }
+@media (max-width: 980px) { section { padding-top: 80px; padding-bottom: 80px; } }
+
+/* GIO LOGO STRIP — replaces the 13-card brand grid */
+.gio-logos-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 22px; }
+.gio-logo-cell { background: white; color: var(--ink); border: 2px solid white; padding: 18px 12px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: all 0.2s; box-shadow: 4px 4px 0 var(--lime); }
+.gio-logo-cell:hover { transform: translate(-3px,-3px); box-shadow: 7px 7px 0 var(--lime); }
+.gio-logo-cell img { width: 36px; height: 36px; object-fit: contain; filter: grayscale(1) contrast(1.1); opacity: 0.85; transition: filter 0.2s, opacity 0.2s; }
+.gio-logo-cell:hover img { filter: none; opacity: 1; }
+.gio-logo-cell span { font-family: var(--display); font-size: 13px; line-height: 1.1; color: var(--ink); }
+.gio-logo-cell em { font-family: var(--mono); font-style: normal; font-size: 9px; letter-spacing: 0.4px; text-transform: uppercase; opacity: 0.65; line-height: 1.25; color: var(--ink); }
+.gio-logo-cell.more { background: var(--gio-blue); color: white; border-color: var(--lime); }
+.gio-logo-cell.more span, .gio-logo-cell.more em { color: white; }
+@media (max-width: 980px) { .gio-logos-row { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .gio-logos-row { grid-template-columns: repeat(2, 1fr); } }
+
+/* Standardize offset-shadow language — consistent 4-6px */
+.product-tier:hover { box-shadow: 6px 6px 0 var(--gio-blue) !important; }
+.motion-card:hover { box-shadow: 6px 6px 0 var(--lime) !important; }
+
 /* READABILITY: text on blue sections needs full opacity + slight weight */
 .bg-ink .chapter-lede, .bg-ink-grad .chapter-lede {
   color: white !important;
@@ -427,13 +449,10 @@ body footer .heart { color: var(--lime); }
 <div class="jump-nav">
   <div class="jump-nav-inner">
     <a href="#bet">01 · The Bet</a>
-    <a href="#product">02 · The Product</a>
-    <a href="#build">03 · The Build · China</a>
-    <a href="#sale">04 · The Sale Engine</a>
-    <a href="#retail">05 · Retail · 12 Stores</a>
-    <a href="#marketing">06 · Marketing</a>
-    <a href="#ambassadors">07 · Ambassadors · 30+</a>
-    <a href="#outcome">08 · The Outcome</a>
+    <a href="#paddle">02 · The Paddle</a>
+    <a href="#sell">03 · The Sell</a>
+    <a href="#noise">04 · The Noise</a>
+    <a href="#outcome">05 · The Outcome</a>
   </div>
 </div>
 
@@ -459,18 +478,19 @@ body footer .heart { color: var(--lime); }
   </div>
 </section>
 
-<!-- ============== 02 · THE PRODUCT ============== -->
-<section id="product" class="bg-paper-2">
+<!-- ============== 02 · THE PADDLE (product + build merged) ============== -->
+<section id="paddle" class="bg-paper-2">
   <div class="wrap">
     <span class="chapter-num">// CHAPTER 02</span>
-    <h2 class="chapter-title">The <span class="hl">product</span>.</h2>
-    <p class="chapter-lede">We built three product tiers covering every player level — from amateur club gift paddles to elite tournament-grade. <strong>Same factory partner. Same QA. Different materials, weights, and feel.</strong> The customization stayed identical across all tiers: pick the paddle type, upload a logo or design, choose grip + edgeguard color, set the quantity. Below: the three tiers and how we built them.</p>
+    <h2 class="chapter-title">The <span class="hl">paddle</span>.</h2>
+    <p class="chapter-lede">Three tiers. Six factories. <strong>One standard.</strong> Custom-branded paddles ready in 15–25 days, from 20 units to 1,000.</p>
 
+    <h3 class="subhead">Three <span class="hl">tiers</span>.</h3>
     <div class="product-grid">
       <div class="product-tier">
         <div class="tier-tag">// TIER 01 · AMATEUR</div>
         <div class="tier-name">Fiberglass</div>
-        <div class="tier-desc">Smooth blend of control and pop. Built for casual players and first-timers. Confidence without overwhelming speed.</div>
+        <div class="tier-desc">Smooth blend of control and pop. Built for casual players and first-timers.</div>
         <div class="tier-spec">
           <div><strong>15.7"</strong>Length</div>
           <div><strong>7.8"</strong>Width</div>
@@ -483,7 +503,7 @@ body footer .heart { color: var(--lime); }
       <div class="product-tier">
         <div class="tier-tag">// TIER 02 · ADVANCED</div>
         <div class="tier-name">T300 Carbon</div>
-        <div class="tier-desc">Fast, balanced, responsive. For players leveling up and competing hard. Adds precision and spin to every shot.</div>
+        <div class="tier-desc">Fast, balanced, responsive. For players leveling up. Precision and spin on every shot.</div>
         <div class="tier-spec">
           <div><strong>16.3"</strong>Length</div>
           <div><strong>7.5"</strong>Width</div>
@@ -496,7 +516,7 @@ body footer .heart { color: var(--lime); }
       <div class="product-tier">
         <div class="tier-tag">// TIER 03 · PRO</div>
         <div class="tier-name">T700 Toray Carbon</div>
-        <div class="tier-desc">Elite raw carbon surface. Unmatched power and grit. Built for players who dominate. Pro-grade feel at every quantity tier.</div>
+        <div class="tier-desc">Elite raw carbon. Unmatched power and grit. Pro-grade feel at every quantity tier.</div>
         <div class="tier-spec">
           <div><strong>16.3"</strong>Length</div>
           <div><strong>7.5"</strong>Width</div>
@@ -507,30 +527,15 @@ body footer .heart { color: var(--lime); }
       </div>
     </div>
 
-    <h3 class="subhead">The lineup, in real life.</h3>
-    <p class="context-line">Six paddle designs from real custom orders we shipped. Different colors, logos, partners — same factory, same QA, same 15–25 day turnaround. These photos came back from clients and field-test sessions.</p>
-
-    <div class="media-grid g3" style="margin-top: 18px;">
-      <div class="media-card"><img src="assets/gio/demo-1.jpg" alt="Demo Paddle 1"/><div class="label">Demo Paddle · 01</div></div>
-      <div class="media-card"><img src="assets/gio/demo-2.jpg" alt="Demo Paddle 2"/><div class="label">Demo Paddle · 02</div></div>
-      <div class="media-card"><img src="assets/gio/demo-3.png" alt="Demo Paddle 3"/><div class="label">Demo Paddle · 03</div></div>
-      <div class="media-card"><img src="assets/gio/demo-4.jpg" alt="Demo Paddle 4"/><div class="label">Demo Paddle · 04</div></div>
-      <div class="media-card"><img src="assets/gio/demo-5.jpg" alt="Demo Paddle 5"/><div class="label">Demo Paddle · 05</div></div>
-      <div class="media-card"><img src="assets/gio/demo-6.jpg" alt="Demo Paddle 6"/><div class="label">Demo Paddle · 06</div></div>
+    <div class="media-grid g3" style="margin-top: 28px;">
+      <div class="media-card"><img src="assets/gio/demo-1.jpg" alt="Demo Paddle 1"/><div class="label">Custom paddle · 01</div></div>
+      <div class="media-card"><img src="assets/gio/demo-3.png" alt="Demo Paddle 3"/><div class="label">Custom paddle · 02</div></div>
+      <div class="media-card"><img src="assets/gio/demo-4.jpg" alt="Demo Paddle 4"/><div class="label">Custom paddle · 03</div></div>
     </div>
-  </div>
-</section>
 
-<!-- ============== 03 · THE BUILD ============== -->
-<section id="build" class="bg-paper">
-  <div class="wrap">
-    <span class="chapter-num">// CHAPTER 03</span>
-    <h2 class="chapter-title">How we <span class="hl">made</span> it.</h2>
-    <p class="chapter-lede">We didn't just slap logos on someone else's paddle. <strong>I personally sourced and managed 6 manufacturing partners across China.</strong> I vetted each factory, ran sample rounds, specced T700 Toray carbon as our flex material, and negotiated MOQs and turnaround windows that no off-the-shelf vendor could match. Quality control happened on every run. The videos below are real footage from our production lines.</p>
-
+    <h3 class="subhead" style="margin-top: 56px;">Six factories. <span class="hl">One standard</span>.</h3>
     <div class="supplier-block">
-      <h3>6 suppliers. <span class="hl">One standard.</span></h3>
-      <p class="lede">Pickleball manufacturing is fragmented in China. I built relationships with six factories so we could match the right tier (Fiberglass / T300 / T700) with the right specialist, run multiple jobs in parallel, and never get locked into a single supplier's queue. <strong>15–25 day turnaround held even at 1,000-paddle volume.</strong></p>
+      <p class="lede">Pickleball manufacturing is fragmented in China. I built relationships with six factories so we could match the right tier with the right specialist, run multiple jobs in parallel, and never get locked into a single supplier's queue. <strong>15–25 day turnaround held even at 1,000-paddle volume.</strong></p>
       <div class="supplier-grid">
         <div class="sg-card"><div class="icon">01</div><strong>Sourced</strong><span>6 factories vetted across China</span></div>
         <div class="sg-card"><div class="icon">02</div><strong>Sampled</strong><span>3 free design mockups + physical sample</span></div>
@@ -539,31 +544,20 @@ body footer .heart { color: var(--lime); }
       </div>
     </div>
 
-    <h3 class="subhead">From the factory floor.</h3>
-    <p class="context-line">Three runs from three different production cycles. Watch the materials get cut, pressed, finished, and packed. This is where the T700 Toray carbon turns into the paddle that ends up in a Four Seasons pro shop.</p>
-
-    <div class="media-grid g3" style="margin-top: 18px;">
+    <div class="media-grid g3" style="margin-top: 28px;">
       <div class="media-card video-card"><video src="assets/gio/manufacture.mp4" muted loop playsinline poster="assets/posters/manufacture.jpg"></video><div class="label">Manufacture · main run</div></div>
-      <div class="media-card video-card"><video src="assets/gio/manufacturing-2.mp4" muted loop playsinline poster="assets/posters/manufacturing-2.jpg"></video><div class="label">Manufacturing 2 · QA pass</div></div>
-      <div class="media-card video-card"><video src="assets/gio/manufacturing-4.mp4" muted loop playsinline poster="assets/posters/manufacturing-4.jpg"></video><div class="label">Manufacturing 4 · second run</div></div>
-    </div>
-
-    <h3 class="subhead">Pack-out, ready to ship.</h3>
-    <p class="context-line">Once a run cleared QA, every paddle was retail-packaged in our custom box. The Sample Paddle below is the one I sent to every prospective retail account before they signed.</p>
-
-    <div class="media-grid g2" style="margin-top: 18px; max-width: 720px;">
-      <div class="media-card"><img src="assets/gio/boxing.jpg" alt="Boxing of Product"/><div class="label">Boxing of Product · pack-out QA</div></div>
-      <div class="media-card"><img src="assets/gio/sample-paddle.jpg" alt="Sample Paddle"/><div class="label">Sample Paddle · sent to every prospect</div></div>
+      <div class="media-card video-card"><video src="assets/gio/manufacturing-2.mp4" muted loop playsinline poster="assets/posters/manufacturing-2.jpg"></video><div class="label">Manufacturing · QA pass</div></div>
+      <div class="media-card video-card"><video src="assets/gio/manufacturing-4.mp4" muted loop playsinline poster="assets/posters/manufacturing-4.jpg"></video><div class="label">Manufacturing · second run</div></div>
     </div>
   </div>
 </section>
 
-<!-- ============== 04 · THE SALE ENGINE ============== -->
-<section id="sale" class="bg-ink-grad">
+<!-- ============== 03 · THE SELL (sale + retail merged) ============== -->
+<section id="sell" class="bg-ink-grad">
   <div class="wrap">
-    <span class="chapter-num">// CHAPTER 04</span>
+    <span class="chapter-num">// CHAPTER 03</span>
     <h2 class="chapter-title">How we <span class="hl">sold</span> it.</h2>
-    <p class="chapter-lede">Sales lived across three motions, each with its own playbook. <strong>I owned all three.</strong> B2B custom orders to hotels, resorts, and brands. B2C direct via Amazon, Shopify, and TikTok Shop. Retail wholesale to specialty pro shops (covered in chapter 05). Below: how each one worked, the decks I sent, the close playbook I ran, and the pricing I designed.</p>
+    <p class="chapter-lede">Three motions. <strong>I owned all three.</strong> B2B custom + bulk to hotels and brands; B2C direct via Amazon, Shopify, TikTok Shop; retail wholesale into pro shops.</p>
 
     <h3 class="subhead">Three motions.</h3>
     <div class="motions-grid">
@@ -644,48 +638,28 @@ body footer .heart { color: var(--lime); }
       <div class="margin-card"><div class="name">T700 Carbon</div><div class="retail">$120</div><div class="retail-label">Retail · $75 margin</div><div class="pm">165% PROFIT MARGIN</div></div>
     </div>
 
-    <h3 class="subhead">The brands we closed.</h3>
-    <p class="context-line">Every logo below is a signed PO. Hospitality, country clubs, sports bars, biotech, lifestyle. The three at the top — <strong>Four Seasons, Marriott, Cytiva</strong> — were our biggest hospitality and corporate runs.</p>
-    <div class="brand-grid">
-      <div class="brand-card hero-brand"><div class="brand-name">FOUR SEASONS</div><div class="brand-tag">Hospitality · custom run</div></div>
-      <div class="brand-card hero-brand"><div class="brand-name">MARRIOTT</div><div class="brand-tag">Hospitality · property paddles</div></div>
-      <div class="brand-card hero-brand"><div class="brand-name">CYTIVA</div><div class="brand-tag">Biotech · corporate event</div></div>
-      <div class="brand-card"><div class="brand-name">ROCK &amp; ROLL</div><div class="brand-tag">Lifestyle / entertainment</div></div>
-      <div class="brand-card"><div class="brand-name">SYNERGY</div><div class="brand-tag">Brand collab</div></div>
-      <div class="brand-card"><div class="brand-name">FERG'S SPORTS BAR</div><div class="brand-tag">Sports bar · co-branded</div></div>
-      <div class="brand-card"><div class="brand-name">ATLANTIC PICKLEBALL CLUB</div><div class="brand-tag">Club · member paddles</div></div>
-      <div class="brand-card"><div class="brand-name">SHERRY COUNTRY CLUB</div><div class="brand-tag">Country club · pro shop</div></div>
-      <div class="brand-card"><div class="brand-name">SEAYACHTER</div><div class="brand-tag">Yacht · custom run</div></div>
-      <div class="brand-card"><div class="brand-name">AQUAVISTA RETREAT</div><div class="brand-tag">Resort · retail edition</div></div>
-      <div class="brand-card"><div class="brand-name">ANA SPRINGS</div><div class="brand-tag">Luxury condos · branded</div></div>
-      <div class="brand-card"><div class="brand-name">THE CREST RESORT &amp; SPA</div><div class="brand-tag">Resort · pro shop</div></div>
-      <div class="brand-card more"><div class="brand-name">+ MORE</div><div class="brand-tag">Pipeline · always closing</div></div>
+    <h3 class="subhead">The <span class="hl">brands</span> we closed.</h3>
+    <p class="context-line">Every logo is a signed PO. Hospitality, country clubs, sports bars, biotech, lifestyle.</p>
+    <div class="gio-logos-row">
+      <div class="gio-logo-cell"><img src="https://www.google.com/s2/favicons?domain=fourseasons.com&sz=128" alt="Four Seasons" loading="lazy"/><span>Four Seasons</span><em>Hospitality · custom run</em></div>
+      <div class="gio-logo-cell"><img src="https://www.google.com/s2/favicons?domain=marriott.com&sz=128" alt="Marriott" loading="lazy"/><span>Marriott</span><em>Property paddles</em></div>
+      <div class="gio-logo-cell"><img src="https://www.google.com/s2/favicons?domain=cytiva.com&sz=128" alt="Cytiva" loading="lazy"/><span>Cytiva</span><em>Biotech · corporate</em></div>
+      <div class="gio-logo-cell"><img src="https://www.google.com/s2/favicons?domain=fergssportsbar.com&sz=128" alt="Ferg's" loading="lazy"/><span>Ferg's</span><em>Sports bar · co-brand</em></div>
+      <div class="gio-logo-cell"><img src="https://www.google.com/s2/favicons?domain=atlanticpickleball.com&sz=128" alt="Atlantic Pickleball Club" loading="lazy"/><span>Atlantic PB Club</span><em>Member paddles</em></div>
+      <div class="gio-logo-cell more"><span>+6 more</span><em>Synergy · Rock &amp; Roll · Sherry CC · Seayachter · Aquavista · Ana Springs</em></div>
     </div>
 
-    <h3 class="subhead">Branded paddles in the wild.</h3>
-    <p class="context-line">The Four Seasons paddle layout below is the actual file I sent to the property's procurement team. Rock &amp; Roll is a finished collab paddle.</p>
-    <div class="media-grid g2" style="margin-top: 18px; max-width: 880px;">
-      <div class="media-card"><img src="assets/gio/four-seasons-paddle.jpg" alt="Four Seasons Paddle Layout"/><div class="label">Four Seasons Paddle Layout · sent file</div></div>
-      <div class="media-card"><img src="assets/gio/rockandroll-paddle.png" alt="RockandRoll Paddle"/><div class="label">RockandRoll Paddle · finished collab</div></div>
-    </div>
-
-    <h3 class="subhead">Real proposal pages.</h3>
-    <p class="context-line">Two pages from a real proposal I built — the cover and the pricing tier. Reason hotels said yes: clear value, clean numbers, paddles they were proud to retail.</p>
+    <h3 class="subhead">Real <span class="hl">proposal</span> pages.</h3>
+    <p class="context-line">Two pages from a real proposal — cover and pricing tier. Why hotels said yes: clear value, clean numbers.</p>
     <div class="media-grid g2" style="margin-top: 18px; max-width: 880px;">
       <div class="media-card"><img src="assets/gio/proposal-1.jpg" alt="Proposal cover"/><div class="label">Proposal · cover</div></div>
       <div class="media-card"><img src="assets/gio/proposal-4.jpg" alt="Proposal pricing"/><div class="label">Proposal · pricing tier</div></div>
     </div>
-  </div>
-</section>
 
-<!-- ============== 05 · RETAIL ============== -->
-<section id="retail" class="bg-paper-2">
-  <div class="wrap">
-    <span class="chapter-num">// CHAPTER 05</span>
-    <h2 class="chapter-title">12 stores. <span class="hl">6 states</span>.</h2>
-    <p class="chapter-lede">Beyond custom B2B, we also placed our own GIO Sports paddle line into 12 specialty retail accounts. <strong>I cold-emailed every single store</strong>, demo'd the product in person or by sample paddle, closed the order, and managed each account on an ongoing basis. Florida was our biggest footprint — 7 stores. Plus New York, Washington DC, North Carolina, and Tennessee.</p>
+    <h3 class="subhead"><span class="hl">12 stores</span>. 6 states.</h3>
+    <p class="context-line">Our own GIO line in 12 specialty retail accounts. I cold-emailed every store, demo'd the product, closed the order, managed the relationship.</p>
 
-    <div class="retail-region-grid">
+    <div class="retail-region-grid" style="margin-top: 18px;">
       <div class="region-block">
         <div class="region-head"><div class="region-flag">FL</div><h4>Florida · 7 stores</h4></div>
         <ul class="store-list">
@@ -727,57 +701,32 @@ body footer .heart { color: var(--lime); }
   </div>
 </section>
 
-<!-- ============== 06 · MARKETING ============== -->
-<section id="marketing" class="bg-paper">
+<!-- ============== 04 · THE NOISE (marketing + ambassadors merged) ============== -->
+<section id="noise" class="bg-paper">
   <div class="wrap">
-    <span class="chapter-num">// CHAPTER 06</span>
-    <h2 class="chapter-title">How we drove <span class="hl">demand</span>.</h2>
-    <p class="chapter-lede">We didn't have a marketing agency. <strong>I designed every Instagram campaign, every paid ad, every co-branded promotional asset.</strong> The visual system below ran across paid social, organic, and partner activations. Below: featured banner work, IG campaigns, paid ads, promo stills, and the live brand activation.</p>
+    <span class="chapter-num">// CHAPTER 04</span>
+    <h2 class="chapter-title">The <span class="hl">noise</span>.</h2>
+    <p class="chapter-lede">Every Instagram campaign, every ad, every co-branded asset, every ambassador post. <strong>I designed them. No agency.</strong></p>
 
     <div class="featured-banner">
       <h4>★ Featured · Ferg's Sports Bar promo banner</h4>
-      <p>Co-branded promo banner I designed end-to-end for Ferg's Sports Bar (a B2B partner). The original PSD lives in my project folder. One of several B2B partner activations I designed personally — every brand collab needed its own visual treatment.</p>
+      <p>Co-branded promo banner I designed end-to-end for Ferg's Sports Bar. One of many B2B partner activations — every brand collab needed its own visual treatment.</p>
       <div class="banner-img"><img src="assets/gio/fergs-banner.jpg" alt="Fergs Sports Bar promo banner I designed"/></div>
     </div>
 
-    <h3 class="subhead">Instagram campaigns I built.</h3>
-    <p class="context-line">Three Instagram campaign creative sets — designed, shot, copywritten by me. Same brand voice, three different angles: lifestyle, performance, B2B partner.</p>
+    <h3 class="subhead" style="margin-top: 40px;"><span class="hl">Campaigns</span> + creative.</h3>
+    <p class="context-line">A mix of the Instagram campaigns, paid-social ads, and live event activations I designed, shot, and copywrote myself.</p>
     <div class="media-grid g3" style="margin-top: 18px;">
-      <div class="media-card tall"><img src="assets/gio/ig-campaign-1.jpg" alt="GIO Instagram Campaign 1"/><div class="label">GIO Instagram Campaign · 01</div></div>
-      <div class="media-card tall"><img src="assets/gio/ig-campaign-2.jpg" alt="GIO Instagram Campaign 2"/><div class="label">GIO Instagram Campaign · 02</div></div>
-      <div class="media-card tall"><img src="assets/gio/ig-campaign-3.jpg" alt="GIO Instagram Campaign 3"/><div class="label">GIO Instagram Campaign · 03</div></div>
+      <div class="media-card tall"><img src="assets/gio/ig-campaign-1.jpg" alt="Instagram campaign 1"/><div class="label">IG campaign · 01</div></div>
+      <div class="media-card tall"><img src="assets/gio/ig-campaign-2.jpg" alt="Instagram campaign 2"/><div class="label">IG campaign · 02</div></div>
+      <div class="media-card tall"><img src="assets/gio/ig-campaign-3.jpg" alt="Instagram campaign 3"/><div class="label">IG campaign · 03</div></div>
+      <div class="media-card video-card"><video src="assets/gio/promo-1.mp4" muted loop playsinline poster="assets/posters/promo-1.jpg"></video><div class="label">Promo · hero edit</div></div>
+      <div class="media-card"><img src="assets/gio/advertising-1.jpg" alt="Paid social ad"/><div class="label">Paid social · ad</div></div>
+      <div class="media-card"><img src="assets/gio/gio-event.jpg" alt="Live event activation"/><div class="label">Live activation</div></div>
     </div>
 
-    <h3 class="subhead">Paid social ad creative.</h3>
-    <p class="context-line">Two paid-social variants and the consumer hero edit that ran on Instagram, TikTok, and Meta. The hero promo became our most-clicked ad.</p>
-    <div class="media-grid g3" style="margin-top: 18px;">
-      <div class="media-card"><img src="assets/gio/advertising-1.jpg" alt="Advertising 1"/><div class="label">Advertising · paid social 01</div></div>
-      <div class="media-card"><img src="assets/gio/advertising-2.jpg" alt="Advertising 2"/><div class="label">Advertising · paid social 02</div></div>
-      <div class="media-card video-card"><video src="assets/gio/promo-1.mp4" muted loop playsinline poster="assets/posters/promo-1.jpg"></video><div class="label">Promo Vid 1 · hero edit</div></div>
-    </div>
-
-    <h3 class="subhead">Brand library · stills.</h3>
-    <p class="context-line">Three stills from our brand image library — used across Amazon listings, Shopify, partner emails, and internal decks.</p>
-    <div class="media-grid g3" style="margin-top: 18px;">
-      <div class="media-card"><img src="assets/gio/promo-pic-1.jpg" alt="Promo still 1"/><div class="label">Brand still · 01</div></div>
-      <div class="media-card"><img src="assets/gio/promo-pic-2.jpg" alt="Promo still 2"/><div class="label">Brand still · 02</div></div>
-      <div class="media-card"><img src="assets/gio/paddle-promo-1.jpg" alt="Paddle promo"/><div class="label">Paddle promo · close-up</div></div>
-    </div>
-
-    <h3 class="subhead">Live activation.</h3>
-    <p class="context-line">A real GIO Sports brand event we activated — paddles in players' hands, our visual system on the wall, content captured for organic re-use. Below is one shot from that day.</p>
-    <div class="media-grid" style="margin-top: 18px;">
-      <div class="media-card wide"><img src="assets/gio/gio-event.jpg" alt="GIO Event live activation"/><div class="label">GIO Event · live brand activation</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============== 07 · BRAND AMBASSADOR PROGRAM ============== -->
-<section id="ambassadors" class="bg-paper-2">
-  <div class="wrap">
-    <span class="chapter-num">// CHAPTER 07</span>
-    <h2 class="chapter-title">30+ <span class="hl">ambassadors</span>.</h2>
-    <p class="chapter-lede">We built a formal brand-ambassador program from scratch. <strong>30+ active members</strong> — a deliberate mix of pickleball athletes/coaches and lifestyle creators on Instagram and TikTok. I recruited each one personally, comp'd them paddles, gave them content briefs, and got back real posts from real settings. The videos and shoots below are deliverables from program members.</p>
+    <h3 class="subhead" style="margin-top: 56px;">30+ <span class="hl">ambassadors</span>.</h3>
+    <p class="context-line">A formal brand-ambassador program built from scratch. Athletes + creators, recruited personally, comp'd paddles, briefed on content. <strong>Real posts from real settings.</strong></p>
 
     <div class="amb-hero">
       <h3>Athletes <span class="hl">+</span> creators.</h3>
@@ -788,30 +737,20 @@ body footer .heart { color: var(--lime); }
       </div>
     </div>
 
-    <h3 class="subhead">Ambassador deliverables · real videos.</h3>
-    <p class="context-line">Three videos shot by ambassadors and our team in real settings — on-court, lifestyle, and the website hero edit. The "GIO Website Main Page" video below was the hero edit on gio-sports.com when the brand was active.</p>
-    <div class="media-grid g3" style="margin-top: 18px;">
-      <div class="media-card video-card tall"><video src="assets/gio/brand-ambassador.mp4" muted loop playsinline poster="assets/posters/brand-ambassador.jpg"></video><div class="label">Brand Ambassador Video · main spot</div></div>
-      <div class="media-card video-card tall"><video src="assets/gio/brand-ambassador-2.mp4" muted loop playsinline poster="assets/posters/brand-ambassador-2.jpg"></video><div class="label">Brand Ambassador Program 2 · followup</div></div>
-      <div class="media-card video-card tall"><video src="assets/gio/gio-website.mp4" muted loop playsinline poster="assets/posters/gio-website.jpg"></video><div class="label">GIO Website Main Page · hero edit</div></div>
-    </div>
-
-    <h3 class="subhead">Studio product shoots.</h3>
-    <p class="context-line">We art-directed and shot every product image ourselves. Three studio shoots from our brand library — used on Amazon listings, Shopify product pages, and partner decks.</p>
-    <div class="media-grid g3" style="margin-top: 18px;">
-      <div class="media-card"><img src="assets/gio/product-shoot-1.jpg" alt="Product Shoot 1"/><div class="label">Product Shoot · studio 01</div></div>
-      <div class="media-card"><img src="assets/gio/product-shoot-2.jpg" alt="Product Shoot 2"/><div class="label">Product Shoot · studio 02</div></div>
-      <div class="media-card"><img src="assets/gio/product-shoot-4.jpg" alt="Product Shoot 4"/><div class="label">Product Shoot · studio 04</div></div>
+    <div class="media-grid g3" style="margin-top: 22px;">
+      <div class="media-card video-card tall"><video src="assets/gio/brand-ambassador.mp4" muted loop playsinline poster="assets/posters/brand-ambassador.jpg"></video><div class="label">Ambassador · main spot</div></div>
+      <div class="media-card video-card tall"><video src="assets/gio/brand-ambassador-2.mp4" muted loop playsinline poster="assets/posters/brand-ambassador-2.jpg"></video><div class="label">Ambassador · followup</div></div>
+      <div class="media-card video-card tall"><video src="assets/gio/gio-website.mp4" muted loop playsinline poster="assets/posters/gio-website.jpg"></video><div class="label">Website hero edit</div></div>
     </div>
   </div>
 </section>
 
-<!-- ============== 08 · THE OUTCOME ============== -->
+<!-- ============== 05 · THE OUTCOME ============== -->
 <section id="outcome" class="bg-ink" style="padding-bottom: 60px;">
   <div class="wrap">
-    <span class="chapter-num">// CHAPTER 08</span>
+    <span class="chapter-num">// CHAPTER 05</span>
     <h2 class="chapter-title">The <span class="hl">outcome</span>.</h2>
-    <p class="chapter-lede">GIO Sports is a wound-down chapter today — but the run paid out. <strong>Built from zero with my co-founder in 2023.</strong> Closed $250K in revenue across B2B + B2C + retail. Placed our paddles in 12 stores across 6 states. Closed 12 named brand partnerships including Four Seasons, Marriott, and Cytiva. Built and ran a 30+ brand-ambassador program. Along the way I personally wore every hat below.</p>
+    <p class="chapter-lede">GIO Sports is wound down today — but the run paid out. <strong>$250K closed across B2B + B2C + retail, 12 retail stores in 6 states, 12 named brand partnerships</strong> including Four Seasons, Marriott, and Cytiva — plus a 30+ ambassador program. I wore every hat below.</p>
 
     <div class="outcome-block">
       <h3>The numbers, summed up.</h3>
@@ -851,7 +790,7 @@ body footer .heart { color: var(--lime); }
   <a href="index.html" class="btn" style="background: transparent; color: var(--ink); border-color: var(--ink); margin-left: 8px;">← Back home</a>
 </section>
 
-<footer>Built by Alejandro · GIO Sports · 2023 · co-founded · wound down · <span class="heart">●</span> the receipts · <a href="index.html">home</a></footer>
+<footer>GIO Sports · 2023–2025 · <a href="index.html">back home</a></footer>
 
 <script src="site.js"></script>
 </body>

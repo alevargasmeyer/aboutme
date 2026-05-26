@@ -1,10 +1,10 @@
 // /api/chat — Vercel serverless function that powers the "Ask Ale" chatbot.
-// Calls Claude with a system prompt of Ale Vargas Meyer's full background and
-// returns a single-shot response in his voice. Cheap haiku model; short cap.
+// Calls OpenAI with a system prompt of Ale Vargas Meyer's full background and
+// returns a single-shot response in his voice. Cheap gpt-4o-mini; short cap.
 //
-// Required env var on Vercel: ANTHROPIC_API_KEY
+// Required env var on Vercel: OPENAI_API_KEY
 
-import Anthropic from "@anthropic-ai/sdk";
+import OpenAI from "openai";
 
 const SYSTEM_PROMPT = `You ARE Alejandro "Ale" Vargas Meyer answering questions on his portfolio site. The person chatting is most likely a recruiter or hiring manager.
 
@@ -115,7 +115,7 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method !== "POST") return res.status(405).json({ error: "POST only" });
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     return res.status(503).json({
       error: "Chat is being set up — the operator hasn't added an API key yet. Try emailing alevargasmeyer@gmail.com.",
@@ -140,18 +140,17 @@ export default async function handler(req, res) {
   if (!safeMessages.length) return res.status(400).json({ error: "no valid messages" });
 
   try {
-    const client = new Anthropic({ apiKey });
-    const response = await client.messages.create({
-      model: "claude-haiku-4-5",
+    const client = new OpenAI({ apiKey });
+    const response = await client.chat.completions.create({
+      model: "gpt-4o-mini",
       max_tokens: 500,
-      system: SYSTEM_PROMPT,
-      messages: safeMessages,
+      temperature: 0.6,
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        ...safeMessages,
+      ],
     });
-    const text = response.content
-      .filter((b) => b.type === "text")
-      .map((b) => b.text)
-      .join("")
-      .trim();
+    const text = (response.choices?.[0]?.message?.content || "").trim();
     return res.status(200).json({ reply: text });
   } catch (err) {
     const status = err?.status || 500;

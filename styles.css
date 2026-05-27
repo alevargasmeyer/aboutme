@@ -92,7 +92,8 @@ nav.top ul a:hover::after, nav.top ul a.active::after { transform: scaleX(1); }
 .mobile-menu .menu-cta a.cv { background: var(--lime); color: var(--ink); }
 
 /* ===== CURSOR TOGGLE ===== */
-.cursor-toggle { position: fixed; bottom: 18px; right: 18px; z-index: 200; background: var(--ink); color: var(--lime); border: 2px solid var(--ink); border-radius: 999px; padding: 8px 14px; font-family: var(--mono); font-size: 11px; letter-spacing: 1px; cursor: pointer; box-shadow: 4px 4px 0 var(--lime); transition: all 0.2s; text-transform: uppercase; }
+/* Lives at bottom-LEFT to stay clear of the chat bubble (which is bottom-right). */
+.cursor-toggle { position: fixed; bottom: 18px; left: 18px; z-index: 200; background: var(--ink); color: var(--lime); border: 2px solid var(--ink); border-radius: 999px; padding: 8px 14px; font-family: var(--mono); font-size: 11px; letter-spacing: 1px; cursor: pointer; box-shadow: 4px 4px 0 var(--lime); transition: all 0.2s; text-transform: uppercase; }
 .cursor-toggle:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--lime); }
 body.no-custom-cursor { cursor: auto; }
 body.no-custom-cursor a, body.no-custom-cursor button, body.no-custom-cursor input, body.no-custom-cursor select { cursor: pointer; }
@@ -186,7 +187,29 @@ footer a { color: var(--lime); }
 #avm-chat-root {
   position: fixed; bottom: 24px; right: 24px;
   z-index: 220; font-family: var(--body);
+  display: flex; align-items: center; gap: 10px;
 }
+
+/* "Talk to me" pill — sits to the left of the bubble, always visible
+   when the panel is closed, hidden when the panel is open. */
+.chat-label {
+  background: var(--ink); color: var(--lime);
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-family: var(--display); font-size: 13px;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(14,14,14,0.18);
+  user-select: none;
+  pointer-events: none;
+  animation: avm-label-pulse 3.6s ease-in-out infinite;
+}
+@keyframes avm-label-pulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+body.avm-chat-open .chat-label { display: none; }
+@media (max-width: 520px) { .chat-label { display: none; } }
 
 /* Bubble: clean lime circle with chat icon, soft drop shadow, no border */
 #avm-chat-bubble {

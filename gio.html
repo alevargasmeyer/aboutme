@@ -331,6 +331,23 @@ section { padding-top: 130px; padding-bottom: 130px; }
 section.gio-header, header.gio-header { padding-top: 130px; padding-bottom: 60px; }
 @media (max-width: 980px) { section { padding-top: 80px; padding-bottom: 80px; } }
 
+/* US RETAIL FOOTPRINT MAP */
+.us-map-wrap {
+  background: white;
+  border: 2px solid white;
+  padding: 22px;
+  margin-top: 18px;
+  box-shadow: 6px 6px 0 var(--lime);
+  border-radius: 4px;
+  max-width: 860px;
+}
+.us-map-wrap img { width: 100%; height: auto; display: block; }
+.bg-paper .us-map-wrap, .bg-paper-2 .us-map-wrap {
+  background: white;
+  border: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--lime);
+}
+
 /* GIO LOGO STRIP — replaces the 13-card brand grid */
 .gio-logos-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 22px; }
 .gio-logo-cell { background: white; color: var(--ink); border: 2px solid white; padding: 18px 12px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: all 0.2s; box-shadow: 4px 4px 0 var(--lime); }
@@ -657,46 +674,10 @@ section.gio-header, header.gio-header { padding-top: 130px; padding-bottom: 60px
     </div>
 
     <h3 class="subhead"><span class="hl">12 stores</span>. 6 states.</h3>
-    <p class="context-line">Our own GIO line placed in 12 specialty retail accounts — cold outreach, in-person demos with the sample paddle, and ongoing account management for each one.</p>
+    <p class="context-line">Our own GIO line placed in 12 specialty retail accounts — Florida (7), New York (2), Washington DC, North Carolina, Tennessee.</p>
 
-    <div class="retail-region-grid" style="margin-top: 18px;">
-      <div class="region-block">
-        <div class="region-head"><div class="region-flag">FL</div><h4>Florida · 7 stores</h4></div>
-        <ul class="store-list">
-          <li><span class="store-num">01</span><div><strong>Epic Athletic Club</strong><span>Sawgrass Mills Mall, FL</span></div></li>
-          <li><span class="store-num">02</span><div><strong>Tennis Frenzy</strong><span>Stuart, FL</span></div></li>
-          <li><span class="store-num">03</span><div><strong>Pickleball Performance</strong><span>Naples, FL</span></div></li>
-          <li><span class="store-num">04</span><div><strong>Sports Challenge America</strong><span>Bonita Springs, FL</span></div></li>
-          <li><span class="store-num">05</span><div><strong>Dink House</strong><span>St. Pete, FL</span></div></li>
-          <li><span class="store-num">06</span><div><strong>Ultimate Pickleball House</strong><span>Venice, FL</span></div></li>
-          <li><span class="store-num">07</span><div><strong>Palm Beach Gardens</strong><span>Palm Beach, FL</span></div></li>
-        </ul>
-      </div>
-      <div class="region-block">
-        <div class="region-head"><div class="region-flag">NY</div><h4>New York · 2 stores</h4></div>
-        <ul class="store-list">
-          <li><span class="store-num">08</span><div><strong>Sport Time Port Washington</strong><span>Port Washington, NY</span></div></li>
-          <li><span class="store-num">09</span><div><strong>Sport Time Hempstead Lake</strong><span>Hempstead, NY</span></div></li>
-        </ul>
-      </div>
-      <div class="region-block">
-        <div class="region-head"><div class="region-flag">DC</div><h4>Washington DC · 1 store</h4></div>
-        <ul class="store-list">
-          <li><span class="store-num">10</span><div><strong>Pickleball Pro DC</strong><span>Washington, DC</span></div></li>
-        </ul>
-      </div>
-      <div class="region-block">
-        <div class="region-head"><div class="region-flag">NC</div><h4>North Carolina · 1 store</h4></div>
-        <ul class="store-list">
-          <li><span class="store-num">11</span><div><strong>Masters Pro Shop</strong><span>Asheville, NC</span></div></li>
-        </ul>
-      </div>
-      <div class="region-block">
-        <div class="region-head"><div class="region-flag">TN</div><h4>Tennessee · 1 store</h4></div>
-        <ul class="store-list">
-          <li><span class="store-num">12</span><div><strong>Levitate America Sports</strong><span>Franklin, TN</span></div></li>
-        </ul>
-      </div>
+    <div class="us-map-wrap">
+      <img src="assets/gio/us-map.svg" alt="GIO Sports retail footprint — 12 stores across 6 states (FL, NY, DC, NC, TN)" loading="lazy"/>
     </div>
   </div>
 </section>

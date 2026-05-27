@@ -92,6 +92,58 @@
   .grind-grid { grid-template-columns: 1fr 1fr; }
   .lb-row { grid-template-columns: 40px 130px 1fr 80px; gap: 10px; }
 }
+
+/* ============== READABILITY OVERRIDES ============== */
+
+/* Paper variant of the leap-block: white card on cream, ink text,
+   lime accents that ARE ink-bg pills (not faint lime-on-cream text). */
+.leap-block.leap-paper {
+  background: white;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--lime);
+}
+.leap-block.leap-paper::before { content: ''; display: none; }
+.leap-block.leap-paper h3 { color: var(--ink); }
+.leap-block.leap-paper h3 .hl {
+  background: var(--lime); color: var(--ink);
+  padding: 0 10px; display: inline-block; transform: rotate(-1deg);
+}
+.leap-block.leap-paper .lede { color: var(--ink); opacity: 1; }
+.leap-block.leap-paper .lede strong {
+  color: var(--ink);
+  background: var(--lime);
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+.leap-block.leap-paper .grind-card {
+  background: var(--paper-2);
+  border-left: 4px solid var(--lime);
+  color: var(--ink);
+}
+.leap-block.leap-paper .grind-card .icon {
+  color: var(--ink);
+  background: var(--lime);
+  padding: 2px 10px;
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 20px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.leap-block.leap-paper .grind-card strong { color: var(--ink); }
+.leap-block.leap-paper .grind-card span { color: var(--ink); opacity: 0.75; }
+
+/* LEADERBOARD on ink-bg section: rows need explicit dark text so
+   they're readable against the cream card backgrounds. */
+.lb-row { color: var(--ink); }
+.lb-row .rank { color: var(--ink); opacity: 0.55; }
+.lb-row .name { color: var(--ink); }
+.lb-row .num { color: var(--ink); }
+.lb-row.cadena .rank,
+.lb-row.cadena .name,
+.lb-row.cadena .num { color: var(--ink); opacity: 1; font-weight: 800; }
+.lb-row.cadena { box-shadow: 4px 4px 0 var(--ink); }
 </style>
 </head>
 <body>
@@ -202,12 +254,12 @@
       <div><h2>How I <span class="hl">did</span> it.</h2></div>
       <p class="kicker">No ad spend. No team. Just relentless cadence + format I created.</p>
     </div>
-    <div class="leap-block" style="background: var(--paper); color: var(--ink); border-color: var(--lime); box-shadow: 14px 14px 0 var(--lime);">
-      <h3 style="color: var(--ink);">The daily <span class="hl">cadence</span>.</h3>
-      <p class="lede" style="color: var(--ink); opacity: 0.92;">Posted <strong>50+ videos a day</strong>. Wrote every caption. Edited every clip myself. Worked directly with the on-air advertising team so each video carried sponsor inventory in the bottom strip — turning the social feed into a second monetized channel for the network. Engagement reached <strong>2.5%+</strong> peak — every competitor stayed under 1.2%.</p>
+    <div class="leap-block leap-paper">
+      <h3>The daily <span class="hl">cadence</span>.</h3>
+      <p class="lede">Posted <strong>50+ videos a day</strong>. Wrote every caption. Edited every clip myself. Worked directly with the on-air advertising team so each video carried sponsor inventory in the bottom strip — turning the social feed into a second monetized channel for the network. Engagement reached <strong>2.5%+</strong> peak — every competitor stayed under 1.2%.</p>
       <div class="grind-grid">
         <div class="grind-card"><div class="icon">50+</div><strong>Videos / day</strong><span>Posted across IG, FB, TikTok, X.</span></div>
-        <div class="grind-card"><div class="icon">✎</div><strong>Self-edited</strong><span>Cut, captioned, exported. All me.</span></div>
+        <div class="grind-card"><div class="icon">✎</div><strong>Self-edited</strong><span>Cut, captioned, exported in-house.</span></div>
         <div class="grind-card"><div class="icon">$</div><strong>Ad-team partnership</strong><span>Sponsor strip on every post.</span></div>
         <div class="grind-card"><div class="icon">0</div><strong>Paid spend</strong><span>100% organic growth.</span></div>
       </div>
@@ -258,8 +310,8 @@
     </div>
 
     <div class="iphone-row">
-      <div class="iphone"><div class="screen"><video src="assets/cadena/60seg-1.mp4" muted loop playsinline poster="assets/posters/60seg-1.jpg"></video><div class="platform-tag">EP · 01</div></div></div>
-      <div class="iphone"><div class="screen"><video src="assets/cadena/60seg-2.mp4" muted loop playsinline poster="assets/posters/60seg-2.jpg"></video><div class="platform-tag">EP · 02</div></div></div>
+      <div class="iphone"><div class="screen video-card"><video src="assets/cadena/60seg-1.mp4" autoplay muted loop playsinline poster="assets/posters/60seg-1.jpg"></video><div class="platform-tag">EP · 01</div></div></div>
+      <div class="iphone"><div class="screen video-card"><video src="assets/cadena/60seg-2.mp4" autoplay muted loop playsinline poster="assets/posters/60seg-2.jpg"></video><div class="platform-tag">EP · 02</div></div></div>
     </div>
   </div>
 </section>
@@ -299,7 +351,6 @@
     <div class="posts-row">
       <img src="assets/cadena/ig-post-1.jpg" alt="Instagram Post 1"/>
       <img src="assets/cadena/ig-post-2.jpg" alt="Instagram Post 2"/>
-      <img src="assets/cadena/likes-end.png" alt="Likes on the page near end of my run"/>
     </div>
   </div>
 </section>

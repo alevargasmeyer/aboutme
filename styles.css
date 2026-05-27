@@ -190,23 +190,29 @@ footer a { color: var(--lime); }
   display: flex; align-items: center; gap: 10px;
 }
 
-/* "Talk to me" pill — sits to the left of the bubble, always visible
-   when the panel is closed, hidden when the panel is open. */
+/* "Talk to me" — handwritten chalk-style note next to the bubble.
+   No pill background; just the Caveat script tilted, with a tiny
+   smudge-shadow to suggest chalk on paper. */
 .chat-label {
-  background: var(--ink); color: var(--lime);
-  padding: 9px 14px;
-  border-radius: 999px;
-  font-family: var(--display); font-size: 13px;
-  letter-spacing: 0.4px;
+  background: transparent;
+  color: var(--ink);
+  padding: 0 4px;
+  font-family: var(--hand);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1;
   white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(14,14,14,0.18);
   user-select: none;
   pointer-events: none;
-  animation: avm-label-pulse 3.6s ease-in-out infinite;
+  transform: rotate(-6deg) translateY(-4px);
+  transform-origin: right center;
+  opacity: 0.85;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  animation: avm-label-wobble 4.2s ease-in-out infinite;
 }
-@keyframes avm-label-pulse {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
+@keyframes avm-label-wobble {
+  0%, 100% { transform: rotate(-6deg) translateY(-4px); }
+  50%      { transform: rotate(-4deg) translateY(-6px); }
 }
 body.avm-chat-open .chat-label { display: none; }
 @media (max-width: 520px) { .chat-label { display: none; } }

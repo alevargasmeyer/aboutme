@@ -331,21 +331,100 @@ section { padding-top: 130px; padding-bottom: 130px; }
 section.gio-header, header.gio-header { padding-top: 130px; padding-bottom: 60px; }
 @media (max-width: 980px) { section { padding-top: 80px; padding-bottom: 80px; } }
 
-/* US RETAIL FOOTPRINT MAP */
+/* US RETAIL FOOTPRINT MAP — interactive */
 .us-map-wrap {
   background: white;
-  border: 2px solid white;
+  border: 2px solid var(--ink);
   padding: 22px;
   margin-top: 18px;
   box-shadow: 6px 6px 0 var(--lime);
   border-radius: 4px;
   max-width: 860px;
+  position: relative;
 }
-.us-map-wrap img { width: 100%; height: auto; display: block; }
-.bg-paper .us-map-wrap, .bg-paper-2 .us-map-wrap {
-  background: white;
-  border: 2px solid var(--ink);
-  box-shadow: 6px 6px 0 var(--lime);
+.us-map { width: 100%; }
+.us-map svg { width: 100%; height: auto; display: block; }
+.us-map-legend {
+  font-family: var(--hand);
+  font-size: 18px;
+  color: var(--ink);
+  opacity: 0.75;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* GIO states get a thicker stroke + smooth color transition + pointer */
+.us-map svg .fl, .us-map svg .ny, .us-map svg .nc,
+.us-map svg .tn, .us-map svg .dc {
+  cursor: pointer;
+  transition: filter 0.18s, transform 0.18s;
+  transform-origin: center;
+  transform-box: fill-box;
+  stroke: var(--ink) !important;
+  stroke-width: 2 !important;
+}
+.us-map svg .fl:hover, .us-map svg .ny:hover, .us-map svg .nc:hover,
+.us-map svg .tn:hover, .us-map svg .dc:hover,
+.us-map svg .fl.active, .us-map svg .ny.active, .us-map svg .nc.active,
+.us-map svg .tn.active, .us-map svg .dc.active {
+  filter: drop-shadow(0 4px 12px rgba(27,79,168,0.4)) brightness(1.04);
+}
+
+/* Floating tooltip */
+.us-map-tooltip {
+  position: absolute;
+  background: var(--ink);
+  color: white;
+  padding: 14px 18px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(14,14,14,0.25);
+  font-size: 13px;
+  line-height: 1.5;
+  min-width: 220px;
+  max-width: 320px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.18s, transform 0.18s;
+}
+.us-map-tooltip.visible {
+  opacity: 1; transform: translateY(0);
+}
+.us-map-tooltip h5 {
+  font-family: var(--display);
+  font-size: 16px;
+  color: var(--lime);
+  margin-bottom: 4px;
+  line-height: 1;
+}
+.us-map-tooltip .count {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: white;
+  opacity: 0.6;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+.us-map-tooltip ul {
+  list-style: none;
+  padding: 0; margin: 0;
+}
+.us-map-tooltip li {
+  padding: 4px 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.15);
+  font-size: 13px;
+}
+.us-map-tooltip li:last-child { border-bottom: none; }
+.us-map-tooltip li strong { display: block; font-weight: 600; color: white; }
+.us-map-tooltip li span {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--lime);
+  letter-spacing: 0.5px;
+  opacity: 0.8;
 }
 
 /* GIO LOGO STRIP — replaces the 13-card brand grid */
@@ -677,7 +756,9 @@ section.gio-header, header.gio-header { padding-top: 130px; padding-bottom: 60px
     <p class="context-line">Our own GIO line placed in 12 specialty retail accounts — Florida (7), New York (2), Washington DC, North Carolina, Tennessee.</p>
 
     <div class="us-map-wrap">
-      <img src="assets/gio/us-map.svg" alt="GIO Sports retail footprint — 12 stores across 6 states (FL, NY, DC, NC, TN)" loading="lazy"/>
+      <div class="us-map" id="us-map" aria-label="Interactive US retail map — hover the lime states for store names"></div>
+      <div class="us-map-legend">↳ Hover the lime states for the actual store list.</div>
+      <div class="us-map-tooltip" id="us-map-tooltip" role="tooltip" aria-hidden="true"></div>
     </div>
   </div>
 </section>
@@ -775,5 +856,127 @@ section.gio-header, header.gio-header { padding-top: 130px; padding-bottom: 60px
 
 <script src="site.js?v=9067fad0"></script>
 <script src="chat.js?v=2a144f71"></script>
+<script>
+/* ============== INTERACTIVE US MAP ============== */
+(function () {
+  const mapEl = document.getElementById('us-map');
+  const tooltipEl = document.getElementById('us-map-tooltip');
+  if (!mapEl || !tooltipEl) return;
+
+  const STORES = {
+    fl: {
+      label: 'Florida',
+      count: 7,
+      stores: [
+        { name: 'Epic Athletic Club',         city: 'Sawgrass Mills, FL' },
+        { name: 'Tennis Frenzy',              city: 'Stuart, FL' },
+        { name: 'Pickleball Performance',     city: 'Naples, FL' },
+        { name: 'Sports Challenge America',   city: 'Bonita Springs, FL' },
+        { name: 'Dink House',                 city: 'St. Pete, FL' },
+        { name: 'Ultimate Pickleball House',  city: 'Venice, FL' },
+        { name: 'Palm Beach Gardens',         city: 'Palm Beach, FL' },
+      ],
+    },
+    ny: {
+      label: 'New York',
+      count: 2,
+      stores: [
+        { name: 'Sport Time Port Washington', city: 'Port Washington, NY' },
+        { name: 'Sport Time Hempstead Lake',  city: 'Hempstead, NY' },
+      ],
+    },
+    dc: {
+      label: 'Washington DC',
+      count: 1,
+      stores: [{ name: 'Pickleball Pro DC',   city: 'Washington, DC' }],
+    },
+    nc: {
+      label: 'North Carolina',
+      count: 1,
+      stores: [{ name: 'Masters Pro Shop',    city: 'Asheville, NC' }],
+    },
+    tn: {
+      label: 'Tennessee',
+      count: 1,
+      stores: [{ name: 'Levitate America Sports', city: 'Franklin, TN' }],
+    },
+  };
+
+  function render(stateKey) {
+    const data = STORES[stateKey];
+    if (!data) return;
+    const items = data.stores.map((s) =>
+      `<li><strong>${s.name}</strong><span>${s.city}</span></li>`
+    ).join('');
+    tooltipEl.innerHTML =
+      `<h5>${data.label}</h5>` +
+      `<span class="count">${data.count} ${data.count === 1 ? 'store' : 'stores'}</span>` +
+      `<ul>${items}</ul>`;
+  }
+
+  function positionTooltip(targetEl, e) {
+    const wrapRect = mapEl.parentElement.getBoundingClientRect();
+    const tipRect = tooltipEl.getBoundingClientRect();
+    let x, y;
+    if (e && e.clientX !== undefined) {
+      x = e.clientX - wrapRect.left + 14;
+      y = e.clientY - wrapRect.top + 14;
+    } else {
+      const r = targetEl.getBoundingClientRect();
+      x = r.left + r.width / 2 - wrapRect.left + 12;
+      y = r.top + r.height / 2 - wrapRect.top + 12;
+    }
+    // Keep tooltip inside the wrapper horizontally
+    if (x + tipRect.width > wrapRect.width - 12) {
+      x = wrapRect.width - tipRect.width - 12;
+    }
+    if (x < 12) x = 12;
+    tooltipEl.style.left = x + 'px';
+    tooltipEl.style.top = y + 'px';
+  }
+
+  function showTooltip(stateKey, target, e) {
+    render(stateKey);
+    tooltipEl.classList.add('visible');
+    tooltipEl.setAttribute('aria-hidden', 'false');
+    requestAnimationFrame(() => positionTooltip(target, e));
+  }
+  function hideTooltip() {
+    tooltipEl.classList.remove('visible');
+    tooltipEl.setAttribute('aria-hidden', 'true');
+  }
+
+  function wire(svgEl) {
+    Object.keys(STORES).forEach((stateKey) => {
+      const targets = svgEl.querySelectorAll('.' + stateKey);
+      targets.forEach((el) => {
+        el.addEventListener('mouseenter', (e) => showTooltip(stateKey, el, e));
+        el.addEventListener('mousemove', (e) => positionTooltip(el, e));
+        el.addEventListener('mouseleave', hideTooltip);
+        el.addEventListener('focus', (e) => showTooltip(stateKey, el, null));
+        el.addEventListener('blur', hideTooltip);
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', STORES[stateKey].label + ' — ' + STORES[stateKey].count + ' stores');
+      });
+    });
+  }
+
+  fetch('assets/gio/us-map.svg')
+    .then((r) => r.text())
+    .then((svgText) => {
+      mapEl.innerHTML = svgText;
+      const svgEl = mapEl.querySelector('svg');
+      if (svgEl) {
+        // Make SVG responsive
+        svgEl.setAttribute('viewBox', svgEl.getAttribute('viewBox') || '0 0 959 593');
+        svgEl.removeAttribute('width');
+        svgEl.removeAttribute('height');
+        wire(svgEl);
+      }
+    })
+    .catch(() => { mapEl.innerHTML = '<p style="text-align:center;padding:40px;opacity:0.5;">Map failed to load.</p>'; });
+})();
+</script>
 </body>
 </html>

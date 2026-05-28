@@ -300,13 +300,6 @@ Place this code in the empty space below. */
 <path class="separator1" fill="none" d="m 215,493 v 55 l 36,45 m -251,-168 h 147 l 68,68 h 85 l 54,54 v 46"/>
 
 
-<g id="gio-pins" font-family="Arial Black, Archivo Black, sans-serif" font-weight="900" fill="#0E0E0E" text-anchor="middle">
-  <text x="773" y="495" font-size="28">7</text><text x="773" y="515" font-size="11">FL</text>
-  <text x="843" y="200" font-size="28">2</text><text x="843" y="220" font-size="11">NY</text>
-  <text x="802" y="265" font-size="14">1</text>
-  <text x="780" y="320" font-size="22">1</text><text x="780" y="338" font-size="10">NC</text>
-  <text x="700" y="320" font-size="22">1</text><text x="700" y="338" font-size="10">TN</text>
-  <text x="822" y="252" font-size="9">DC</text>
-</g>
+
 
 </svg>
